@@ -24,7 +24,7 @@ void		validation(t_anthill *ant)
 	vars->n_comm = 0;
 	vars->stat = 0;
 	rooms = new_room();
-	fd = open("/Users/emeha/Desktop/lem_in", O_RDONLY);
+	fd = open("/Users/emeha/Desktop/lem_in/text", O_RDONLY);
 	while (get_next_line(fd, &line) > 0)
 	{
 		vars->type = check_line(line);
@@ -62,7 +62,6 @@ void		validation(t_anthill *ant)
 		}
 		free(line);
 	}
-	print_rooms(rooms);
 	print_rooms(rooms);
 	free_rooms(rooms);
 	ft_printf("rooms: %d\n", ant->rooms);
