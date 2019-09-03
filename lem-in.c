@@ -26,10 +26,12 @@ static t_anthill	*newanthill(void)
 
 int					main(void)
 {
-	t_anthill *ant;
+	t_anthill	*ant;
+	t_room		*rooms;
 
+	rooms = new_room();
 	ant = newanthill();
-	validation(ant);
+	validation(ant, rooms);
 	free(ant);
 	return (0);
 }

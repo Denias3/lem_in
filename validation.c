@@ -13,17 +13,17 @@
 #include <fcntl.h>
 #include "lem-in.h"
 
-void		validation(t_anthill *ant)
+void		validation(t_anthill *ant, t_room *rooms)
 {
 	char		*line;
 	int			fd;
 	t_sys_var	*vars;
-	t_room		*rooms;
+
 
 	vars = (t_sys_var*)malloc(sizeof(t_sys_var));
 	vars->n_comm = 0;
 	vars->stat = 0;
-	rooms = new_room();
+
 	fd = open("/Users/emeha/Desktop/lem_in/text", O_RDONLY);
 	while (get_next_line(fd, &line) > 0)
 	{
