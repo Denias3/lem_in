@@ -69,11 +69,11 @@ void	print_rooms(t_room *rooms)
 	i = 0;
 	while (rooms != NULL)
 	{
-		ft_printf("id - %d\nname - %s\n", i, rooms->name);
-		ft_printf("type - %d\n", rooms->type);
-		ft_printf("state - %d\n", rooms->state);
-		ft_printf("x - %d\n", rooms->x);
-		ft_printf("y - %d\n\n", rooms->y);
+		ft_printf("id:    %d\nname:  %s\n", i, rooms->name);
+		ft_printf("type:  %d\n", rooms->type);
+		ft_printf("state: %d\n", rooms->state);
+		ft_printf("x:     %d\n", rooms->x);
+		ft_printf("y:     %d\n\n", rooms->y);
 		i++;
 		rooms = rooms->next;
 	}

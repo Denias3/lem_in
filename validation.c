@@ -64,6 +64,6 @@ void		validation(t_anthill *ant)
 	}
 	print_rooms(rooms);
 	free_rooms(rooms);
-	ft_printf("rooms - %d\n", ant->rooms);
-	ft_printf("ants - %d\n", ant->ants);
+	ft_printf("rooms: %d\n", ant->rooms);
+	ft_printf("ants:  %d\n", ant->ants);
 }
