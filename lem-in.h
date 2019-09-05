@@ -40,20 +40,23 @@ typedef	struct		s_anthill
 **			s_sys_var
 **		type_past	-   прошлый тип линии
 **		type		- 	тип линии
-**		stat		-
+**		stage		-   этап
+**              0   -   Количество муравьев
+**              1   -   Создание комнат
+**              2   -   Линковка комнат
 **		n_comm		-	количество комманд
 */
 
-typedef struct		s_sys_var
+typedef struct		s_var_valid
 {
 	// validation
 
 	int				type_past;
 	int				type;
-	int 			stat;
+	int 			stage;
 	int				n_comm;
 
-}					t_sys_var;
+}					t_var_valid;
 
 int					check_line(char *line);
 int					count_char_double_array(char **str);

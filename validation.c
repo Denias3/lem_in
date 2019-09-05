@@ -13,53 +13,51 @@
 #include <fcntl.h>
 #include "lem-in.h"
 
+
+
+void        stage_num_ant(t_var_valid *var_valid, t_anthill *ant, char *line)
+{
+    if (var_valid->type == 4 || var_valid->type == 5 ||
+        var_valid->type == 6 || var_valid->type == -1)
+        error();
+    else if (var_valid->type == 0)
+    {
+        ant->ants = ft_atoi(line);
+        var_valid->stage = 1;
+    }
+}
+
+void        stage_rooms(t_var_valid *var_valid, t_anthill *ant, t_room *rooms, char *line)
+{
+    if (var_valid->type == 6 || var_valid->type == -1)
+        error();
+    else if (var_valid->type == 1 || var_valid->type == 4 || var_valid->type == 5)
+    {
+        pars_line(ant, rooms, line, var_valid->type);
+        var_valid->stage = 1;
+    }
+}
+
 void		validation(t_anthill *ant, t_room *rooms)
 {
 	char		*line;
 	int			fd;
-	t_sys_var	*vars;
+    t_var_valid	*var_valid;
 
 
-	vars = (t_sys_var*)malloc(sizeof(t_sys_var));
-	vars->n_comm = 0;
-	vars->stat = 0;
+	var_valid = (t_var_valid*)malloc(sizeof(t_var_valid));
+    var_valid->n_comm = 0;
+    var_valid->stage = 0;
 
 	fd = open("C:\\Users\\balak\\CLionProjects\\lem_in\\text", O_RDONLY);
 	while (get_next_line(fd, &line) > 0)
 	{
-		vars->type = check_line(line);
-		if (vars->type == -1 ||
-			vars->n_comm > 2 ||
-			((vars->type == 4 || vars->type == 6) && vars->type_past == 4) ||
-			((vars->type == 5 || vars->type == 6) && vars->type_past == 5) ||
-			(vars->stat == 1 && vars->type == 0) ||
-			(vars->stat == 0 && ant->rooms > 0))
-			error();
-		if (vars->type == 4 || vars->type == 5)
-		{
-			vars->type_past = vars->type;
-			vars->n_comm++;
-		}
-		else
-		{
-			if ((vars->type_past == 4 || vars->type_past == 5))
-			{
-				if (vars->type != 1)
-					error();
-				pars_line(ant, rooms, line, vars->type_past);
-				vars->type_past = 0;
-			}
-			else
-			{
-				if (vars->type == 0 && vars->stat == 0)
-				{
-					vars->stat++;
-					pars_line(ant, rooms, line, vars->type);
-				}
-				else
-					pars_line(ant, rooms, line, vars->type);
-			}
-		}
+        var_valid->type = check_line(line);
+        if (var_valid->stage == 0 && var_valid->type != 3)
+            stage_num_ant(var_valid, ant, line);
+        if (var_valid->stage == 1 && var_valid->type != 3)
+            stage_rooms(var_valid, ant, rooms, line);
+
 		free(line);
 	}
 	print_rooms(rooms);

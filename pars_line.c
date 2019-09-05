@@ -15,7 +15,6 @@
 /*
 **			pars_line
 **		arg: (type)
-**			number_of_ants - 0
 **			the_room       - 1
 **			the_link       - 2
 **			command:
@@ -45,12 +44,7 @@ int		pars_line(t_anthill *ant, t_room *room, char *line, int type)
     char **split;
 	t_room *rooms;
 
-    if (type == 0)
-    {
-		ant->ants = ft_atoi(line);
-        return (1);
-    }
-    else if (type == 1 || type == 4 || type == 5)
+    if (type == 1 || type == 4 || type == 5)
     {
         rooms = room;
         ant->rooms++;
