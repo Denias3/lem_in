@@ -15,9 +15,7 @@
 int	*reverse_arr_num(int *num, int len)
 {
 	int i;
-	int tmp;
 
-	tmp = 0;
 	i = 0;
 	while (i < len)
 	{
