@@ -13,29 +13,76 @@
 #include <fcntl.h>
 #include "lem-in.h"
 
+t_var_valid *new_var_valid(void)
+{
+    t_var_valid	*var_valid;
 
+    var_valid = (t_var_valid*)malloc(sizeof(t_var_valid));
+    var_valid->n_comm = 0;
+    var_valid->stage = 0;
+    var_valid->start = 0;
+    var_valid->type = -1;
+    var_valid->type_past = -1;
+    var_valid->end = 0;
+    return (var_valid);
+}
 
 void        stage_num_ant(t_var_valid *var_valid, t_anthill *ant, char *line)
 {
-    if (var_valid->type == 4 || var_valid->type == 5 ||
-        var_valid->type == 6 || var_valid->type == -1)
+    if (var_valid->type == 4 || var_valid->type == 5)
         error();
     else if (var_valid->type == 0)
     {
         ant->ants = ft_atoi(line);
         var_valid->stage = 1;
     }
+    else
+        error();
 }
 
 void        stage_rooms(t_var_valid *var_valid, t_anthill *ant, t_room *rooms, char *line)
 {
-    if (var_valid->type == 6 || var_valid->type == -1)
-        error();
-    else if (var_valid->type == 1 || var_valid->type == 4 || var_valid->type == 5)
+    if (var_valid->type == 1 || var_valid->type == 4 || var_valid->type == 5)
     {
-        pars_line(ant, rooms, line, var_valid->type);
-        var_valid->stage = 1;
+        if (var_valid->n_comm < 2)
+        {
+            if (var_valid->type == 4)
+            {
+                if (var_valid->start == 1 || var_valid->type_past == 5)
+                    error();
+                var_valid->type_past = var_valid->type;
+                var_valid->start = 1;
+                var_valid->n_comm++;
+            }
+            else if (var_valid->type == 5)
+            {
+                if (var_valid->end == 1 || var_valid->type_past == 4)
+                    error();
+                var_valid->type_past = var_valid->type;
+                var_valid->end = 1;
+                var_valid->n_comm++;
+            }
+            else if (var_valid->type == 1)
+            {
+                var_valid->type_past = var_valid->type;
+                pars_line_room(ant, rooms, line, var_valid->type);
+            }
+        }
+        else
+            var_valid->stage = 2;
     }
+    else
+        error();
+}
+
+void        stage_link(t_var_valid *var_valid, t_anthill *ant, t_room *rooms, char *line)
+{
+    if (var_valid->type == 2)
+    {
+        pars_line_link(ant, rooms, line, var_valid->type);
+    }
+    else
+        error();
 }
 
 void		validation(t_anthill *ant, t_room *rooms)
@@ -44,19 +91,19 @@ void		validation(t_anthill *ant, t_room *rooms)
 	int			fd;
     t_var_valid	*var_valid;
 
-
-	var_valid = (t_var_valid*)malloc(sizeof(t_var_valid));
-    var_valid->n_comm = 0;
-    var_valid->stage = 0;
-
+	var_valid = new_var_valid();
 	fd = open("C:\\Users\\balak\\CLionProjects\\lem_in\\text", O_RDONLY);
 	while (get_next_line(fd, &line) > 0)
 	{
         var_valid->type = check_line(line);
+        if (var_valid->type == 6 || var_valid->type == -1)
+            error();
         if (var_valid->stage == 0 && var_valid->type != 3)
             stage_num_ant(var_valid, ant, line);
-        if (var_valid->stage == 1 && var_valid->type != 3)
+        else if (var_valid->stage == 1 && var_valid->type != 3)
             stage_rooms(var_valid, ant, rooms, line);
+        else if (var_valid->stage == 2 && var_valid->type != 3)
+            stage_link(var_valid, ant, rooms, line);
 
 		free(line);
 	}

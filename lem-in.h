@@ -37,22 +37,22 @@ typedef	struct		s_anthill
 }					t_anthill;
 
 /*
-**			s_sys_var
+**			s_var_valid
 **		type_past	-   прошлый тип линии
 **		type		- 	тип линии
 **		stage		-   этап
-**              0   -   Количество муравьев
-**              1   -   Создание комнат
-**              2   -   Линковка комнат
+**          0   -   Количество муравьев
+**          1   -   Создание комнат
+**          2   -   Линковка комнат
 **		n_comm		-	количество комманд
 */
 
 typedef struct		s_var_valid
 {
-	// validation
-
-	int				type_past;
+	int             start;
+	int             end;
 	int				type;
+	int             type_past;
 	int 			stage;
 	int				n_comm;
 
@@ -62,10 +62,11 @@ int					check_line(char *line);
 int					count_char_double_array(char **str);
 void				free_char_double_array(char **str);
 void				validation(t_anthill *ant, t_room *rooms);
-int					pars_line(t_anthill *ant, t_room *room, char *line, int type);
+int					pars_line_room(t_anthill *ant, t_room *room, char *line, int type);
 void				print_rooms(t_room *rooms);
 t_room				*new_room(void);
 void				free_rooms(t_room *rooms);
 void				error(void);
+int		            pars_line_link(t_anthill *ant, t_room *room, char *line, int type);
 
 #endif

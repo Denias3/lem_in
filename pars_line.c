@@ -39,10 +39,21 @@ static int		check_name_coord(t_room *rooms, t_room *room)
 	return (1);
 }
 
-int		pars_line(t_anthill *ant, t_room *room, char *line, int type)
+static t_room   *check_name(t_room *rooms, char *name)
+{
+    while (rooms != NULL)
+    {
+        if (ft_strcmp(rooms->name, name) == 0)
+            return (rooms);
+        rooms = rooms->next;
+    }
+    return (NULL);
+}
+
+int		pars_line_room(t_anthill *ant, t_room *room, char *line, int type)
 {
     char **split;
-	t_room *rooms;
+    t_room *rooms;
 
     if (type == 1 || type == 4 || type == 5)
     {
@@ -72,14 +83,21 @@ int		pars_line(t_anthill *ant, t_room *room, char *line, int type)
             room->type = 2;
         else
             room->type = 0;
-		if (check_name_coord(rooms, room) == 0)
-			error();
+        if (check_name_coord(rooms, room) == 0)
+            error();
         return (1);
     }
-//    else if (type == 2)
-//    {
-//
-//    }
     else
         return (-1);
+}
+
+int		pars_line_link(t_anthill *ant, t_room *room, char *line, int type)
+{
+    char **split;
+
+    split = ft_strsplit(line, '-');
+    if (check_name(room, split[0]) != NULL && check_name(room, split[1]) != NULL)
+    {
+
+    }
 }
