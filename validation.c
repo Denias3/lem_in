@@ -44,7 +44,7 @@ void        stage_rooms(t_var_valid *var_valid, t_anthill *ant, t_room *rooms, c
 {
     if (var_valid->type == 1 || var_valid->type == 4 || var_valid->type == 5)
     {
-        if (var_valid->n_comm < 2)
+        if (var_valid->n_comm <= 2)
         {
             if (var_valid->type == 4)
             {
@@ -52,7 +52,7 @@ void        stage_rooms(t_var_valid *var_valid, t_anthill *ant, t_room *rooms, c
                     error();
                 var_valid->type_past = var_valid->type;
                 var_valid->start = 1;
-                var_valid->n_comm++;
+				var_valid->n_comm++;
             }
             else if (var_valid->type == 5)
             {
@@ -60,7 +60,7 @@ void        stage_rooms(t_var_valid *var_valid, t_anthill *ant, t_room *rooms, c
                     error();
                 var_valid->type_past = var_valid->type;
                 var_valid->end = 1;
-                var_valid->n_comm++;
+				var_valid->n_comm++;
             }
             else if (var_valid->type == 1)
             {
@@ -75,14 +75,16 @@ void        stage_rooms(t_var_valid *var_valid, t_anthill *ant, t_room *rooms, c
         error();
 }
 
-void        stage_link(t_var_valid *var_valid, t_anthill *ant, t_room *rooms, char *line)
+void        stage_link(t_var_valid *var_valid, t_room *rooms, char *line)
 {
-    if (var_valid->type == 2)
-    {
-        pars_line_link(ant, rooms, line, var_valid->type);
-    }
-    else
-        error();
+		if (var_valid->type == 2)
+		{
+			var_valid->stage = 2;
+			if (pars_line_link(rooms, line))
+				error();
+		}
+		else
+			error();
 }
 
 void		validation(t_anthill *ant, t_room *rooms)
@@ -95,18 +97,21 @@ void		validation(t_anthill *ant, t_room *rooms)
 	fd = open("/Users/emeha/Desktop/lem_in/text", O_RDONLY);
 	while (get_next_line(fd, &line) > 0)
 	{
-        var_valid->type = check_line(line);
-        if (var_valid->type == 6 || var_valid->type == -1)
-            error();
-        if (var_valid->stage == 0 && var_valid->type != 3)
-            stage_num_ant(var_valid, ant, line);
-        else if (var_valid->stage == 1 && var_valid->type != 3)
-            stage_rooms(var_valid, ant, rooms, line);
-        else if (var_valid->stage == 2 && var_valid->type != 3)
-            stage_link(var_valid, ant, rooms, line);
-
+		var_valid->type = check_line(line);
+		if (var_valid->type == -1)
+			error();
+		if (var_valid->type == 6)
+			var_valid->type_past = 6;
+		else if (var_valid->stage == 0 && var_valid->type != 3)
+			stage_num_ant(var_valid, ant, line);
+		else if (var_valid->stage == 1 && var_valid->type != 3 && var_valid->type != 2)
+			stage_rooms(var_valid, ant, rooms, line);
+		else if ((var_valid->stage == 2 || var_valid->stage == 1) && var_valid->type != 3)
+			stage_link(var_valid, rooms, line);
 		free(line);
 	}
+	if (var_valid->stage != 2)
+		error();
 	print_rooms(rooms);
 	free_rooms(rooms);
 	ft_printf("rooms: %d\n", ant->rooms);

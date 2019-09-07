@@ -91,13 +91,15 @@ int		pars_line_room(t_anthill *ant, t_room *room, char *line, int type)
         return (-1);
 }
 
-int		pars_line_link(t_anthill *ant, t_room *room, char *line, int type)
+int		pars_line_link(t_room *room, char *line)
 {
     char **split;
 
     split = ft_strsplit(line, '-');
     if (check_name(room, split[0]) != NULL && check_name(room, split[1]) != NULL)
     {
-
+		return (0);
     }
+    else
+    	return (1);
 }
