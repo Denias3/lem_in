@@ -47,6 +47,9 @@ t_room	*new_room(void)
 	room->x = -1;
 	room->y = -1;
 	room->next = NULL;
+	room->next_rooms = (t_room**)malloc(sizeof(t_room*) * 2);
+	room->next_rooms[0] = NULL;
+	room->next_rooms[1] = NULL;
 	return (room);
 }
 
