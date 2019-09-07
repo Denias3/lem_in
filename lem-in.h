@@ -67,6 +67,6 @@ void				print_rooms(t_room *rooms);
 t_room				*new_room(void);
 void				free_rooms(t_room *rooms);
 void				error(void);
-int		            pars_line_link(t_anthill *ant, t_room *room, char *line, int type);
+int		            pars_line_link(t_room *room, char *line);
 
 #endif

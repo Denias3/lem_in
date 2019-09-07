@@ -22,6 +22,26 @@
 **				##end      - 5
 */
 
+void 			memolloc_room(t_room *room1, t_room *room2, int i)
+{
+	t_room		**tmp_room;
+	int 		j;
+
+	tmp_room = (t_room**)malloc(sizeof(t_room*) * i + 2);
+	j = 0;
+	while (room1->next_rooms[j] != NULL)
+	{
+		tmp_room[j] = room1->next_rooms[j];
+		free(room1->next_rooms[j]);
+		j++;
+	}
+	tmp_room[j] = room2;
+	j++;
+	tmp_room[j] = NULL;
+	room1->next_rooms = tmp_room;
+	free(tmp_room);
+}
+
 static int		check_name_coord(t_room *rooms, t_room *room)
 {
 	int ch;
@@ -50,7 +70,7 @@ static t_room   *check_name(t_room *rooms, char *name)
     return (NULL);
 }
 
-int		pars_line_room(t_anthill *ant, t_room *room, char *line, int type)
+int				pars_line_room(t_anthill *ant, t_room *room, char *line, int type)
 {
     char **split;
     t_room *rooms;
@@ -91,13 +111,43 @@ int		pars_line_room(t_anthill *ant, t_room *room, char *line, int type)
         return (-1);
 }
 
-int		pars_line_link(t_anthill *ant, t_room *room, char *line, int type)
+int				pars_line_link(t_room *room, char *line)
 {
-    char **split;
+    char		**split;
+	t_room		*room1;
+	t_room		*room2;
+	int 		i;
 
+	i = 1;
     split = ft_strsplit(line, '-');
-    if (check_name(room, split[0]) != NULL && check_name(room, split[1]) != NULL)
+    if ((room1 = check_name(room, split[0])) != NULL && (room2 = check_name(room, split[1])) != NULL)
     {
-
+		if (room1->next_rooms[0] == NULL)
+		{
+			room1->next_rooms[0] = room2;
+		}
+		else
+		{
+			while (room1->next_rooms[i] != NULL)
+			{
+				i++;
+			}
+			memolloc_room(room1, room2, i);
+		}
+		if (room2->next_rooms[0] == NULL)
+		{
+			room2->next_rooms[0] = room2;
+		}
+		else
+		{
+			while (room2->next_rooms[i] != NULL)
+			{
+				i++;
+			}
+			memolloc_room(room2, room1 , i);
+		}
+		return (0);
     }
+    else
+    	return (1);
 }
