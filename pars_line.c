@@ -25,9 +25,18 @@
 void 			memolloc_room(t_room *room1, t_room *room2, int i)
 {
 	t_room		**tmp_room;
+	int 		size;
 	int 		j;
 
-	tmp_room = (t_room**)malloc(sizeof(t_room*) * i + 2);
+	size = i + 2;
+	tmp_room = (t_room**)malloc(sizeof(t_room*) * size);
+	j = 0;
+	while (size > 0)
+	{
+		tmp_room[j] = (t_room*)malloc(sizeof(t_room));
+		j++;
+		size--;
+	}
 	j = 0;
 	while (room1->next_rooms[j] != NULL)
 	{
@@ -39,7 +48,7 @@ void 			memolloc_room(t_room *room1, t_room *room2, int i)
 	j++;
 	tmp_room[j] = NULL;
 	room1->next_rooms = tmp_room;
-	free(tmp_room);
+//	free(tmp_room);
 }
 
 static int		check_name_coord(t_room *rooms, t_room *room)

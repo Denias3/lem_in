@@ -108,6 +108,7 @@ void		validation(t_anthill *ant, t_room *rooms)
 	}
 	print_rooms(rooms);
 	free_rooms(rooms);
+	free(var_valid);
 	ft_printf("rooms: %d\n", ant->rooms);
 	ft_printf("ants:  %d\n", ant->ants);
 }

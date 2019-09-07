@@ -29,8 +29,6 @@ int					main(void)
 	t_anthill	*ant;
 	t_room		*rooms;
 
-
-
 	rooms = new_room();
 	ant = newanthill();
 	validation(ant, rooms);

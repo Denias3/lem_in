@@ -48,15 +48,26 @@ t_room	*new_room(void)
 	room->y = -1;
 	room->next = NULL;
 	room->next_rooms = (t_room**)malloc(sizeof(t_room*) * 2);
+	room->next_rooms[0] = (t_room*)malloc(sizeof(t_room));
 	room->next_rooms[0] = NULL;
+	room->next_rooms[1] = (t_room*)malloc(sizeof(t_room));
 	room->next_rooms[1] = NULL;
 	return (room);
 }
 
 void	free_rooms(t_room *rooms)
 {
-	t_room *tmp;
+	t_room	*tmp;
+	int 	i;
 
+	i = 0;
+	free(rooms->next_rooms);
+	while (rooms->next_rooms[i] != NULL)
+	{
+		free(rooms->next_rooms[i]);
+		i++;
+	}
+	free(rooms->next_rooms);
 	while (rooms != NULL)
 	{
 		free(rooms->name);
