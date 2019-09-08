@@ -28,7 +28,7 @@ void 			memolloc_room(t_room *room1, t_room *room2, int i)
 	int 		size;
 	int 		j;
 
-	size = i + 2;
+	size = i + 1;
 	tmp_room = (t_room**)malloc(sizeof(t_room*) * size);
 	j = 0;
 	while (size > 0)
@@ -131,6 +131,9 @@ int				pars_line_link(t_room *room, char *line)
     split = ft_strsplit(line, '-');
     if ((room1 = check_name(room, split[0])) != NULL && (room2 = check_name(room, split[1])) != NULL)
     {
+    	free(split[0]);
+    	free(split[1]);
+    	free(split);
 		if (room1->next_rooms[0] == NULL)
 		{
 			room1->next_rooms[0] = room2;
