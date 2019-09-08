@@ -66,7 +66,7 @@ void	free_rooms(t_room *rooms)
 		i++;
 	}
 	free(rooms->next_rooms);
-	while (rooms != NULL)
+	while (rooms->next != NULL)
 	{
 		free(rooms->name);
 		tmp = rooms;

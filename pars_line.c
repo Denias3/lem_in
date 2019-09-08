@@ -39,7 +39,7 @@ void 			memolloc_room(t_room *room1, t_room *room2, int i)
 	}
 	size = j;
 	j = 0;
-	while (size > 0)
+	while (size > 1)
 	{
 		tmp_room[j] = room1->next_rooms[j];
 		free(room1->next_rooms[j]);
@@ -49,7 +49,6 @@ void 			memolloc_room(t_room *room1, t_room *room2, int i)
 	tmp_room[j] = room2;
 	j++;
 	tmp_room[j] = NULL;
-	free(room1->next_rooms);
 	room1->next_rooms = tmp_room;
 //	free(tmp_room);
 }
@@ -96,6 +95,7 @@ int				pars_line_room(t_anthill *ant, t_room *room, char *line, int type)
             if (room->next == NULL)
             {
                 room->next = new_room();
+				room = room->next;
                 break ;
             }
             room = room->next;
