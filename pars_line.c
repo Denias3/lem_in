@@ -139,11 +139,13 @@ void			check_link_room(t_room *room)
 
 void			check_link_room_full(t_room *room)
 {
+	ft_printf("------------------------\n");
 	while (room != NULL)
 	{
 		check_link_room(room);
 		room = room->next;
 	}
+	ft_printf("------------------------\n");
 }
 
 int				pars_line_link(t_room *room, char *line)
