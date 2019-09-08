@@ -37,16 +37,19 @@ void 			memolloc_room(t_room *room1, t_room *room2, int i)
 		j++;
 		size--;
 	}
+	size = j;
 	j = 0;
-	while (room1->next_rooms[j] != NULL)
+	while (size > 0)
 	{
 		tmp_room[j] = room1->next_rooms[j];
 		free(room1->next_rooms[j]);
 		j++;
+		size--;
 	}
 	tmp_room[j] = room2;
 	j++;
 	tmp_room[j] = NULL;
+	free(room1->next_rooms);
 	room1->next_rooms = tmp_room;
 //	free(tmp_room);
 }
