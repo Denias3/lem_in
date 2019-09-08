@@ -42,7 +42,7 @@ void 			memolloc_room(t_room *room1, t_room *room2, int i)
 	while (size > 1)
 	{
 		tmp_room[j] = room1->next_rooms[j];
-		free(room1->next_rooms[j]);
+//		free(room1->next_rooms[j]);
 		j++;
 		size--;
 	}
@@ -122,6 +122,30 @@ int				pars_line_room(t_anthill *ant, t_room *room, char *line, int type)
         return (-1);
 }
 
+void			check_link_room(t_room *room)
+{
+	int i;
+
+	i = 0;
+	ft_printf("%s - room\n", room->name);
+	ft_printf("links:\n");
+	while(room->next_rooms[i] != NULL)
+	{
+		ft_printf("%4s - name\n", room->next_rooms[i]->name);
+		i++;
+	}
+	ft_printf("\n");
+}
+
+void			check_link_room_full(t_room *room)
+{
+	while (room != NULL)
+	{
+		check_link_room(room);
+		room = room->next;
+	}
+}
+
 int				pars_line_link(t_room *room, char *line)
 {
     char		**split;
@@ -133,6 +157,7 @@ int				pars_line_link(t_room *room, char *line)
     split = ft_strsplit(line, '-');
     if ((room1 = check_name(room, split[0])) != NULL && (room2 = check_name(room, split[1])) != NULL)
     {
+
     	free(split[0]);
     	free(split[1]);
     	free(split);
@@ -160,6 +185,7 @@ int				pars_line_link(t_room *room, char *line)
 			}
 			memolloc_room(room2, room1 , i);
 		}
+		check_link_room_full(room);
 		return (0);
     }
     else
