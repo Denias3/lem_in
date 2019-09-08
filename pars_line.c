@@ -72,7 +72,7 @@ static int		check_name_coord(t_room *rooms, t_room *room)
 
 static t_room   *check_name(t_room *rooms, char *name)
 {
-    while (rooms->next != NULL)
+    while (rooms != NULL)
     {
         if (ft_strcmp(rooms->name, name) == 0)
             return (rooms);
@@ -177,7 +177,7 @@ int				pars_line_link(t_room *room, char *line)
 		}
 		if (room2->next_rooms[0] == NULL)
 		{
-			room2->next_rooms[0] = room2;
+			room2->next_rooms[0] = room1;
 		}
 		else
 		{
