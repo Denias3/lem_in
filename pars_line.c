@@ -96,7 +96,6 @@ int				pars_line_room(t_anthill *ant, t_room *room, char *line, int type)
             if (room->next == NULL)
             {
                 room->next = new_room();
-                room = room->next;
                 break ;
             }
             room = room->next;
