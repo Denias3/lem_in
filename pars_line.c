@@ -73,7 +73,7 @@ static int		check_name_coord(t_room *rooms, t_room *room)
 
 static t_room   *check_name(t_room *rooms, char *name)
 {
-    while (rooms != NULL)
+    while (rooms->next != NULL)
     {
         if (ft_strcmp(rooms->name, name) == 0)
             return (rooms);
