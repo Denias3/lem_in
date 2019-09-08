@@ -22,6 +22,21 @@
 **				##end      - 5
 */
 
+void			check_link_room(t_room *room)
+{
+	int i;
+
+	i = 0;
+	ft_printf("%s - room\n", room->name);
+	ft_printf("links:\n");
+	while(room->next_rooms[i] != NULL)
+	{
+		ft_printf("%4s - name\n", room->next_rooms[i]->name);
+		i++;
+	}
+	ft_printf("\n");
+}
+
 void 			memolloc_room(t_room *room1, t_room *room2, int i)
 {
 	t_room		**tmp_room;
@@ -30,14 +45,6 @@ void 			memolloc_room(t_room *room1, t_room *room2, int i)
 
 	size = i + 1;
 	tmp_room = (t_room**)malloc(sizeof(t_room*) * size);
-	j = 0;
-	while (size > 0)
-	{
-		tmp_room[j] = (t_room*)malloc(sizeof(t_room));
-		j++;
-		size--;
-	}
-	size = j;
 	j = 0;
 	while (size > 1)
 	{
@@ -49,7 +56,11 @@ void 			memolloc_room(t_room *room1, t_room *room2, int i)
 	tmp_room[j] = room2;
 	j++;
 	tmp_room[j] = NULL;
+//	ft_printf("do\n");
+//	check_link_room(room1);
 	room1->next_rooms = tmp_room;
+//	ft_printf("posle\n");
+//	check_link_room(room1);
 //	free(tmp_room);
 }
 
@@ -122,21 +133,6 @@ int				pars_line_room(t_anthill *ant, t_room *room, char *line, int type)
         return (-1);
 }
 
-void			check_link_room(t_room *room)
-{
-	int i;
-
-	i = 0;
-	ft_printf("%s - room\n", room->name);
-	ft_printf("links:\n");
-	while(room->next_rooms[i] != NULL)
-	{
-		ft_printf("%4s - name\n", room->next_rooms[i]->name);
-		i++;
-	}
-	ft_printf("\n");
-}
-
 void			check_link_room_full(t_room *room)
 {
 	ft_printf("------------------------\n");
@@ -173,21 +169,28 @@ int				pars_line_link(t_room *room, char *line)
 			{
 				i++;
 			}
+//			ft_printf("------------------\nline - %s\n", line);
 			memolloc_room(room1, room2, i);
+//			ft_printf("stage 1 on 2\n");
+//			check_link_room_full(room);
 		}
-		if (room2->next_rooms[0] == NULL)
-		{
-			room2->next_rooms[0] = room1;
-		}
-		else
-		{
-			while (room2->next_rooms[i] != NULL)
-			{
-				i++;
-			}
-			memolloc_room(room2, room1 , i);
-		}
-		check_link_room_full(room);
+//		i = 1;
+//		if (room2->next_rooms[0] == NULL)
+//		{
+//			room2->next_rooms[0] = room1;
+//		}
+//		else
+//		{
+//			while (room2->next_rooms[i] != NULL)
+//			{
+//				i++;
+//			}
+////			ft_printf("------------------\nline - %s\n", line);
+//			memolloc_room(room2, room1 , i);
+////			ft_printf("stage  2 on 1\n");
+////			check_link_room_full(room);
+//		}
+//		check_link_room_full(room);
 		return (0);
     }
     else
