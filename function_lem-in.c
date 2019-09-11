@@ -58,18 +58,9 @@ t_room	*new_room(void)
 void	free_rooms(t_room *rooms)
 {
 	t_room	*tmp;
-	int 	i;
-
-	i = 0;
-	while (rooms->next_rooms[i] != NULL)
-	{
-		free(rooms->next_rooms[i]);
-		i++;
-	}
-	free(rooms->next_rooms);
 	while (rooms->next != NULL)
 	{
-		free(rooms->name);
+		free(rooms->next_rooms);
 		tmp = rooms;
 		rooms = rooms->next;
 		free(tmp);

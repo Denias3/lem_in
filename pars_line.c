@@ -49,19 +49,13 @@ void 			memolloc_room(t_room *room1, t_room *room2, int i)
 	while (size > 2)
 	{
 		tmp_room[j] = room1->next_rooms[j];
-//		free(room1->next_rooms[j]);
 		j++;
 		size--;
 	}
 	tmp_room[j] = room2;
 	j++;
 	tmp_room[j] = NULL;
-//	ft_printf("do\n");
-//	check_link_room(room1);
 	room1->next_rooms = tmp_room;
-//	ft_printf("posle\n");
-//	check_link_room(room1);
-//	free(tmp_room);
 }
 
 static int		check_name_coord(t_room *rooms, t_room *room)
@@ -166,31 +160,18 @@ int				pars_line_link(t_room *room, char *line)
 		else
 		{
 			while (room1->next_rooms[i] != NULL)
-			{
 				i++;
-			}
-//			ft_printf("------------------\nline - %s\n", line);
 			memolloc_room(room1, room2, i);
-//			ft_printf("stage 1 on 2\n");
-//			check_link_room_full(room);
 		}
 		i = 1;
 		if (room2->next_rooms[0] == NULL)
-		{
 			room2->next_rooms[0] = room1;
-		}
 		else
 		{
 			while (room2->next_rooms[i] != NULL)
-			{
 				i++;
-			}
-//			ft_printf("------------------\nline - %s\n", line);
 			memolloc_room(room2, room1 , i);
-//			ft_printf("stage  2 on 1\n");
-//			check_link_room_full(room);
 		}
-//		check_link_room_full(room);
 		return (0);
     }
     else
