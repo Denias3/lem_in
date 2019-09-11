@@ -92,7 +92,7 @@ void		validation(t_anthill *ant, t_room *rooms)
 	t_var_valid	*var_valid;
 
 	var_valid = new_var_valid();
-	fd = open("/Users/fschille/Desktop/lem_in/text", O_RDONLY);
+	fd = open("/Users/emeha/Desktop/lem_in/text", O_RDONLY);
 	while (get_next_line(fd, &line) > 0)
 	{
 		var_valid->type = check_line(line);
@@ -107,7 +107,7 @@ void		validation(t_anthill *ant, t_room *rooms)
 		free(line);
 	}
 	print_rooms(rooms);
-//	free_rooms(rooms);
+	free_rooms(rooms);
 	free(var_valid);
 	ft_printf("rooms: %d\n", ant->rooms);
 	ft_printf("ants:  %d\n", ant->ants);
