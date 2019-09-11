@@ -40,6 +40,7 @@ void			check_link_room(t_room *room)
 void 			memolloc_room(t_room *room1, t_room *room2, int i)
 {
 	t_room		**tmp_room;
+	t_room		**tmp;
 	int 		size;
 	int 		j;
 
@@ -55,7 +56,9 @@ void 			memolloc_room(t_room *room1, t_room *room2, int i)
 	tmp_room[j] = room2;
 	j++;
 	tmp_room[j] = NULL;
+	tmp = room1->next_rooms;
 	room1->next_rooms = tmp_room;
+	free(tmp);
 }
 
 static int		check_name_coord(t_room *rooms, t_room *room)
@@ -172,6 +175,7 @@ int				pars_line_link(t_room *room, char *line)
 				i++;
 			memolloc_room(room2, room1 , i);
 		}
+		check_link_room_full(room);
 		return (0);
     }
     else
