@@ -43,10 +43,10 @@ void 			memolloc_room(t_room *room1, t_room *room2, int i)
 	int 		size;
 	int 		j;
 
-	size = i + 1;
+	size = i + 2;
 	tmp_room = (t_room**)malloc(sizeof(t_room*) * size);
 	j = 0;
-	while (size > 1)
+	while (size > 2)
 	{
 		tmp_room[j] = room1->next_rooms[j];
 //		free(room1->next_rooms[j]);
@@ -174,22 +174,22 @@ int				pars_line_link(t_room *room, char *line)
 //			ft_printf("stage 1 on 2\n");
 //			check_link_room_full(room);
 		}
-//		i = 1;
-//		if (room2->next_rooms[0] == NULL)
-//		{
-//			room2->next_rooms[0] = room1;
-//		}
-//		else
-//		{
-//			while (room2->next_rooms[i] != NULL)
-//			{
-//				i++;
-//			}
-////			ft_printf("------------------\nline - %s\n", line);
-//			memolloc_room(room2, room1 , i);
-////			ft_printf("stage  2 on 1\n");
-////			check_link_room_full(room);
-//		}
+		i = 1;
+		if (room2->next_rooms[0] == NULL)
+		{
+			room2->next_rooms[0] = room1;
+		}
+		else
+		{
+			while (room2->next_rooms[i] != NULL)
+			{
+				i++;
+			}
+//			ft_printf("------------------\nline - %s\n", line);
+			memolloc_room(room2, room1 , i);
+//			ft_printf("stage  2 on 1\n");
+//			check_link_room_full(room);
+		}
 //		check_link_room_full(room);
 		return (0);
     }
