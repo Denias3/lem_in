@@ -59,9 +59,10 @@ void	free_rooms(t_room *rooms)
 {
 	t_room	*tmp;
 
-	while (rooms->next != NULL)
+	while (rooms != NULL)
 	{
 		free(rooms->next_rooms);
+		free(rooms->name);
 		tmp = rooms;
 		rooms = rooms->next;
 		free(tmp);
