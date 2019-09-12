@@ -68,5 +68,5 @@ t_room				*new_room(void);
 void				free_rooms(t_room *rooms);
 void				error(void);
 int					pars_line_link(t_room *room, char *line);
-
+void				algorithm(t_anthill *ant, t_room *rooms);
 #endif
