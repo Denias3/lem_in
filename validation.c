@@ -92,17 +92,19 @@ void		validation(t_anthill *ant, t_room *rooms)
 	t_var_valid	*var_valid;
 
 	var_valid = new_var_valid();
-	fd = open("/Users/fschille/Desktop/lem_in/text", O_RDONLY);
+	fd = open("/Users/emeha/Desktop/lem_in/text", O_RDONLY);
 	while (get_next_line(fd, &line) > 0)
 	{
 		var_valid->type = check_line(line);
-		if (var_valid->type == 6 || var_valid->type == -1)
+		if (var_valid->type == -1)
 			error();
-		if (var_valid->stage == 0 && var_valid->type != 3)
+		if (var_valid->type == 3 || var_valid->type == 6)
+			continue;
+		if (var_valid->stage == 0 )
 			stage_num_ant(var_valid, ant, line);
-		else if (var_valid->stage == 1 && var_valid->type != 3 && var_valid->type != 2)
+		else if (var_valid->stage == 1 &&  var_valid->type != 2)
 			stage_rooms(var_valid, ant, rooms, line);
-		else if ((var_valid->stage == 2 || var_valid->stage == 1) && var_valid->type != 3)
+		else if ((var_valid->stage == 2 || var_valid->stage == 1))
 			stage_link(var_valid, rooms, line);
 		free(line);
 	}
