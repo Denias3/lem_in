@@ -25,5 +25,7 @@ int	check_number(char *str)
 			return (0);
 		i++;
 	}
-	return (1);
+	if (i > 0)
+		return (1);
+	return (0);
 }

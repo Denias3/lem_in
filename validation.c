@@ -64,8 +64,8 @@ void        stage_rooms(t_var_valid *var_valid, t_anthill *ant, t_room *rooms, c
 			}
 			else if (var_valid->type == 1)
 			{
+				pars_line_room(ant, rooms, line, var_valid->type_past);
 				var_valid->type_past = var_valid->type;
-				pars_line_room(ant, rooms, line, var_valid->type);
 			}
 		}
 		else
@@ -98,11 +98,11 @@ void		validation(t_anthill *ant, t_room *rooms)
 		var_valid->type = check_line(line);
 		if (var_valid->type == -1)
 			error();
-		if (var_valid->type == 3 || var_valid->type == 6)
+		if (var_valid->type == 6 || var_valid->type == 3)
 			continue;
-		if (var_valid->stage == 0 )
+		if (var_valid->stage == 0)
 			stage_num_ant(var_valid, ant, line);
-		else if (var_valid->stage == 1 &&  var_valid->type != 2)
+		else if (var_valid->stage == 1 && var_valid->type != 2)
 			stage_rooms(var_valid, ant, rooms, line);
 		else if ((var_valid->stage == 2 || var_valid->stage == 1))
 			stage_link(var_valid, rooms, line);
