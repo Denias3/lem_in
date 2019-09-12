@@ -89,12 +89,12 @@ static t_room   *check_name(t_room *rooms, char *name)
     return (NULL);
 }
 
-int				pars_line_room(t_anthill *ant, t_room *room, char *line, int type)
+int				pars_line_room(t_anthill *ant, t_room *room, char *line, t_var_valid *v_val)
 {
     char **split;
     t_room *rooms;
 
-    if (type == 1 || type == 4 || type == 5)
+    if (v_val->type == 1 || v_val->type == 4 || v_val->type == 5)
     {
         rooms = room;
         ant->rooms++;
@@ -108,7 +108,6 @@ int				pars_line_room(t_anthill *ant, t_room *room, char *line, int type)
             }
             room = room->next;
         }
-
         split = ft_strsplit(line, ' ');
         room->name = split[0];
         room->x = ft_atoi(split[1]);
@@ -116,9 +115,9 @@ int				pars_line_room(t_anthill *ant, t_room *room, char *line, int type)
         free(split[1]);
         free(split[2]);
         free(split);
-        if (type == 4)
+        if (v_val->type_past == 4)
             room->type = 1;
-        else if (type == 5)
+        else if (v_val->type_past == 5)
             room->type = 2;
         else
             room->type = 0;

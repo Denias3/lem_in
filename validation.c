@@ -64,7 +64,7 @@ void        stage_rooms(t_var_valid *var_valid, t_anthill *ant, t_room *rooms, c
 			}
 			else if (var_valid->type == 1)
 			{
-				pars_line_room(ant, rooms, line, var_valid->type_past);
+				pars_line_room(ant, rooms, line, var_valid);
 				var_valid->type_past = var_valid->type;
 			}
 		}
@@ -79,7 +79,9 @@ void        stage_link(t_var_valid *var_valid, t_room *rooms, char *line)
 {
 	if (var_valid->type == 2)
 	{
-		pars_line_link(rooms, line);
+		var_valid->stage = 2;
+		if (pars_line_link(rooms, line) == 1)
+			error();
 	}
 	else
 		error();
@@ -108,6 +110,8 @@ void		validation(t_anthill *ant, t_room *rooms)
 			stage_link(var_valid, rooms, line);
 		free(line);
 	}
+	if (var_valid->stage != 2)
+		error();
 	print_rooms(rooms);
 	free_rooms(rooms);
 	free(var_valid);
