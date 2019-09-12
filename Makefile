@@ -4,7 +4,8 @@ SRC = lem-in.c\
 check_line.c\
 function_lem-in.c\
 validation.c\
-pars_line.c
+pars_line.c\
+algorithm.c
 
 INCLUDES = ft_printf/libftprintf.a
 
