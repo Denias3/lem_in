@@ -110,7 +110,7 @@ void		validation(t_anthill *ant, t_room *rooms)
 			stage_link(var_valid, rooms, line);
 		free(line);
 	}
-	if (var_valid->stage != 2)
+	if (var_valid->stage != 2 || var_valid->n_comm != 2)
 		error();
 	print_rooms(rooms);
 	free_rooms(rooms);
