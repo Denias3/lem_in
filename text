@@ -1,7 +1,21 @@
 1
-1 0 2
 ##start
-0 2 0
+A 0 2
+B 1 0
+C 1 1
+D 1 2
+E 2 0
+F 2 1
+G 2 2
 ##end
-4 2 1
-4-0
+H 2 3
+A-B
+A-E
+B-C
+C-D
+D-H
+D-E
+D-F
+E-F
+F-G
+G-H
