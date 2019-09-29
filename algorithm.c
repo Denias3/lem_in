@@ -25,7 +25,9 @@ t_room          *search_room_type(t_room *rooms, short type)
 
 void            to_position(t_room *rooms)
 {
-	print_room(rooms);
+	t_room *st_room;
+	st_room = search_room_type(rooms,1);
+	print_room(st_room);
 }
 
 
