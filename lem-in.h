@@ -23,6 +23,7 @@ typedef	struct		s_room
 	short			state; // 0 - нет муравья, 1 - есть муравей
 	int				x;
 	int				y;
+	int             bf;
 	struct s_room	**next_rooms;
 	struct s_room	*next;
 
