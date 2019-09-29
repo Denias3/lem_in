@@ -112,7 +112,7 @@ void		validation(t_anthill *ant, t_room *rooms)
 	}
 	if (var_valid->stage != 2 || var_valid->n_comm != 2)
 		error();
-	print_rooms(rooms);
+//	print_rooms(rooms);
 	free(var_valid);
 //	ft_printf("rooms: %d\n", ant->rooms);
 //	ft_printf("ants:  %d\n", ant->ants);

@@ -64,6 +64,7 @@ int					count_char_double_array(char **str);
 void				free_char_double_array(char **str);
 void				validation(t_anthill *ant, t_room *rooms);
 int					pars_line_room(t_anthill *ant, t_room *room, char *line, t_var_valid *v_val);
+void				print_room(t_room *room);
 void				print_rooms(t_room *rooms);
 t_room				*new_room(void);
 void				free_rooms(t_room *rooms);

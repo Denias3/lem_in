@@ -12,8 +12,26 @@
 
 #include "lem-in.h"
 
+t_room          *search_room_type(t_room *rooms, short type)
+{
+    while (rooms != NULL)
+    {
+        if (rooms->type == type)
+			return (rooms);
+		rooms = rooms->next;
+    }
+    return (NULL);
+}
+
+void            to_position(t_room *rooms)
+{
+	print_room(rooms);
+}
+
 
 void			algorithm(t_anthill *ant, t_room *rooms)
 {
+    ant = NULL;
+    to_position(rooms);
 
 }

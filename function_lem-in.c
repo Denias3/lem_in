@@ -68,17 +68,30 @@ void	free_rooms(t_room *rooms)
 	}
 }
 
+void	print_room(t_room *room)
+{
+	if (room != NULL)
+	{
+		ft_printf("name:  %s\n", room->name);
+		ft_printf("type:  %d\n", room->type);
+		ft_printf("state: %d\n", room->state);
+		ft_printf("x:     %d\n", room->x);
+		ft_printf("y:     %d\n\n", room->y);
+	}
+	else
+	{
+		ft_printf("NULL");
+	}
+}
+
 void	print_rooms(t_room *rooms)
 {
 	int i;
 	i = 0;
 	while (rooms != NULL)
 	{
-		ft_printf("id:    %d\nname:  %s\n", i, rooms->name);
-		ft_printf("type:  %d\n", rooms->type);
-		ft_printf("state: %d\n", rooms->state);
-		ft_printf("x:     %d\n", rooms->x);
-		ft_printf("y:     %d\n\n", rooms->y);
+		ft_printf("id:    %d\n", i);
+		print_room(rooms);
 		i++;
 		rooms = rooms->next;
 	}
