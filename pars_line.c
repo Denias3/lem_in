@@ -174,7 +174,7 @@ int				pars_line_link(t_room *room, char *line)
 				i++;
 			memolloc_room(room2, room1 , i);
 		}
-		check_link_room_full(room);
+//		check_link_room_full(room);
 		return (0);
     }
     else

@@ -112,9 +112,25 @@ static int 	no_valid_command(char *str)
 	return (0);
 }
 
+int	check_number_positive(char *str)
+{
+    int i;
+
+    i = 0;
+    while (str[i])
+    {
+        if (str[i] < '0' || str[i] > '9')
+            return (0);
+        i++;
+    }
+    if (i > 0)
+        return (1);
+    return (0);
+}
+
 int			check_line(char *line)
 {
-	if (check_number(line))
+	if (check_number_positive(line))
 		return (0);
 	else if (the_room(line))
 		return (1);
