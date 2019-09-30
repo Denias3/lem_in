@@ -78,7 +78,7 @@ static int		check_name_coord(t_room *rooms, t_room *room)
 	return (1);
 }
 
-static t_room   *check_name(t_room *rooms, char *name)
+t_room   *check_name(t_room *rooms, char *name)
 {
     while (rooms != NULL)
     {
@@ -174,7 +174,7 @@ int				pars_line_link(t_room *room, char *line)
 				i++;
 			memolloc_room(room2, room1 , i);
 		}
-//		check_link_room_full(room);
+		check_link_room_full(room);
 		return (0);
     }
     else

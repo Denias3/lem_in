@@ -32,7 +32,7 @@ int					main(void)
 	rooms = new_room();
 	ant = newanthill();
 	validation(ant, rooms);
-	algorithm(ant, rooms);
+//	algorithm(ant, rooms);
 	free(ant);
 	free_rooms(rooms);
 	return (0);
