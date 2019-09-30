@@ -73,4 +73,6 @@ void				free_rooms(t_room *rooms);
 void				error(void);
 int					pars_line_link(t_room *room, char *line);
 void				algorithm(t_anthill *ant, t_room *rooms);
+void				short_way(t_room *rooms);
+void				check_link_room_full(t_room *room);
 #endif

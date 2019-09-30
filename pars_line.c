@@ -28,6 +28,8 @@ void			check_link_room(t_room *room)
 
 	i = 0;
 	ft_printf("%s - room\n", room->name);
+	ft_printf("%d - df\n", room->bf);
+	ft_printf("%d - type\n", room->type);
 	ft_printf("links:\n");
 	while(room->next_rooms[i] != NULL)
 	{
@@ -174,7 +176,7 @@ int				pars_line_link(t_room *room, char *line)
 				i++;
 			memolloc_room(room2, room1 , i);
 		}
-		check_link_room_full(room);
+//		check_link_room_full(room);
 		return (0);
     }
     else
