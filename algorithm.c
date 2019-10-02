@@ -23,6 +23,15 @@ t_room          *search_room_type(t_room *rooms, short type)
     return (NULL);
 }
 
+void			print_bfs(t_room *rooms)
+{
+	while (rooms != NULL)
+	{
+		ft_printf("%s-", rooms->name);
+		rooms = rooms->bfs_next;
+	}
+}
+
 int 			ch_bf(t_room *room)
 {
 	int i;
@@ -89,9 +98,11 @@ int				end_bf(t_room *rooms)
 
 void			go_bf(t_room *rooms)
 {
-	t_room *tmp;
-	int bf;
+	t_room	*tmp;
+	t_room	*tmp2;
+	int		bf;
 
+	tmp2 = search_room_type(rooms, 1);
 	bf = 1;
 	while (end_bf(rooms) == 0)
 	{
@@ -99,9 +110,16 @@ void			go_bf(t_room *rooms)
 		if (tmp == NULL)
 			bf++;
 		else
+		{
 			tmp->bf = bf;
+			tmp->bfs_prev = tmp2;
+			tmp2->bfs_next = tmp;
+			tmp2 = tmp;
+		}
+
 	}
 }
+
 
 void            to_position(t_room *rooms)
 {
@@ -109,14 +127,13 @@ void            to_position(t_room *rooms)
 	go_bf(rooms);
 }
 
-
 void			algorithm(t_anthill *ant, t_room *rooms)
 {
 	ant = NULL;
     to_position(rooms);
 	short_way(rooms);
-	to_position(rooms);
-	print_rooms(rooms);
+	print_bfs(rooms);
+//	print_rooms(rooms);
 //	go_ants(rooms, ant);
 }
 

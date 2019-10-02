@@ -27,6 +27,8 @@ typedef	struct		s_room
 	int 			*closed_links;
 	struct s_room	**next_rooms;
 	struct s_room	*next;
+	struct s_room	*bfs_next;
+	struct s_room	*bfs_prev;
 
 }					t_room;
 

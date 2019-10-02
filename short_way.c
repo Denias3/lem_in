@@ -111,5 +111,5 @@ void			short_way(t_room *rooms)
 	{
 		room = df_check(room);
 	}
-	check_link_room_full(rooms);
+//	check_link_room_full(rooms);
 }
