@@ -33,6 +33,7 @@ int					main(void)
 	ant = newanthill();
 	validation(ant, rooms);
 	algorithm(ant, rooms);
+	free_closed_links(rooms);
 	free(ant);
 	free_rooms(rooms);
 	return (0);
