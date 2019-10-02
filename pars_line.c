@@ -28,15 +28,15 @@ void			check_link_room(t_room *room)
 
 	i = 0;
 	ft_printf("%s - room\n", room->name);
-	ft_printf("%d - df\n", room->bf);
+	ft_printf("%d - bf\n", room->bf);
 	ft_printf("%d - type\n", room->type);
 	ft_printf("links:\n");
 	while(room->next_rooms[i] != NULL)
 	{
 		if (room->closed_links && room->closed_links[i])
-			ft_printf("%4s - name - %d\n", room->next_rooms[i]->name, room->closed_links[i]);
+			ft_printf("%4s(%d) - name - %d\n", room->next_rooms[i]->name, i, room->closed_links[i]);
 		else
-			ft_printf("%4s - name - 0\n", room->next_rooms[i]->name);
+			ft_printf("%4s(%d) - name - 0\n", room->next_rooms[i]->name, i);
 		i++;
 	}
 	ft_printf("\n");

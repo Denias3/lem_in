@@ -103,8 +103,8 @@ void			algorithm(t_anthill *ant, t_room *rooms)
 {
 	ant = NULL;
     to_position(rooms);
-    print_rooms(rooms);
-//	short_way(rooms);
+//    print_rooms(rooms);
+	short_way(rooms);
 //	go_ants(rooms, ant);
 }
 

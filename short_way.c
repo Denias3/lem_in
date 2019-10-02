@@ -59,6 +59,7 @@ void		close_link(t_room *room, t_room *tmp)
 		{
 			tmp->closed_links[i] = 1;
 		}
+		i++;
 	}
 }
 
@@ -86,13 +87,16 @@ void			short_way(t_room *rooms)
 {
 	t_room      *room;
 
-	room = rooms;
+	room = end_room(rooms);
 	if (rooms == NULL)
 	{
 		ft_printf("error finding (end) room");
 		exit(0);
 	}
-	df_check(end_room(rooms));
+	while (room->bf > 0)
+	{
+		room = df_check(room);
+	}
 	check_link_room_full(rooms);
 //	ft_printf("%s - room\n", tmp->name);
 //	ft_printf("%d - bf\n", tmp->bf);
