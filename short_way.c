@@ -101,7 +101,6 @@ void			short_way(t_room *rooms)
 	t_room      *room;
 
 	room = end_room(rooms);
-
 	if (room == NULL)
 	{
 		ft_printf("error finding (end) room");

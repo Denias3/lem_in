@@ -127,6 +127,7 @@ void            to_position(t_room *rooms)
 	go_bf(rooms);
 }
 
+
 void			algorithm(t_anthill *ant, t_room *rooms)
 {
 	ant = NULL;
