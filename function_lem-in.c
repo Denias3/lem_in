@@ -73,8 +73,9 @@ void	print_room(t_room *room)
 {
 	if (room != NULL)
 	{
-		ft_printf("name:  %s\n", room->name);
 		ft_printf("id:    %d\n", room->id);
+		ft_printf("name:  %s\n", room->name);
+		ft_printf("bf:    %d\n", room->bf);
 		ft_printf("type:  %d\n", room->type);
 		ft_printf("state: %d\n", room->state);
 		ft_printf("x:     %d\n", room->x);
@@ -92,7 +93,6 @@ void	print_rooms(t_room *rooms)
 	i = 0;
 	while (rooms != NULL)
 	{
-		ft_printf("id:    %d\n", i);
 		print_room(rooms);
 		i++;
 		rooms = rooms->next;

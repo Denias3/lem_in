@@ -12,6 +12,7 @@
 
 #include "lem-in.h"
 
+
 //void go_ants(t_room *rooms, t_anthill *ant)
 //{
 //	int i;
