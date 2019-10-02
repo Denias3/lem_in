@@ -84,10 +84,7 @@ void			go_bf(t_room *rooms)
 		if (tmp == NULL)
 			bf++;
 		else
-		{
 			tmp->bf = bf;
-			print_room(tmp);
-		}
 	}
 }
 
@@ -106,5 +103,8 @@ void			algorithm(t_anthill *ant, t_room *rooms)
 {
 	ant = NULL;
     to_position(rooms);
-	short_way(rooms);
+    print_rooms(rooms);
+//	short_way(rooms);
+//	go_ants(rooms, ant);
 }
+

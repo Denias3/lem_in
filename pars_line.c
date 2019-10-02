@@ -114,6 +114,7 @@ int				pars_line_room(t_anthill *ant, t_room *room, char *line, t_var_valid *v_v
         room->name = split[0];
         room->x = ft_atoi(split[1]);
         room->y = ft_atoi(split[2]);
+        room->id = ant->rooms - 1;
         free(split[1]);
         free(split[2]);
         free(split);
