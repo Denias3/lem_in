@@ -48,6 +48,19 @@ int 		*creat_closed_links(int size)
 	return (closed_links);
 }
 
+void        free_closed_links(t_room *rooms)
+{
+	int     i;
+
+	i = 0;
+	while (rooms != NULL)
+	{
+		if (rooms->closed_links != 0)
+			free(rooms->closed_links);
+		rooms = rooms->next;
+	}
+}
+
 void		close_link(t_room *room, t_room *tmp)
 {
 	int     i;
