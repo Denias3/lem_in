@@ -34,6 +34,7 @@ typedef	struct		s_anthill
 {
 	int				ants;
 	int				rooms;
+	int 			**ways;
 	int				max_x;
 	int				max_y;
 }					t_anthill;
