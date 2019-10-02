@@ -27,7 +27,7 @@ void			check_link_room(t_room *room)
 	int i;
 
 	i = 0;
-	ft_printf("%s - room\n", room->name);
+	ft_printf("%s(%d) - room\n", room->name, room->id);
 	ft_printf("%d - bf\n", room->bf);
 	ft_printf("%d - type\n", room->type);
 	ft_printf("links:\n");

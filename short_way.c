@@ -101,7 +101,8 @@ void			short_way(t_room *rooms)
 	t_room      *room;
 
 	room = end_room(rooms);
-	if (rooms == NULL)
+
+	if (room == NULL)
 	{
 		ft_printf("error finding (end) room");
 		exit(0);
@@ -111,7 +112,4 @@ void			short_way(t_room *rooms)
 		room = df_check(room);
 	}
 	check_link_room_full(rooms);
-//	ft_printf("%s - room\n", tmp->name);
-//	ft_printf("%d - bf\n", tmp->bf);
-//	ft_printf("%d - type\n", tmp->type);
 }
