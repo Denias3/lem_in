@@ -33,7 +33,10 @@ void			check_link_room(t_room *room)
 	ft_printf("links:\n");
 	while(room->next_rooms[i] != NULL)
 	{
-		ft_printf("%4s - name\n", room->next_rooms[i]->name);
+		if (room->closed_links && room->closed_links[i])
+			ft_printf("%4s - name - %d\n", room->next_rooms[i]->name, room->closed_links[i]);
+		else
+			ft_printf("%4s - name - 0\n", room->next_rooms[i]->name);
 		i++;
 	}
 	ft_printf("\n");
