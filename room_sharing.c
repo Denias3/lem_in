@@ -119,10 +119,23 @@ void	room_sharing(t_room *room_in, t_anthill *ant)
 {
 	t_room	*room_out;
 
-	check_link_room_full(room_in);
 	room_out = new_room();
 	rewriting_room(room_in, room_out, ant->rooms);
 	ant->rooms++;
 	separation_links(room_in, room_out);
 	add_to_end(room_in, room_out);
+}
+
+void	rooms_sharing(t_room *room, t_anthill *ant)
+{
+	int i;
+	t_room *st_room;
+
+	i = 1;
+	st_room = search_room_type(room, 1);
+	while (i < ant->ways[0][0])
+	{
+		room_sharing(st_room->next_rooms[ant->ways[0][i]], ant);
+		i++;
+	}
 }
