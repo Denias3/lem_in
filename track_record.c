@@ -12,15 +12,41 @@
 
 #include "lem-in.h"
 
-void        track_record(int *way, t_anthill *ant)
+int         len_int(int **way)
 {
 	int     i;
 
+	i = 0;
+	while (way[i] != NULL)
+	{
+		i++;
+	}
+	return (i + 1);
+}
+
+void        track_record(int *way, t_anthill *ant)
+{
+	int     **ways;
+	int     i;
+
+	ways = NULL;
 	i = 0;
 	if (!ant->ways)
 	{
 		ant->ways = (int**)malloc(sizeof(int*) * 2);
 		ant->ways[0] = way;
 		ant->ways[1] = NULL;
+	}
+	else
+	{
+		ways = (int**)malloc(sizeof(int*) * (len_int(ant->ways) + 1));
+		while (ant->ways[i] != NULL)
+		{
+			ways[i] = ant->ways[i];
+			i++;
+		}
+		ways[i] = way;
+		free(ant->ways);
+		ant->ways = ways;
 	}
 }
