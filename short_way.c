@@ -138,6 +138,5 @@ void			short_way(t_room *rooms, t_anthill *ant)
 	room->closed_links = creat_closed_links(size_link(room));
 	way = df_check(room);
 	track_record(way, ant);
-	track_record(way, ant);
 //	check_link_room_full(rooms);
 }
