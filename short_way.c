@@ -18,17 +18,17 @@ t_room		*end_room(t_room *rooms)
 	{
 		if (rooms->type == 2)
 			return (rooms);
-		rooms = rooms->next;
+		rooms = rooms->bfs_next;
 	}
 	return (NULL);
 }
 
-int 		size_link(t_room *rooms)
+int 		size_link(t_room *room)
 {
 	int		size;
 
 	size = 0;
-	while (rooms->next_rooms[size] != NULL)
+	while (room->next_rooms[size] != NULL)
 		size++;
 	return (size);
 }
@@ -50,9 +50,6 @@ int 		*creat_closed_links(int size)
 
 void        free_closed_links(t_room *rooms)
 {
-	int     i;
-
-	i = 0;
 	while (rooms != NULL)
 	{
 		if (rooms->closed_links != 0)
@@ -61,39 +58,62 @@ void        free_closed_links(t_room *rooms)
 	}
 }
 
-void		close_link(t_room *room, t_room *tmp)
+void		close_link(t_room *end_room, t_room *room)
 {
 	int     i;
 
 	i = 0;
-	while (tmp->next_rooms[i] != NULL)
+	while (end_room->next_rooms[i] != NULL)
 	{
-		if (tmp->next_rooms[i] == room)
+		if (end_room->next_rooms[i] == room)
 		{
-			tmp->closed_links[i] = 1;
+			end_room->closed_links[i] = 2;
 		}
 		i++;
 	}
 }
 
-t_room      *df_check(t_room *end_room)
+int         link_check(t_room *room, t_room *room_2)
 {
-	t_room	*tmp;
-	int		i;
+	int     i;
 
-	tmp = NULL;
 	i = 0;
-	while (end_room->next_rooms[i] != NULL)
+	while (room_2->next_rooms[i] != NULL)
 	{
-		if (end_room->bf == end_room->next_rooms[i]->bf && tmp == NULL)
-			tmp = end_room->next_rooms[i];
-		if (end_room->bf == end_room->next_rooms[i]->bf + 1)
-			tmp = end_room->next_rooms[i];
+		if (room_2->next_rooms[i] == room)
+			return (0);
 		i++;
 	}
-	tmp->closed_links = creat_closed_links(size_link(tmp));
-	close_link(end_room, tmp);
-	return(tmp);
+	return (1);
+}
+
+void        df_check(t_room *end_room)
+{
+	t_room	*room;
+	int     i;
+
+	room = end_room;
+	i = 0;
+	room = room->bfs_prev;
+	while (room != NULL)
+	{
+		if (end_room->bf == room->bf + 1 && (link_check(end_room, room) == 0))
+		{
+			while (room->next_rooms[i] != NULL)
+			{
+				if (room->next_rooms[i] == end_room)
+				{
+					room->closed_links = creat_closed_links(size_link(room));
+					room->closed_links[i] = 1;
+					close_link(end_room, room);
+					end_room = room;
+					break ;
+				}
+				i++;
+			}
+		}
+		room = room->bfs_prev;
+	}
 }
 
 void			short_way(t_room *rooms)
@@ -106,9 +126,7 @@ void			short_way(t_room *rooms)
 		ft_printf("error finding (end) room");
 		exit(0);
 	}
-	while (room->bf > 0)
-	{
-		room = df_check(room);
-	}
-//	check_link_room_full(rooms);
+	room->closed_links = creat_closed_links(size_link(room));
+	df_check(room);
+	check_link_room_full(rooms);
 }
