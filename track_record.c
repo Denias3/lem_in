@@ -10,9 +10,17 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-//#include "lem-in.h"
-//
-//void        track_record(t_anthill *ant)
-//{
-//
-//}
+#include "lem-in.h"
+
+void        track_record(int *way, t_anthill *ant)
+{
+	int     i;
+
+	i = 0;
+	if (!ant->ways)
+	{
+		ant->ways = (int**)malloc(sizeof(int*) * 2);
+		ant->ways[0] = way;
+		ant->ways[1] = NULL;
+	}
+}

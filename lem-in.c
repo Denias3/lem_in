@@ -37,9 +37,9 @@ int					main(void)
 //	room_sharing(rooms->next, ant);
 
 	algorithm(ant, rooms);
-	print_rooms(rooms);
+//	print_rooms(rooms);
 	free_closed_links(rooms);
 	free(ant);
-//	free_rooms(rooms);
+	free_rooms(rooms);
 	return (0);
 }
