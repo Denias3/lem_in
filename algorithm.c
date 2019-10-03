@@ -71,12 +71,11 @@ t_room          *search_room_bf(t_room *rooms, int bf)
 			{
 				if (rooms->next_rooms[i]->bf == -1)
 				{
-					if (rooms->closed_links != NULL && rooms->closed_links[i] != 1)
+					if (rooms->closed_links != 0 && rooms->closed_links[i] != 1)
 						return (rooms->next_rooms[i]);
-					else if (rooms->closed_links == NULL)
+					else if (rooms->closed_links == 0)
 						return (rooms->next_rooms[i]);
 				}
-
 				i++;
 			}
 		}

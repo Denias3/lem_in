@@ -33,10 +33,8 @@ int					main(void)
 	rooms = new_room();
 	ant = newanthill();
 	validation(ant, rooms);
-//	room_sharing(rooms, ant);
-//	room_sharing(rooms->next, ant);
-
 	algorithm(ant, rooms);
+	room_sharing(rooms, ant);
 	print_rooms(rooms);
 	free_closed_links(rooms);
 	free(ant);
