@@ -36,7 +36,7 @@ int					main(void)
 	algorithm(ant, rooms);
 //	print_rooms(rooms);
 //	free_closed_links(rooms);
-	free(ant);
+	free_track_record(ant);
 //	free_rooms(rooms);
 	return (0);
 }

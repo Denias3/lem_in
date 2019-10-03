@@ -12,7 +12,13 @@
 
 #include "lem-in.h"
 
-int         len_int(int **way)
+void        free_track_record(t_anthill *ant)
+{
+	free(ant->ways);
+	free(ant);
+}
+
+static int         len_int(int **way)
 {
 	int     i;
 
