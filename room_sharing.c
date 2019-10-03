@@ -82,16 +82,17 @@ static void separation_links(t_room *room_in, t_room *room_out)
 	tmp_room[0] = room_in;
 	while (room_in->next_rooms[j] != NULL)
 	{
-		if (room_in->closed_links[j] != 1)
+		if (room_in->closed_links[j] == 0)
 		{
 			tmp_room[i] = room_in->next_rooms[j];
 //			print_close_links(room_in);
 			i++;
 		}
-		else
+		else if (room_in->closed_links[j] == 1)
 			redirect_link(room_in->next_rooms[j], room_out, room_in->name);
 		j++;
 	}
+	tmp_room[i] = NULL;
 	tmp = room_out->next_rooms;
 	room_out->next_rooms = tmp_room;
 	free(tmp);
@@ -136,6 +137,7 @@ void	rooms_sharing(t_room *room, t_anthill *ant)
 	while (i < ant->ways[0][0])
 	{
 		room_sharing(st_room->next_rooms[ant->ways[0][i]], ant);
+		st_room = st_room->next_rooms[ant->ways[0][i]];
 		i++;
 	}
 }
