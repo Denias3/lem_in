@@ -87,13 +87,18 @@ int         link_check(t_room *room, t_room *room_2)
 	return (1);
 }
 
-void        df_check(t_room *end_room)
+int         *df_check(t_room *end_room)
 {
 	t_room	*room;
 	int     i;
+	int     j;
+	int     *way;
 
 	room = end_room;
 	i = 0;
+	j = 1;
+	way = (int*)malloc(sizeof(int) * (end_room->bf + 1));
+	way[0] = end_room->bf;
 	room = room->bfs_prev;
 	while (room != NULL)
 	{
@@ -105,6 +110,8 @@ void        df_check(t_room *end_room)
 				{
 					room->closed_links = creat_closed_links(size_link(room));
 					room->closed_links[i] = 1;
+					way[j] = i;
+					j++;
 					close_link(end_room, room);
 					end_room = room;
 					break ;
@@ -114,11 +121,13 @@ void        df_check(t_room *end_room)
 		}
 		room = room->bfs_prev;
 	}
+	return (way);
 }
 
-void			short_way(t_room *rooms)
+void			short_way(t_room *rooms, t_anthill *ant)
 {
 	t_room      *room;
+	int         *way;
 
 	room = end_room(rooms);
 	if (room == NULL)
@@ -127,6 +136,8 @@ void			short_way(t_room *rooms)
 		exit(0);
 	}
 	room->closed_links = creat_closed_links(size_link(room));
-	df_check(room);
+	way = df_check(room);
+	track_record(way, ant);
+	track_record(way, ant);
 //	check_link_room_full(rooms);
 }

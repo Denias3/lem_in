@@ -129,7 +129,7 @@ void            to_position(t_room *rooms)
 void			algorithm(t_anthill *ant, t_room *rooms)
 {
     to_position(rooms);
-	short_way(rooms);
+	short_way(rooms, ant);
 	rooms_sharing(rooms, ant);
 //	print_bfs(rooms);
 //	print_rooms(rooms);
