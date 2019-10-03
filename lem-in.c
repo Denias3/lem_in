@@ -34,9 +34,8 @@ int					main(void)
 	ant = newanthill();
 	validation(ant, rooms);
 	algorithm(ant, rooms);
-	room_sharing(rooms, ant);
-	print_rooms(rooms);
-	free_closed_links(rooms);
+	check_link_room_full(rooms);
+//	free_closed_links(rooms);
 	free(ant);
 //	free_rooms(rooms);
 	return (0);

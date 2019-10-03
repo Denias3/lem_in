@@ -87,7 +87,7 @@ int         link_check(t_room *room, t_room *room_2)
 	return (1);
 }
 
-void        df_check(t_room *end_room)
+void        df_check(t_room *end_room, t_anthill *ant)
 {
 	t_room	*room;
 	int     i;
@@ -116,7 +116,7 @@ void        df_check(t_room *end_room)
 	}
 }
 
-void			short_way(t_room *rooms)
+void			short_way(t_room *rooms, t_anthill *ant)
 {
 	t_room      *room;
 
@@ -127,6 +127,6 @@ void			short_way(t_room *rooms)
 		exit(0);
 	}
 	room->closed_links = creat_closed_links(size_link(room));
-	df_check(room);
-	check_link_room_full(rooms);
+	df_check(room, ant);
+//	check_link_room_full(rooms);
 }

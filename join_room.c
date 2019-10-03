@@ -12,7 +12,7 @@
 
 #include "lem-in.h"
 
-void	join_room(t_room *room_in, t_room *room_out)
-{
-	
-}
+//void	join_room(t_room *room_in, t_room *room_out)
+//{
+//
+//}
