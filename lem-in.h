@@ -81,5 +81,6 @@ void			    short_way(t_room *rooms);
 void				check_link_room_full(t_room *room);
 void				go_ants(t_room *rooms, t_anthill *ant);
 void				free_closed_links(t_room *rooms);
+void				room_sharing(t_room *room_in, t_anthill *ant);
 
 #endif

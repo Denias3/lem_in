@@ -43,7 +43,7 @@ t_room	*new_room(void)
 	room->name = NULL;
 	room->id = -1;
 	room->type = -1;
-	room->state = -1;
+	room->state = 0;
 	room->x = -1;
 	room->y = -1;
 	room->bf = -1;
