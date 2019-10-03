@@ -114,7 +114,6 @@ int         *df_check(t_room *end_room)
 					j++;
 					close_link(end_room, room);
 					end_room = room;
-					check_link_room_full(room);
 					break ;
 				}
 				i++;

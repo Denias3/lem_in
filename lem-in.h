@@ -20,6 +20,7 @@ typedef	struct		s_room
 	char			*name;
 	int				id;
 	short			type; // 0 - обычная комната, 1 -  start, 2 - end
+							// 3 - room_in, 4 - room_out
 	short			state; // 0 - нет муравья, 1 - есть муравей
 	int				x;
 	int				y;
