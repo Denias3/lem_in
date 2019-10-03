@@ -132,7 +132,7 @@ void			algorithm(t_anthill *ant, t_room *rooms)
 	ant = NULL;
     to_position(rooms);
 	short_way(rooms);
-	print_bfs(rooms);
+//	print_bfs(rooms);
 //	print_rooms(rooms);
 //	go_ants(rooms, ant);
 }
