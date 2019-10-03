@@ -35,6 +35,7 @@ int					main(void)
 	validation(ant, rooms);
 	algorithm(ant, rooms);
 //	print_rooms(rooms);
+	check_link_room_full(rooms);
 //	free_closed_links(rooms);
 	free(ant);
 //	free_rooms(rooms);
