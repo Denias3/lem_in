@@ -25,6 +25,7 @@ typedef	struct		s_room
 	int				x;
 	int				y;
 	int             bf;
+	int             visit;
 	int 			*closed_links;
 	struct s_room	**next_rooms;
 	struct s_room	*next;
@@ -84,5 +85,6 @@ void				go_ants(t_room *rooms, t_anthill *ant);
 void				free_closed_links(t_room *rooms);
 void				rooms_sharing(t_room *room_in, t_anthill *ant);
 void                track_record(int *way, t_anthill *ant);
+void                free_track_record(t_anthill *ant);
 
 #endif

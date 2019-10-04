@@ -30,6 +30,7 @@ void			check_link_room(t_room *room)
 	ft_printf("%s(%d) - room\n", room->name, room->id);
 	ft_printf("%d - bf\n", room->bf);
 	ft_printf("%d - type\n", room->type);
+	ft_printf("%d - visit\n", room->visit);
 	ft_printf("links:\n");
 	while(room->next_rooms[i] != NULL)
 	{

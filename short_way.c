@@ -112,6 +112,8 @@ int         *df_check(t_room *end_room)
 					room->closed_links[i] = 1;
 					way[j] = i;
 					j++;
+					if (room->type == 0)
+						room->visit++;
 					close_link(end_room, room);
 					end_room = room;
 					break ;
