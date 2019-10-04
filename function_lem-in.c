@@ -140,15 +140,12 @@ void	print_vay(t_room *room, t_anthill *ant)
 
 void	print_rooms(t_room *rooms, int t)
 {
-	int i;
-	i = 0;
 	while (rooms != NULL)
 	{
 		if (t == 1)
 			print_room(rooms);
 		else if (t == 0)
 			print_close_links(rooms);
-		i++;
 		rooms = rooms->next;
 	}
 }

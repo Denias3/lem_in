@@ -212,7 +212,8 @@ void			algorithm(t_anthill *ant, t_room *rooms)
 	short_way(rooms, ant);
 	rooms_sharing(rooms, ant);
 	join_rooms_main(rooms);
-	print_rooms(rooms, 0);
+	print_rooms(rooms, 1);
+	ft_printf("\n%d", ant->rooms);
 //	search_xlink(rooms, ant);
 //    print_vay(rooms, ant);
 //    print_bfs(rooms);

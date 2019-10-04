@@ -56,6 +56,8 @@ void	join_rooms(t_room *rooms)
 			}
 			rooms->type = 0;
 		}
+		if (rooms->visit == 1)
+			rooms->visit = 0;
 		rooms = rooms->next;
 	}
 }
