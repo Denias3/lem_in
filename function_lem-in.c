@@ -119,6 +119,8 @@ void		print_close_links(t_room *room)
 			ft_printf("close(%d)\n", 1);
 		else if (room->closed_links[i] == 2)
 			ft_printf("line(%d)\n", 2);
+		else if (room->closed_links[i] == 3)
+			ft_printf("line(%d)\n", 3);
 		i++;
 	}
 }

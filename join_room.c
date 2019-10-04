@@ -51,7 +51,7 @@ void	join_rooms(t_room *rooms)
 			i = 0;
 			while (rooms->next_rooms[i] != NULL)
 			{
-				if (rooms->closed_links[i] == 2)
+				if (rooms->closed_links[i] == 3)
 					redirect_link(rooms->next_rooms[i], rooms, rooms->name);
 				i++;
 			}
