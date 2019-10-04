@@ -221,31 +221,31 @@ int             search_xlink(t_room *room, t_anthill *ant, int type)
 	return (0);
 }
 
-void			algorithm(t_anthill *ant, t_room *rooms)
-{
-	to_position(rooms);
-	short_way(rooms, ant);
-	rooms_sharing(rooms, ant);
-	join_rooms_main(rooms, ant);
-	print_rooms(rooms, 0);
-//	search_xlink(rooms, ant);
-//    print_vay(rooms, ant);
-//    print_bfs(rooms);
-//    print_rooms(rooms);
-//    go_ants(rooms, ant);
-}
-//void			algorithm(t_anthill *ant, t_room *rooms) {
-//	while (ended_way(rooms) == 0 && ended_way(end_room_next(rooms)) == 0) {
-//		to_position(rooms);
-//		if (short_way(rooms, ant) == 0) {
-//			rooms_sharing(rooms, ant);
-//			if (search_xlink(rooms, ant, 1) == 1) {
-//				join_rooms_main(rooms);
-//				search_xlink(rooms, ant, 0);
-//				free_track_record(ant);
-//			}
-//		}
-//		print_rooms(rooms, 0);
-//	}
+//void			algorithm(t_anthill *ant, t_room *rooms)
+//{
+//	to_position(rooms);
+//	short_way(rooms, ant);
+//	rooms_sharing(rooms, ant);
+//	join_rooms_main(rooms, ant);
 //	print_rooms(rooms, 0);
+////	search_xlink(rooms, ant);
+////    print_vay(rooms, ant);
+////    print_bfs(rooms);
+////    print_rooms(rooms);
+////    go_ants(rooms, ant);
 //}
+void			algorithm(t_anthill *ant, t_room *rooms) {
+	while (ended_way(rooms) == 0 && ended_way(end_room_next(rooms)) == 0) {
+		to_position(rooms);
+		if (short_way(rooms, ant) == 0) {
+			rooms_sharing(rooms, ant);
+			if (search_xlink(rooms, ant, 1) == 1) {
+				join_rooms_main(rooms, ant);
+				search_xlink(rooms, ant, 0);
+				free_track_record(ant);
+			}
+		}
+		print_rooms(rooms, 0);
+	}
+	print_rooms(rooms, 0);
+}
