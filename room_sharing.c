@@ -120,6 +120,21 @@ void	rewriting_room(t_room *room_in, t_room *room_out, int count_room)
 
 }
 
+void	close_link_in(t_room *room_in)
+{
+	int i;
+
+	i = 0;
+	while (room_in->next_rooms[i] != NULL)
+	{
+		if (room_in->closed_links[i] == 2)
+			room_in->closed_links[i] = 0;
+		else
+			room_in->closed_links[i] = 1;
+		i++;
+	}
+}
+
 void	room_sharing(t_room *room_in, t_anthill *ant)
 {
 	t_room	*room_out;
@@ -129,6 +144,9 @@ void	room_sharing(t_room *room_in, t_anthill *ant)
 	rewriting_room(room_in, room_out, ant->rooms);
 	ant->rooms++;
 	separation_links(room_in, room_out);
+	close_link_in(room_in);
+	print_close_links(room_out);
+	print_close_links(room_in);
 	add_to_end(room_in, room_out);
 }
 
