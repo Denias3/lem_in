@@ -12,7 +12,7 @@
 
 #include "lem-in.h"
 
-void	del_copies(t_room *rooms)
+void	del_copies(t_room *rooms, t_anthill *ant)
 {
 	t_room	*tmp;
 	t_room	*tmp2;
@@ -29,6 +29,7 @@ void	del_copies(t_room *rooms)
 			tmp2->next = NULL;
 			free(rooms->next_rooms);
 			free(rooms->name);
+			ant->rooms--;
 			tmp = rooms;
 			rooms = rooms->next;
 			free(tmp);
@@ -62,9 +63,9 @@ void	join_rooms(t_room *rooms)
 	}
 }
 
-void	join_rooms_main(t_room *rooms)
+void	join_rooms_main(t_room *rooms, t_anthill *ant)
 {
 	join_rooms(rooms);
-	del_copies(rooms);
+	del_copies(rooms, ant);
 }
 
