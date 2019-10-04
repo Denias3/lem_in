@@ -90,6 +90,39 @@ void	print_room(t_room *room)
 	}
 }
 
+void		print_close_links(t_room *room)
+{
+	int i;
+
+	i = 0;
+	ft_printf("\n-------------\n");
+	ft_printf("name - %s", room->name);
+	if (room->type == 3)
+		ft_printf("_in\n");
+	else if (room->type == 4)
+		ft_printf("_out\n");
+	else
+		ft_printf("\n");
+	ft_printf("Links:\n");
+	while (room->next_rooms[i] != NULL)
+	{
+		ft_printf("%s", room->next_rooms[i]->name);
+		if (room->next_rooms[i]->type == 3)
+			ft_printf("_in - ");
+		else if (room->next_rooms[i]->type == 4)
+			ft_printf("_out - ");
+		else
+			ft_printf(" - ");
+		if (room->closed_links == NULL || room->closed_links[i] == 0)
+			ft_printf("open(%d)\n", 0);
+		else if (room->closed_links[i] == 1)
+			ft_printf("close(%d)\n", 1);
+		else if (room->closed_links[i] == 2)
+			ft_printf("line(%d)\n", 2);
+		i++;
+	}
+}
+
 void	print_vay(t_room *room, t_anthill *ant)
 {
 	int i;
@@ -97,21 +130,24 @@ void	print_vay(t_room *room, t_anthill *ant)
 
 	i = 1;
 	st_room = search_room_type(room, 1);
-	while (i < ant->ways[0][0])
+	while (i - 1 <= ant->ways[0][0])
 	{
-		ft_printf("%d-", ant->ways[0][i]);
-//		st_room = st_room->next_rooms[ant->ways[0][i]];
+		ft_printf("%s-", st_room->name);
+		st_room = st_room->next_rooms[ant->ways[0][i]];
 		i++;
 	}
 }
 
-void	print_rooms(t_room *rooms)
+void	print_rooms(t_room *rooms, int t)
 {
 	int i;
 	i = 0;
 	while (rooms != NULL)
 	{
-		print_room(rooms);
+		if (t == 1)
+			print_room(rooms);
+		else if (t == 0)
+			print_close_links(rooms);
 		i++;
 		rooms = rooms->next;
 	}

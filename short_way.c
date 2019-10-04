@@ -20,7 +20,7 @@ int         *my_intrevers(int *way)
 
 	i = 1;
 	m_i = way[0];
-	while (i > m_i)
+	while (i < m_i)
 	{
 		tmp = way[i];
 		way[i] = way[m_i];
@@ -67,16 +67,6 @@ int 		*creat_closed_links(int size)
 	return (closed_links);
 }
 
-void        free_closed_links(t_room *rooms)
-{
-	while (rooms != NULL)
-	{
-		if (rooms->closed_links != NULL)
-			free(rooms->closed_links);
-		rooms = rooms->next;
-	}
-}
-
 void		close_link(t_room *end_room, t_room *room)
 {
 	int     i;
@@ -106,27 +96,22 @@ int         link_check(t_room *room, t_room *room_2)
 	return (1);
 }
 
-int         *df_check(t_room *end_room)
-{
-	t_room	*room;
-	int     i;
-	int     j;
-	int     *way;
+int         *df_check(t_room *end_room) {
+	t_room *room;
+	int i;
+	int j;
+	int *way;
 
 	room = end_room;
 	j = 1;
-	way = (int*)malloc(sizeof(int) * (end_room->bf + 1));
+	way = (int *) malloc(sizeof(int) * (end_room->bf + 1));
 	way[0] = end_room->bf;
 	room = room->bfs_prev;
-	while (room != NULL)
-	{
-		if (end_room->bf == room->bf + 1 && (link_check(end_room, room) == 0))
-		{
+	while (room != NULL) {
+		if (end_room->bf == room->bf + 1 && (link_check(end_room, room) == 0)) {
 			i = 0;
-			while (room->next_rooms[i] != NULL)
-			{
-				if (room->next_rooms[i] == end_room)
-				{
+			while (room->next_rooms[i] != NULL) {
+				if (room->next_rooms[i] == end_room) {
 					room->closed_links = creat_closed_links(size_link(room));
 					room->closed_links[i] = 1;
 					way[j] = i;
@@ -135,15 +120,14 @@ int         *df_check(t_room *end_room)
 						room->visit++;
 					close_link(end_room, room);
 					end_room = room;
-					break ;
+					break;
 				}
 				i++;
 			}
 		}
 		room = room->bfs_prev;
 	}
-	if (j == 1)
-	{
+	if (j == 1) {
 		free(way);
 		return (NULL);
 	}

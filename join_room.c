@@ -12,7 +12,57 @@
 
 #include "lem-in.h"
 
-//void	join_room(t_room *room_in, t_room *room_out)
-//{
-//
-//}
+void	del_copies(t_room *rooms)
+{
+	t_room	*tmp;
+	t_room	*tmp2;
+
+	while (rooms != NULL)
+	{
+		if (rooms->closed_links != NULL)
+		{
+			free(rooms->closed_links);
+			rooms->closed_links = NULL;
+		}
+		if (rooms->type == 4)
+		{
+			tmp2->next = NULL;
+			free(rooms->next_rooms);
+			free(rooms->name);
+			tmp = rooms;
+			rooms = rooms->next;
+			free(tmp);
+			continue ;
+		}
+		tmp2 = rooms;
+		rooms = rooms->next;
+	}
+}
+
+void	join_rooms(t_room *rooms)
+{
+	int i;
+
+	while (rooms->next != NULL)
+	{
+		if (rooms->type == 3)
+		{
+			i = 0;
+			while (rooms->next_rooms[i] != NULL)
+			{
+				if (rooms->closed_links[i] == 2)
+					redirect_link(rooms->next_rooms[i], rooms, rooms->name);
+				i++;
+			}
+			rooms->type = 0;
+		}
+		rooms = rooms->next;
+	}
+}
+
+void	join_rooms_main(t_room *rooms)
+{
+	join_rooms(rooms);
+	del_copies(rooms);
+}
+
