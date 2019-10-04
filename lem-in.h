@@ -71,7 +71,7 @@ void				free_char_double_array(char **str);
 void				validation(t_anthill *ant, t_room *rooms);
 int					pars_line_room(t_anthill *ant, t_room *room, char *line, t_var_valid *v_val);
 void				print_room(t_room *room);
-void				print_rooms(t_room *rooms);
+void				print_rooms(t_room *rooms, int t);
 t_room				*check_name(t_room *rooms, char *name);
 t_room				*new_room(void);
 void				free_rooms(t_room *rooms);
@@ -82,12 +82,14 @@ t_room          	*search_room_type(t_room *rooms, short type);
 int 			    short_way(t_room *rooms, t_anthill *ant);
 void				check_link_room_full(t_room *room);
 void				go_ants(t_room *rooms, t_anthill *ant);
-void				free_closed_links(t_room *rooms);
 void				rooms_sharing(t_room *room_in, t_anthill *ant);
 void                track_record(int *way, t_anthill *ant);
 void                free_track_record(t_anthill *ant);
 void				print_vay(t_room *room, t_anthill *ant);
 t_room		        *end_room(t_room *rooms);
 int 		        size_link(t_room *room);
+void				redirect_link(t_room *room, t_room *new_room, char *name);
+void				print_close_links(t_room *room);
+void				join_rooms_main(t_room *rooms);
 
 #endif
