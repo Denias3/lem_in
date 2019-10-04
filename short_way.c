@@ -12,6 +12,25 @@
 
 #include "lem-in.h"
 
+int         *my_intrevers(int *way)
+{
+	int     i;
+	int     tmp;
+	int     m_i;
+
+	i = 1;
+	m_i = way[0];
+	while (i > m_i)
+	{
+		tmp = way[i];
+		way[i] = way[m_i];
+		way[m_i] = tmp;
+		i++;
+		m_i--;
+	}
+	return (way);
+}
+
 t_room		*end_room(t_room *rooms)
 {
 	while (rooms != NULL)
@@ -95,7 +114,6 @@ int         *df_check(t_room *end_room)
 	int     *way;
 
 	room = end_room;
-	i = 0;
 	j = 1;
 	way = (int*)malloc(sizeof(int) * (end_room->bf + 1));
 	way[0] = end_room->bf;
@@ -104,6 +122,7 @@ int         *df_check(t_room *end_room)
 	{
 		if (end_room->bf == room->bf + 1 && (link_check(end_room, room) == 0))
 		{
+			i = 0;
 			while (room->next_rooms[i] != NULL)
 			{
 				if (room->next_rooms[i] == end_room)
@@ -123,22 +142,27 @@ int         *df_check(t_room *end_room)
 		}
 		room = room->bfs_prev;
 	}
-	return (way);
+	if (j == 1)
+	{
+		free(way);
+		return (NULL);
+	}
+	else
+		return (way);
 }
 
-void			short_way(t_room *rooms, t_anthill *ant)
+int         short_way(t_room *rooms, t_anthill *ant)
 {
-	t_room      *room;
-	int         *way;
+	t_room  *room;
+	int     *way;
 
 	room = end_room(rooms);
-	if (room == NULL)
-	{
-		ft_printf("error finding (end) room");
-		exit(0);
-	}
 	room->closed_links = creat_closed_links(size_link(room));
-	way = df_check(room);
-	track_record(way, ant);
-//	check_link_room_full(rooms);
+	if ((way = my_intrevers(df_check(room))) != NULL)
+	{
+		track_record(way, ant);
+		return (0);
+	}
+	//	check_link_room_full(rooms);
+	return (1);
 }
