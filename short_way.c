@@ -52,7 +52,7 @@ void        free_closed_links(t_room *rooms)
 {
 	while (rooms != NULL)
 	{
-		if (rooms->closed_links != 0)
+		if (rooms->closed_links != NULL)
 			free(rooms->closed_links);
 		rooms = rooms->next;
 	}
