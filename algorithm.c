@@ -82,7 +82,7 @@ t_room          *search_room_bf(t_room *rooms, int bf)
 			{
 				if (rooms->next_rooms[i]->bf == -1)
 				{
-					if (rooms->closed_links != 0 && rooms->closed_links[i] != 1)
+					if (rooms->closed_links != 0 && rooms->closed_links[i] != 1 && rooms->closed_links[i] != 3)
 						return (rooms->next_rooms[i]);
 					else if (rooms->closed_links == 0)
 						return (rooms->next_rooms[i]);
@@ -226,8 +226,10 @@ void			algorithm(t_anthill *ant, t_room *rooms)
 	to_position(rooms);
 	short_way(rooms, ant);
 	rooms_sharing(rooms, ant);
-	join_rooms_main(rooms, ant);
-	print_rooms(rooms, 0);
+//	join_rooms_main(rooms, ant);
+//	print_rooms(rooms, 0);
+	to_position(rooms);
+	print_rooms(rooms, 1);
 //	search_xlink(rooms, ant);
 //    print_vay(rooms, ant);
 //    print_bfs(rooms);
