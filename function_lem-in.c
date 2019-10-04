@@ -77,7 +77,13 @@ void	print_room(t_room *room)
 	if (room != NULL)
 	{
 		ft_printf("id:    %d\n", room->id);
-		ft_printf("name:  %s\n", room->name);
+		ft_printf("name:  %s", room->name);
+		if (room->type == 3)
+			ft_printf("_in\n");
+		else if (room->type == 4)
+			ft_printf("_out\n");
+		else
+			ft_printf("\n");
 		ft_printf("bf:    %d\n", room->bf);
 		ft_printf("type:  %d\n", room->type);
 		ft_printf("state: %d\n", room->state);
