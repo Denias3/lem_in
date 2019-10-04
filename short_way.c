@@ -20,7 +20,7 @@ int         *my_intrevers(int *way)
 
 	i = 1;
 	m_i = way[0];
-	while (i > m_i)
+	while (i < m_i)
 	{
 		tmp = way[i];
 		way[i] = way[m_i];
