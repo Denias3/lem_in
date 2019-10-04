@@ -132,6 +132,7 @@ void	close_link_in(t_room *room_in)
 		else
 			room_in->closed_links[i] = 1;
 		i++;
+
 	}
 }
 
