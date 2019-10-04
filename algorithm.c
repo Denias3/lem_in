@@ -142,14 +142,15 @@ int             ended_way(t_room *start)
 void			algorithm(t_anthill *ant, t_room *rooms)
 {
     to_position(rooms);
-    while (ended_way(rooms) == 0 && short_way(rooms, ant) == 0)
-    {
+//    while (ended_way(rooms) == 0 && short_way(rooms, ant) == 0)
+//    {
+	    short_way(rooms, ant);
 	    rooms_sharing(rooms, ant);
-	    to_position(rooms);
+//	    to_position(rooms);
 	    print_vay(rooms, ant);
 //		print_bfs(rooms);
 //		print_rooms(rooms);
 //		go_ants(rooms, ant);
-    }
+//    }
 }
 
