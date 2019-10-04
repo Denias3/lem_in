@@ -49,28 +49,32 @@ void		print_close_links(t_room *room)
 	int i;
 
 	i = 0;
-	if (room->closed_links)
+	ft_printf("-------------\n");
+	ft_printf("name - %s", room->name);
+	if (room->type == 3)
+		ft_printf("_in\n");
+
+	else if (room->type == 4)
+		ft_printf("_out\n");
+	ft_printf("Links:\n");
+	while (room->next_rooms[i] != NULL)
 	{
-		ft_printf("name - %s\n", room->name);
-		ft_printf("Links:\n");
-		while (room->next_rooms[i] != NULL)
-		{
-			ft_printf("%s - ", room->next_rooms[i]->name);
-			if (room->closed_links[i] == 0)
-				ft_printf("open\n");
-			if (room->closed_links[i] == 1)
-				ft_printf("close\n");
-			if (room->closed_links[i] == 2)
-				ft_printf("line\n");
-			i++;
-		}
+		ft_printf("%s - ", room->next_rooms[i]->name);
+
+		if (room->closed_links == NULL || room->closed_links[i] == 0)
+			ft_printf("open(%d)\n", 0);
+		else if (room->closed_links[i] == 1)
+			ft_printf("close(%d)\n", 1);
+		else if (room->closed_links[i] == 2)
+			ft_printf("line(%d)\n", 2);
+		i++;
 	}
+
 }
 
 static void separation_links(t_room *room_in, t_room *room_out)
 {
 	t_room		**tmp_room;
-	t_room		**tmp;
 	int 		size;
 	int 		i;
 	int 		j;
@@ -85,7 +89,6 @@ static void separation_links(t_room *room_in, t_room *room_out)
 		if (room_in->closed_links[j] == 0)
 		{
 			tmp_room[i] = room_in->next_rooms[j];
-//			print_close_links(room_in);
 			i++;
 		}
 		else if (room_in->closed_links[j] == 1)
@@ -93,9 +96,10 @@ static void separation_links(t_room *room_in, t_room *room_out)
 		j++;
 	}
 	tmp_room[i] = NULL;
-	tmp = room_out->next_rooms;
 	room_out->next_rooms = tmp_room;
-	free(tmp);
+	if (room_out->closed_links != NULL)
+		room_out->closed_links = NULL;
+
 }
 
 static void add_to_end(t_room *room, t_room *room_end)
@@ -121,6 +125,7 @@ void	room_sharing(t_room *room_in, t_anthill *ant)
 	t_room	*room_out;
 
 	room_out = new_room();
+	free(room_out->next_rooms);
 	rewriting_room(room_in, room_out, ant->rooms);
 	ant->rooms++;
 	separation_links(room_in, room_out);
