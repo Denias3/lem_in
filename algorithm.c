@@ -146,6 +146,7 @@ void			algorithm(t_anthill *ant, t_room *rooms)
     {
 	    rooms_sharing(rooms, ant);
 	    to_position(rooms);
+	    print_vay(rooms, ant);
 //		print_bfs(rooms);
 //		print_rooms(rooms);
 //		go_ants(rooms, ant);

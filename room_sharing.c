@@ -21,7 +21,7 @@ static int size_links(t_room *room)
 	i = 0;
 	while (room->next_rooms[i] != NULL)
 	{
-		if (room->closed_links[i] != 1)
+		if (room->closed_links == NULL || room->closed_links[i] != 1)
 			size++;
 		i++;
 	}
@@ -146,8 +146,6 @@ void	room_sharing(t_room *room_in, t_anthill *ant)
 	ant->rooms++;
 	separation_links(room_in, room_out);
 	close_link_in(room_in);
-	print_close_links(room_out);
-	print_close_links(room_in);
 	add_to_end(room_in, room_out);
 }
 

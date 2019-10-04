@@ -90,6 +90,21 @@ void	print_room(t_room *room)
 	}
 }
 
+void	print_vay(t_room *room, t_anthill *ant)
+{
+	int i;
+	t_room *st_room;
+
+	i = 1;
+	st_room = search_room_type(room, 1);
+	while (i < ant->ways[0][0])
+	{
+		ft_printf("%d-", ant->ways[0][i]);
+//		st_room = st_room->next_rooms[ant->ways[0][i]];
+		i++;
+	}
+}
+
 void	print_rooms(t_room *rooms)
 {
 	int i;

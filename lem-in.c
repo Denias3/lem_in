@@ -34,7 +34,7 @@ int					main(void)
 	ant = newanthill();
 	validation(ant, rooms);
 	algorithm(ant, rooms);
-//	print_rooms(rooms);
+	print_vay(rooms, ant);
 	check_link_room_full(rooms);
 	free_closed_links(rooms);
 	free_track_record(ant);
