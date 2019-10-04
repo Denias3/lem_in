@@ -125,10 +125,21 @@ void            to_position(t_room *rooms)
 	go_bf(rooms);
 }
 
+//int             ended_way(t_room *start)
+//{
+//	int         i;
+//
+//	i = 0;
+//	while (start->next_rooms[i])
+//}
 
 void			algorithm(t_anthill *ant, t_room *rooms)
 {
     to_position(rooms);
+//    while (ended_way(rooms))
+//    {
+//
+//    }
 	short_way(rooms, ant);
 	rooms_sharing(rooms, ant);
 //	print_bfs(rooms);
