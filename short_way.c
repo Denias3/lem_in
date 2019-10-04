@@ -95,7 +95,6 @@ int         *df_check(t_room *end_room)
 	int     *way;
 
 	room = end_room;
-	i = 0;
 	j = 1;
 	way = (int*)malloc(sizeof(int) * (end_room->bf + 1));
 	way[0] = end_room->bf;
@@ -104,6 +103,7 @@ int         *df_check(t_room *end_room)
 	{
 		if (end_room->bf == room->bf + 1 && (link_check(end_room, room) == 0))
 		{
+			i = 0;
 			while (room->next_rooms[i] != NULL)
 			{
 				if (room->next_rooms[i] == end_room)

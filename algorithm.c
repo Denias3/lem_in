@@ -140,7 +140,9 @@ void			algorithm(t_anthill *ant, t_room *rooms)
 //    {
 //
 //    }
+//	print_rooms(rooms);
 	short_way(rooms, ant);
+	print_vay(rooms, ant);
 	rooms_sharing(rooms, ant);
 //	print_bfs(rooms);
 //	print_rooms(rooms);

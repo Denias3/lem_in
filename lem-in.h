@@ -86,5 +86,6 @@ void				free_closed_links(t_room *rooms);
 void				rooms_sharing(t_room *room_in, t_anthill *ant);
 void                track_record(int *way, t_anthill *ant);
 void                free_track_record(t_anthill *ant);
+void				print_vay(t_room *room, t_anthill *ant);
 
 #endif
