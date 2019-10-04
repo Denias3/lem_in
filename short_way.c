@@ -76,7 +76,7 @@ void		close_link(t_room *end_room, t_room *room)
 	{
 		if (end_room->next_rooms[i] == room)
 		{
-			end_room->closed_links[i] = 2;
+			end_room->closed_links[i] = 3;
 		}
 		i++;
 	}
@@ -113,7 +113,7 @@ int         *df_check(t_room *end_room) {
 			while (room->next_rooms[i] != NULL) {
 				if (room->next_rooms[i] == end_room) {
 					room->closed_links = creat_closed_links(size_link(room));
-					room->closed_links[i] = 1;
+					room->closed_links[i] = 2;
 					way[j] = i;
 					j++;
 					if (room->type == 0)
