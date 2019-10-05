@@ -16,16 +16,19 @@ void	del_copies(t_room *rooms, t_anthill *ant)
 {
 	t_room	*tmp;
 	t_room	*tmp2;
+	int i;
 
 	while (rooms != NULL)
 	{
-		if (rooms->closed_links != NULL)
-		{
-			free(rooms->closed_links);
-			rooms->closed_links = NULL;
-		}
+		if (rooms->visit == 1)
+			rooms->visit = 0;
 		if (rooms->type == 4)
 		{
+			if (rooms->closed_links != NULL)
+			{
+				free(rooms->closed_links);
+				rooms->closed_links = NULL;
+			}
 			tmp2->next = NULL;
 			free(rooms->next_rooms);
 			free(rooms->name);
@@ -35,18 +38,7 @@ void	del_copies(t_room *rooms, t_anthill *ant)
 			free(tmp);
 			continue ;
 		}
-		tmp2 = rooms;
-		rooms = rooms->next;
-	}
-}
-
-void	join_rooms(t_room *rooms)
-{
-	int i;
-
-	while (rooms->next != NULL)
-	{
-		if (rooms->type == 3)
+		else if (rooms->type == 3)
 		{
 			i = 0;
 			while (rooms->next_rooms[i] != NULL)
@@ -57,8 +49,7 @@ void	join_rooms(t_room *rooms)
 			}
 			rooms->type = 0;
 		}
-		if (rooms->visit == 1)
-			rooms->visit = 0;
+		tmp2 = rooms;
 		rooms = rooms->next;
 	}
 }

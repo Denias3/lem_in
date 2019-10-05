@@ -261,6 +261,9 @@ void			algorithm(t_anthill *ant, t_room *rooms)
 //	join_rooms_main(rooms, ant);
 //	print_rooms(rooms, 0);
 	to_position(rooms);
+
+	print_rooms(rooms, 1);
+	del_copies(rooms, ant);
 	print_rooms(rooms, 1);
 //	search_xlink(rooms, ant);
 //    print_vay(rooms, ant);
