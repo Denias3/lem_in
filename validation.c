@@ -94,7 +94,7 @@ void		validation(t_anthill *ant, t_room *rooms)
 	t_var_valid	*var_valid;
 
 	var_valid = new_var_valid();
-	fd = open("/Users/emeha/CLionProjects/lem_in/text2", O_RDONLY);
+	fd = open("/Users/fschille/Desktop/lem_in/text", O_RDONLY);
 	while (get_next_line(fd, &line) > 0)
 	{
 		var_valid->type = check_line(line);
