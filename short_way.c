@@ -107,11 +107,15 @@ int         *df_check(t_room *end_room) {
 	way = (int *) malloc(sizeof(int) * (end_room->bf + 1));
 	way[0] = end_room->bf;
 	room = room->bfs_prev;
-	while (room != NULL) {
-		if (end_room->bf == room->bf + 1 && (link_check(end_room, room) == 0)) {
+	while (room != NULL)
+	{
+		if (end_room->bf == room->bf + 1 && (link_check(end_room, room) == 0))
+		{
 			i = 0;
-			while (room->next_rooms[i] != NULL) {
-				if (room->next_rooms[i] == end_room) {
+			while (room->next_rooms[i] != NULL)
+			{
+				if (room->next_rooms[i] == end_room)
+				{
 					room->closed_links = creat_closed_links(size_link(room));
 					room->closed_links[i] = 3;
 					way[j] = i;
