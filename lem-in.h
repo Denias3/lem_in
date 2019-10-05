@@ -91,5 +91,6 @@ int 		        size_link(t_room *room);
 void				redirect_link(t_room *room, t_room *new_room, char *name);
 void				print_close_links(t_room *room);
 void				del_copies(t_room *rooms, t_anthill *ant);
+void                null_track_record(t_anthill *ant);
 
 #endif

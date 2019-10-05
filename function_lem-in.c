@@ -161,7 +161,7 @@ void	print_rooms(t_room *rooms, int t)
 			print_close_links(rooms);
 		rooms = rooms->next;
 	}
-	ft_printf("\n*************\n");
+	ft_printf("\n\n*************\n*************\n\n");
 }
 
 void	error(void)

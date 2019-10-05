@@ -204,7 +204,7 @@ void            realoc_xlink(t_room *room, int position)
 	int         i;
 	int         j;
 
-	tmp = (t_room**)malloc(sizeof(t_room*) * (size_link(room) - 1));
+	tmp = (t_room**)malloc(sizeof(t_room*) * (size_link(room)));
 	i = 0;
 	j = 0;
 	while (room->next_rooms[i] != NULL)
@@ -216,6 +216,8 @@ void            realoc_xlink(t_room *room, int position)
 		}
 		i++;
 	}
+
+	tmp[j] = NULL;
 	free(room->next_rooms);
 	room->next_rooms = tmp;
 }
@@ -235,12 +237,13 @@ int             delet_xlink(t_room *room, int id)
 				room->visit = 0;
 				return (0);
 			}
+			i++;
 		}
 	}
 	return (1);
 }
 
-int             search_xlink(t_room *room, t_anthill *ant, int type)
+void            search_xlink(t_room *room, t_anthill *ant)
 {
 	int         i;
 	int         j;
@@ -257,17 +260,55 @@ int             search_xlink(t_room *room, t_anthill *ant, int type)
 		room = room->next_rooms[ant->ways[i][j]];
 		if (room->type == 0 && room->visit > 1)
 		{
-			if (type == 0 && delet_xlink(room->next_rooms[ant->ways[i][j + 1]], room->id) == 0)
+			if (delet_xlink(room->next_rooms[ant->ways[i][j + 1]], room->id) == 0)
 			{
 				realoc_xlink(room, ant->ways[i][j + 1]);
 				room->visit = 0;
+				break ;
 			}
+		}
+		j++;
+	}
+}
+
+int             check_xlink(t_room *room, t_anthill *ant)
+{
+	int         i;
+	int         j;
+	int         size;
+
+	i = 0;
+	j = 1;
+	while (ant->ways[i] != NULL)
+		i++;
+	i--;
+	size = ant->ways[i][0];
+	while (size >= j)
+	{
+		room = room->next_rooms[ant->ways[i][j]];
+		if (room->type == 0 && room->visit > 1)
+		{
 			return (1);
 		}
 		j++;
 	}
 	return (0);
 }
+
+void            free_visit_close(t_room *rooms)
+{
+	while (rooms != NULL)
+	{
+		rooms->visit = 0;
+		if (rooms->closed_links != NULL)
+		{
+			free(rooms->closed_links);
+			rooms->closed_links = NULL;
+		}
+		rooms = rooms->next;
+	}
+}
+
 
 //void			algorithm(t_anthill *ant, t_room *rooms)
 //{
@@ -297,14 +338,17 @@ void			algorithm(t_anthill *ant, t_room *rooms)
 		del_copies(rooms, ant);
 		if (short_way(rooms, ant) == 0)
 		{
-			rooms_sharing(rooms, ant);
-			if (search_xlink(rooms, ant, 1) == 1)
+			if (check_xlink(rooms, ant) == 1)
 			{
-				search_xlink(rooms, ant, 0);
-				free_track_record(ant);
+				search_xlink(rooms, ant);
+				print_rooms(rooms, 0);
+				null_track_record(ant);
+				free_visit_close(rooms);
 			}
+			else
+				rooms_sharing(rooms, ant);
 		}
 	}
 	del_copies(rooms, ant);
-	print_rooms(rooms, 0);
+	print_rooms(rooms, 1);
 }

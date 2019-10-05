@@ -20,10 +20,24 @@ void        free_track_record(t_anthill *ant)
 	while (ant->ways[i] != NULL)
 	{
 		free(ant->ways[i]);
+		ant->ways[i] = NULL;
 		i++;
 	}
 	free(ant->ways);
+	ant->ways = NULL;
 	free(ant);
+}
+
+void        null_track_record(t_anthill *ant)
+{
+	int     i;
+
+	i = 0;
+	while (ant->ways[i] != NULL)
+	{
+		ant->ways[i] = NULL;
+		i++;
+	}
 }
 
 static int         len_int(int **way)
@@ -32,9 +46,7 @@ static int         len_int(int **way)
 
 	i = 0;
 	while (way[i] != NULL)
-	{
 		i++;
-	}
 	return (i + 1);
 }
 
@@ -45,9 +57,8 @@ void        track_record(int *way, t_anthill *ant)
 
 	ways = NULL;
 	i = 0;
-	if (!ant->ways)
+	if (ant->ways == NULL || ant->ways[0] == NULL)
 	{
-		ant->ways = (int**)malloc(sizeof(int*) * 2);
 		ant->ways[0] = way;
 		ant->ways[1] = NULL;
 	}
