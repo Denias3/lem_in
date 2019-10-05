@@ -73,7 +73,7 @@ t_room          *search_room_bf(t_room *rooms, int bf, int *baf)
 {
 	int i;
 
-
+	(*baf) = 0;
 	while (rooms != NULL)
 	{
 		i = 0;
@@ -81,7 +81,6 @@ t_room          *search_room_bf(t_room *rooms, int bf, int *baf)
 		{
 			while (rooms->next_rooms[i] != NULL)
 			{
-				(*baf) = 0;
 				if (rooms->next_rooms[i]->bf == -1)
 				{
 					if (rooms->type == 4 && rooms->closed_links != 0 && rooms->closed_links[i] == 2)
@@ -96,7 +95,13 @@ t_room          *search_room_bf(t_room *rooms, int bf, int *baf)
 				}
 				i++;
 			}
+
 		}
+//		else
+//		{
+//			(*baf) = 2;
+//			return (NULL);
+//		}
 		rooms = rooms->next;
 	}
 	return (NULL);
@@ -113,7 +118,7 @@ int				end_bf(t_room *rooms)
 	return (1);
 }
 
-void			go_bf(t_room *rooms)
+int			go_bf(t_room *rooms)
 {
 	t_room	*tmp;
 	t_room	*tmp2;
@@ -126,6 +131,8 @@ void			go_bf(t_room *rooms)
 	while (end_bf(rooms) == 0)
 	{
 		tmp = search_room_bf(rooms, bf - 1, &baf);
+		if (baf == 2)
+			return (1);
 		if (tmp == NULL)
 			bf++;
 		else
@@ -137,17 +144,25 @@ void			go_bf(t_room *rooms)
 				tmp->bf = bf - baf;
 				tmp->bfs_prev = tmp2;
 				tmp2->bfs_next = tmp;
+				tmp2 = tmp;
 			}
-			tmp2 = tmp;
+
 		}
+//		print_room(tmp);
 	}
+	tmp2->bfs_next = NULL;
+	return (0);
 }
 
 
-void            to_position(t_room *rooms)
+int            to_position(t_room *rooms)
 {
 	free_bf(rooms);
-	go_bf(rooms);
+	if (go_bf(rooms) == 0)
+		return (0);
+	else
+		return (1);
+
 }
 
 int             ended_way(t_room *start)
@@ -240,6 +255,7 @@ void			algorithm(t_anthill *ant, t_room *rooms)
 	to_position(rooms);
 	short_way(rooms, ant);
 	rooms_sharing(rooms, ant);
+//	print_rooms(rooms, 1);
 //	join_rooms_main(rooms, ant);
 //	print_rooms(rooms, 0);
 	to_position(rooms);
