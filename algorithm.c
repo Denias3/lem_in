@@ -98,11 +98,6 @@ t_room          *search_room_bf(t_room *rooms, int bf, int *baf)
 			}
 
 		}
-//		else
-//		{
-//			(*baf) = 2;
-//			return (NULL);
-//		}
 		rooms = rooms->next;
 	}
 	return (NULL);
@@ -125,19 +120,25 @@ int			go_bf(t_room *rooms)
 	t_room	*tmp2;
 	int		bf;
 	int 	baf;
+	int     ch;
 
+	ch = 0;
 	baf = 0;
 	tmp2 = search_room_type(rooms, 1);
 	bf = 1;
 	while (end_bf(rooms) == 0)
 	{
 		tmp = search_room_bf(rooms, bf - 1, &baf);
-		if (baf == 2)
+		if (ch == 2)
 			return (1);
 		if (tmp == NULL)
-			bf++;
+        {
+		    ch++;
+            bf++;
+        }
 		else
 		{
+		    ch = 0;
 			if (tmp->type == 4)
 				tmp->bf = bf;
 			else
@@ -268,43 +269,41 @@ int             search_xlink(t_room *room, t_anthill *ant, int type)
 	return (0);
 }
 
-//void			algorithm(t_anthill *ant, t_room *rooms)
-//{
-//	to_position(rooms);
-//	short_way(rooms, ant);
-//	rooms_sharing(rooms, ant);
-////	join_rooms_main(rooms, ant);
-////	print_rooms(rooms, 0);
-//	to_position(rooms);
-//
-////	print_rooms(rooms, 0);
-//	del_copies(rooms, ant);
-//	print_rooms(rooms, 0);
-////	search_xlink(rooms, ant);
-////    print_vay(rooms, ant);
-////    print_bfs(rooms);
-////    print_rooms(rooms);
-////    go_ants(rooms, ant);
-//}
-
 void			algorithm(t_anthill *ant, t_room *rooms)
 {
-	int         p_ways;
+	to_position(rooms);
+	short_way(rooms, ant);
+	rooms_sharing(rooms, ant);
+	to_position(rooms);
 
-	while ((p_ways = possible_ways(rooms)) > 0)
-	{
-		to_position(rooms);
-//		print_rooms(rooms, 0);
-		del_copies(rooms, ant);
-		print_rooms(rooms, 0);
-		if (short_way(rooms, ant) == 0)
-		{
-			rooms_sharing(rooms, ant);
-			if (search_xlink(rooms, ant, 1) == 1)
-			{
-				search_xlink(rooms, ant, 0);
-				free_track_record(ant);
-			}
-		}
-	}
+	print_rooms(rooms, 0);
+	del_copies(rooms, ant);
+	print_rooms(rooms, 0);
+//	search_xlink(rooms, ant);
+//    print_vay(rooms, ant);
+//    print_bfs(rooms);
+//    print_rooms(rooms);
+//    go_ants(rooms, ant);
 }
+//
+//void			algorithm(t_anthill *ant, t_room *rooms)
+//{
+//	int         p_ways;
+//
+//	while ((p_ways = possible_ways(rooms)) > 0)
+//	{
+//		to_position(rooms);
+////		print_rooms(rooms, 0);
+//		del_copies(rooms, ant);
+//		print_rooms(rooms, 0);
+//		if (short_way(rooms, ant) == 0)
+//		{
+//			rooms_sharing(rooms, ant);
+//			if (search_xlink(rooms, ant, 1) == 1)
+//			{
+//				search_xlink(rooms, ant, 0);
+//				free_track_record(ant);
+//			}
+//		}
+//	}
+//}

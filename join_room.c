@@ -20,8 +20,6 @@ void	del_copies(t_room *rooms, t_anthill *ant)
 
 	while (rooms != NULL)
 	{
-		if (rooms->visit == 1)
-			rooms->visit = 0;
 		if (rooms->type == 4)
 		{
 			if (rooms->closed_links != NULL)
