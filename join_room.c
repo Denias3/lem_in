@@ -63,9 +63,3 @@ void	join_rooms(t_room *rooms)
 	}
 }
 
-void	join_rooms_main(t_room *rooms, t_anthill *ant)
-{
-	join_rooms(rooms);
-	del_copies(rooms, ant);
-}
-

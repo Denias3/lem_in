@@ -90,6 +90,7 @@ t_room		        *end_room(t_room *rooms);
 int 		        size_link(t_room *room);
 void				redirect_link(t_room *room, t_room *new_room, char *name);
 void				print_close_links(t_room *room);
-void				join_rooms_main(t_room *rooms, t_anthill *ant);
+void				del_copies(t_room *rooms, t_anthill *ant);
+void				join_rooms(t_room *rooms);
 
 #endif

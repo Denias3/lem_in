@@ -55,11 +55,14 @@ static void separation_links(t_room *room_in, t_room *room_out)
 	i = 1;
 	size = size_links(room_in);
 	tmp_room = (t_room**)malloc(sizeof(t_room*) * size);
+	room_out->closed_links = (int*)malloc(sizeof(int) * size);
 	tmp_room[0] = room_in;
+	room_out->closed_links[0] = 2;
 	while (room_in->next_rooms[j] != NULL)
 	{
 		if (room_in->closed_links[j] == 0)
 		{
+			room_out->closed_links[i] = 0;
 			tmp_room[i] = room_in->next_rooms[j];
 			i++;
 		}
@@ -69,9 +72,6 @@ static void separation_links(t_room *room_in, t_room *room_out)
 	}
 	tmp_room[i] = NULL;
 	room_out->next_rooms = tmp_room;
-	if (room_out->closed_links != NULL)
-		room_out->closed_links = NULL;
-
 }
 
 static void add_to_end(t_room *room, t_room *room_end)
@@ -115,11 +115,7 @@ void	room_sharing(t_room *room_in, t_anthill *ant)
 	rewriting_room(room_in, room_out, ant->rooms);
 	ant->rooms++;
 	separation_links(room_in, room_out);
-//	print_close_links(room_out);
-//	print_close_links(room_in);
 	close_link_in(room_in);
-//	print_close_links(room_out);
-//	print_close_links(room_in);
 	add_to_end(room_in, room_out);
 }
 

@@ -69,20 +69,27 @@ void			free_bf(t_room *rooms)
 	}
 }
 
-t_room          *search_room_bf(t_room *rooms, int bf)
+t_room          *search_room_bf(t_room *rooms, int bf, int *baf)
 {
 	int i;
 
-	i = 0;
+
 	while (rooms != NULL)
 	{
+		i = 0;
 		if (rooms->bf == bf && ch_bf(rooms) == 0)
 		{
 			while (rooms->next_rooms[i] != NULL)
 			{
+				(*baf) = 0;
 				if (rooms->next_rooms[i]->bf == -1)
 				{
-					if (rooms->closed_links != 0 && rooms->closed_links[i] != 1 && rooms->closed_links[i] != 3)
+					if (rooms->type == 4 && rooms->closed_links != 0 && rooms->closed_links[i] == 2)
+					{
+						(*baf) = 1;
+						return (rooms->next_rooms[i]);
+					}
+					else if (rooms->closed_links != 0 && rooms->closed_links[i] != 1 && rooms->closed_links[i] != 3)
 						return (rooms->next_rooms[i]);
 					else if (rooms->closed_links == 0)
 						return (rooms->next_rooms[i]);
@@ -111,19 +118,26 @@ void			go_bf(t_room *rooms)
 	t_room	*tmp;
 	t_room	*tmp2;
 	int		bf;
+	int 	baf;
 
+	baf = 0;
 	tmp2 = search_room_type(rooms, 1);
 	bf = 1;
 	while (end_bf(rooms) == 0)
 	{
-		tmp = search_room_bf(rooms, bf - 1);
+		tmp = search_room_bf(rooms, bf - 1, &baf);
 		if (tmp == NULL)
 			bf++;
 		else
 		{
-			tmp->bf = bf;
-			tmp->bfs_prev = tmp2;
-			tmp2->bfs_next = tmp;
+			if (tmp->type == 4)
+				tmp->bf = bf;
+			else
+			{
+				tmp->bf = bf - baf;
+				tmp->bfs_prev = tmp2;
+				tmp2->bfs_next = tmp;
+			}
 			tmp2 = tmp;
 		}
 	}
@@ -230,6 +244,7 @@ void			algorithm(t_anthill *ant, t_room *rooms)
 //	print_rooms(rooms, 0);
 	to_position(rooms);
 	print_rooms(rooms, 1);
+	join_rooms_main(rooms, ant);
 //	search_xlink(rooms, ant);
 //    print_vay(rooms, ant);
 //    print_bfs(rooms);
