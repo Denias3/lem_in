@@ -64,6 +64,11 @@ void	free_rooms(t_room *rooms)
 
 	while (rooms != NULL)
 	{
+		if (rooms->closed_links != NULL)
+		{
+			free(rooms->closed_links);
+			rooms->closed_links = NULL;
+		}
 		free(rooms->next_rooms);
 		free(rooms->name);
 		tmp = rooms;
