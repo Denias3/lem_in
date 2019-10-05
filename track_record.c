@@ -60,6 +60,7 @@ void        track_record(int *way, t_anthill *ant)
 			i++;
 		}
 		ways[i] = way;
+		ways[i + 1] = NULL;
 		free(ant->ways);
 		ant->ways = ways;
 	}

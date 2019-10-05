@@ -136,18 +136,35 @@ void            to_position(t_room *rooms)
 	go_bf(rooms);
 }
 
-int             ended_way(t_room *start)
+int             ended_way(t_room *room)
 {
 	int         i;
+	int         j;
 
 	i = 0;
-	while (start->next_rooms[i] != NULL)
+	j = 0;
+	while (room->next_rooms[i] != NULL)
 	{
-		if (start->next_rooms[i]->visit == 0)
-			return (0);
+		if (room->next_rooms[i]->visit == 0)
+			j++;
 		i++;
 	}
-	return (1);
+	return (j);
+}
+
+int             possible_ways(t_room *room)
+{
+	int         j[2];
+
+	j[0] = ended_way(room);
+	room = end_room_next(room);
+	j[1] = ended_way(room);
+	if (j[0] > 0 && j[1] > 0)
+	{
+		return (j[0] < j[1] ? j[0] : j[1]);
+	}
+	else
+		return (0);
 }
 
 void            realoc_xlink(t_room *room, int position)
@@ -221,29 +238,35 @@ int             search_xlink(t_room *room, t_anthill *ant, int type)
 	return (0);
 }
 
+//void			algorithm(t_anthill *ant, t_room *rooms)
+//{
+//	to_position(rooms);
+//	short_way(rooms, ant);
+//	rooms_sharing(rooms, ant);
+//	join_rooms_main(rooms, ant);
+////	print_rooms(rooms, 0);
+////	to_position(rooms);
+//	print_rooms(rooms, 0);
+////	search_xlink(rooms, ant);
+////    print_vay(rooms, ant);
+////    print_bfs(rooms);
+////    print_rooms(rooms);
+////    go_ants(rooms, ant);
+//}
+
 void			algorithm(t_anthill *ant, t_room *rooms)
 {
-	to_position(rooms);
-	short_way(rooms, ant);
-	rooms_sharing(rooms, ant);
-//	join_rooms_main(rooms, ant);
-//	print_rooms(rooms, 0);
-	to_position(rooms);
-	print_rooms(rooms, 1);
-//	search_xlink(rooms, ant);
-//    print_vay(rooms, ant);
-//    print_bfs(rooms);
-//    print_rooms(rooms);
-//    go_ants(rooms, ant);
-}
+	int         p_ways;
 
-void			algorithm(t_anthill *ant, t_room *rooms) {
-	while (ended_way(rooms) == 0 && ended_way(end_room_next(rooms)) == 0) {
+	while ((p_ways = possible_ways(rooms)) > 0)
+	{
 		to_position(rooms);
 		print_rooms(rooms, 0);
-		if (short_way(rooms, ant) == 0) {
+		if (short_way(rooms, ant) == 0)
+		{
 			rooms_sharing(rooms, ant);
-			if (search_xlink(rooms, ant, 1) == 1) {
+			if (search_xlink(rooms, ant, 1) == 1)
+			{
 				join_rooms_main(rooms, ant);
 				search_xlink(rooms, ant, 0);
 				free_track_record(ant);
