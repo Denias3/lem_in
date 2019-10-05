@@ -269,23 +269,23 @@ void			algorithm(t_anthill *ant, t_room *rooms)
 //    go_ants(rooms, ant);
 }
 
-void			algorithm(t_anthill *ant, t_room *rooms)
-{
-	int         p_ways;
-
-	while ((p_ways = possible_ways(rooms)) > 0)
-	{
-		to_position(rooms);
-		print_rooms(rooms, 0);
-		if (short_way(rooms, ant) == 0)
-		{
-			rooms_sharing(rooms, ant);
-			if (search_xlink(rooms, ant, 1) == 1)
-			{
-				join_rooms_main(rooms, ant);
-				search_xlink(rooms, ant, 0);
-				free_track_record(ant);
-			}
-		}
-	}
-}
+//void			algorithm(t_anthill *ant, t_room *rooms)
+//{
+//	int         p_ways;
+//
+//	while ((p_ways = possible_ways(rooms)) > 0)
+//	{
+//		to_position(rooms);
+//		print_rooms(rooms, 0);
+//		if (short_way(rooms, ant) == 0)
+//		{
+//			rooms_sharing(rooms, ant);
+//			if (search_xlink(rooms, ant, 1) == 1)
+//			{
+//				join_rooms_main(rooms, ant);
+//				search_xlink(rooms, ant, 0);
+//				free_track_record(ant);
+//			}
+//		}
+//	}
+//}
