@@ -331,9 +331,8 @@ void			algorithm(t_anthill *ant, t_room *rooms)
 {
 	int         p_ways;
 
-	while ((p_ways = possible_ways(rooms)) > 0)
+	while (to_position(rooms) == 0 && (p_ways = possible_ways(rooms)) > 0)
 	{
-		to_position(rooms);
 //		print_rooms(rooms, 0);
 		del_copies(rooms, ant);
 		if (short_way(rooms, ant) == 0)
@@ -341,7 +340,7 @@ void			algorithm(t_anthill *ant, t_room *rooms)
 			if (check_xlink(rooms, ant) == 1)
 			{
 				search_xlink(rooms, ant);
-				print_rooms(rooms, 0);
+//				print_rooms(rooms, 0);
 				null_track_record(ant);
 				free_visit_close(rooms);
 			}
