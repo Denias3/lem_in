@@ -94,7 +94,7 @@ void		validation(t_anthill *ant, t_room *rooms)
 	t_var_valid	*var_valid;
 
 	var_valid = new_var_valid();
-	fd = open("/Users/fschille/Desktop/lem_in/m4", O_RDONLY);
+	fd = open("/Users/fschille/Desktop/lem_in/m5", O_RDONLY);
 	while (get_next_line(fd, &line) > 0)
 	{
 		var_valid->type = check_line(line);
