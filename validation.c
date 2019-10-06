@@ -104,6 +104,7 @@ void		validation(t_anthill *ant, t_room *rooms)
         {
             free(line);
             continue;
+
         }
 		if (var_valid->stage == 0)
 			stage_num_ant(var_valid, ant, line);
