@@ -20,7 +20,7 @@ typedef	struct		s_room
 	char			*name;
 	int				id;
 	short			type; // 0 - обычная комната, 1 -  start, 2 - end
-							// 3 - room_in, 4 - room_out
+							// 3 - room_in, 4 - room_out, 5 - комнаты без путей
 	short			state; // 0 - нет муравья, 1 - есть муравей
 	int				x;
 	int				y;
@@ -93,5 +93,6 @@ void				print_close_links(t_room *room);
 void				del_copies(t_room *rooms, t_anthill *ant);
 void                null_track_record(t_anthill *ant);
 int 		        *creat_closed_links(int size);
+int                 to_position(t_room *rooms);
 
 #endif
