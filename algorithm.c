@@ -297,13 +297,18 @@ int             check_xlink(t_room *room, t_anthill *ant)
 
 void            free_visit_close(t_room *rooms)
 {
+	int         i;
+	int         size;
+
+	i = 0;
+	size = 0;
 	while (rooms != NULL)
 	{
 		rooms->visit = 0;
-		if (rooms->closed_links != NULL)
+		size = size_link(rooms);
+		if (size > i)
 		{
-			free(rooms->closed_links);
-			rooms->closed_links = NULL;
+			rooms->closed_links[i] = 0;
 		}
 		rooms = rooms->next;
 	}
