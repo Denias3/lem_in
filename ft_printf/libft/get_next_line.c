@@ -69,7 +69,7 @@ static int		get_collect_line(int ret, char **line, char *buf, t_list **list)
 	nd = 0;
 	buf[ret] = '\0';
 	if (get_collect2_line(line, buf, list, nd))
-		return (1);
+        return (1);
 	if (ret == 0)
 	{
 		tmp = *line;

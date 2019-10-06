@@ -362,7 +362,7 @@ void			algorithm(t_anthill *ant, t_room *rooms)
 				rooms_sharing(rooms, ant);
 		}
 	}
-	print_vay(rooms, ant);
 	del_copies(rooms, ant);
+	print_vay(rooms, ant);
 //	print_rooms(rooms, 1);
 }

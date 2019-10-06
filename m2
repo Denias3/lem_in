@@ -1,5 +1,5 @@
 1
-##start
+#start
 A 0 2
 B 1 0
 C 1 1

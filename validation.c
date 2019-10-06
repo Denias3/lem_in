@@ -94,14 +94,17 @@ void		validation(t_anthill *ant, t_room *rooms)
 	t_var_valid	*var_valid;
 
 	var_valid = new_var_valid();
-	fd = open("/Users/fschille/Desktop/lem_in/m4", O_RDONLY);
+	fd = open("/Users/emeha/CLionProjects/lem_in/m2", O_RDONLY);
 	while (get_next_line(fd, &line) > 0)
 	{
 		var_valid->type = check_line(line);
 		if (var_valid->type == -1)
 			error();
 		if (var_valid->type == 6 || var_valid->type == 3)
-			continue;
+        {
+            free(line);
+            continue;
+        }
 		if (var_valid->stage == 0)
 			stage_num_ant(var_valid, ant, line);
 		else if (var_valid->stage == 1 && var_valid->type != 2)

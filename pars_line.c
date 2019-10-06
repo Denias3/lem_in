@@ -185,5 +185,11 @@ int				pars_line_link(t_room *room, char *line)
 		return (0);
     }
     else
-    	return (1);
+    {
+        free(split[0]);
+        free(split[1]);
+        free(split);
+        return (1);
+    }
+
 }
