@@ -10,13 +10,13 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lem-in.h"
+#include "lem_in.h"
 
-void	del_copies(t_room *rooms, t_anthill *ant)
+void		del_copies(t_room *rooms, t_anthill *ant)
 {
 	t_room	*tmp;
 	t_room	*tmp2;
-	int i;
+	int		i;
 
 	while (rooms != NULL)
 	{
@@ -51,4 +51,3 @@ void	del_copies(t_room *rooms, t_anthill *ant)
 		rooms = rooms->next;
 	}
 }
-

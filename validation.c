@@ -11,11 +11,11 @@
 /* ************************************************************************** */
 
 #include <fcntl.h>
-#include "lem-in.h"
+#include "lem_in.h"
 
-t_var_valid *new_var_valid(void)
+t_var_valid			*new_var_valid(void)
 {
-	t_var_valid	*var_valid;
+	t_var_valid		*var_valid;
 
 	var_valid = (t_var_valid*)malloc(sizeof(t_var_valid));
 	var_valid->n_comm = 0;
@@ -27,7 +27,7 @@ t_var_valid *new_var_valid(void)
 	return (var_valid);
 }
 
-void        stage_num_ant(t_var_valid *var_valid, t_anthill *ant, char *line)
+void				stage_num_ant(t_var_valid *var_valid, t_anthill *ant, char *line)
 {
 	if (var_valid->type == 4 || var_valid->type == 5)
 		error();
@@ -40,7 +40,7 @@ void        stage_num_ant(t_var_valid *var_valid, t_anthill *ant, char *line)
 		error();
 }
 
-void        stage_rooms(t_var_valid *var_valid, t_anthill *ant, t_room *rooms, char *line)
+void				stage_rooms(t_var_valid *var_valid, t_anthill *ant, t_room *rooms, char *line)
 {
 	if (var_valid->type == 1 || var_valid->type == 4 || var_valid->type == 5)
 	{
@@ -75,7 +75,7 @@ void        stage_rooms(t_var_valid *var_valid, t_anthill *ant, t_room *rooms, c
 		error();
 }
 
-void        stage_link(t_var_valid *var_valid, t_room *rooms, char *line)
+void				stage_link(t_var_valid *var_valid, t_room *rooms, char *line)
 {
 	if (var_valid->type == 2)
 	{
@@ -87,11 +87,11 @@ void        stage_link(t_var_valid *var_valid, t_room *rooms, char *line)
 		error();
 }
 
-void		validation(t_anthill *ant, t_room *rooms)
+void				validation(t_anthill *ant, t_room *rooms)
 {
-	char		*line;
-	int			fd;
-	t_var_valid	*var_valid;
+	char			*line;
+	int				fd;
+	t_var_valid		*var_valid;
 
 	var_valid = new_var_valid();
 	fd = open("/Users/fschille/Desktop/lem_in/m0", O_RDONLY);
@@ -101,11 +101,10 @@ void		validation(t_anthill *ant, t_room *rooms)
 		if (var_valid->type == -1)
 			error();
 		if (var_valid->type == 6 || var_valid->type == 3)
-        {
-            free(line);
-            continue;
-
-        }
+		{
+			free(line);
+			continue ;
+		}
 		if (var_valid->stage == 0)
 			stage_num_ant(var_valid, ant, line);
 		else if (var_valid->stage == 1 && var_valid->type != 2)
@@ -116,8 +115,5 @@ void		validation(t_anthill *ant, t_room *rooms)
 	}
 	if (var_valid->stage != 2 || var_valid->n_comm != 2)
 		error();
-//	print_rooms(rooms);
 	free(var_valid);
-//	ft_printf("rooms: %d\n", ant->rooms);
-//	ft_printf("ants:  %d\n", ant->ants);
 }

@@ -10,11 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lem-in.h"
+#include "lem_in.h"
 
-int		count_char_double_array(char **str)
+int				count_char_double_array(char **str)
 {
-	int i;
+	int			i;
 
 	i = 0;
 	while (str[i])
@@ -22,9 +22,9 @@ int		count_char_double_array(char **str)
 	return (i);
 }
 
-void	free_char_double_array(char **str)
+void			free_char_double_array(char **str)
 {
-	int i;
+	int			i;
 
 	i = 0;
 	while (str[i])
@@ -35,7 +35,7 @@ void	free_char_double_array(char **str)
 	free(str);
 }
 
-t_room	*new_room(void)
+t_room			*new_room(void)
 {
 	t_room *room;
 
@@ -58,9 +58,9 @@ t_room	*new_room(void)
 	return (room);
 }
 
-void	free_rooms(t_room *rooms)
+void			free_rooms(t_room *rooms)
 {
-	t_room	*tmp;
+	t_room		*tmp;
 
 	while (rooms != NULL)
 	{
@@ -77,7 +77,7 @@ void	free_rooms(t_room *rooms)
 	}
 }
 
-void	print_room(t_room *room)
+void			print_room(t_room *room)
 {
 	if (room != NULL)
 	{
@@ -101,9 +101,9 @@ void	print_room(t_room *room)
 	}
 }
 
-void		print_close_links(t_room *room)
+void			print_close_links(t_room *room)
 {
-	int i;
+	int			i;
 
 	i = 0;
 	ft_printf("\n-------------\n");
@@ -136,16 +136,15 @@ void		print_close_links(t_room *room)
 	}
 }
 
-void	print_way(t_room *room, int *way)
+void			print_way(t_room *room, int *way)
 {
-	int i;
-	t_room *st_room;
+	int			i;
+	t_room		*st_room;
 
 	i = 1;
 	st_room = search_room_type(room, 1);
 	while (i - 1 <= way[0])
 	{
-
 		if (st_room->type == 2)
 		{
 			ft_printf("%s(%d)", st_room->name, st_room->state);
@@ -157,24 +156,21 @@ void	print_way(t_room *room, int *way)
 	}
 }
 
-void	print_ways(t_room *rooms, t_anthill *ant)
+void			print_ways(t_room *rooms, t_anthill *ant)
 {
-
-	int j;
-
+	int			j;
 
 	j = 0;
-
 	while (ant->ways[j] != NULL)
-    {
-        print_way(rooms, ant->ways[j]);
-        ft_printf("\n");
-        j++;
-    }
-    ft_printf("**-------**\n");
+	{
+		print_way(rooms, ant->ways[j]);
+		ft_printf("\n");
+		j++;
+	}
+	ft_printf("**-------**\n");
 }
 
-void	print_rooms(t_room *rooms, int t)
+void			print_rooms(t_room *rooms, int t)
 {
 	while (rooms != NULL)
 	{
@@ -187,7 +183,7 @@ void	print_rooms(t_room *rooms, int t)
 	ft_printf("\n\n*************\n*************\n\n");
 }
 
-void	error(void)
+void			error(void)
 {
 	ft_printf("error\n");
 	exit(0);

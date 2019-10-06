@@ -10,11 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lem-in.h"
+#include "lem_in.h"
 
-void        free_track_record(t_anthill *ant)
+void		free_track_record(t_anthill *ant)
 {
-	int     i;
+	int		i;
 
 	i = 0;
 	while (ant->ways[i] != NULL)
@@ -28,9 +28,9 @@ void        free_track_record(t_anthill *ant)
 	free(ant);
 }
 
-void        null_track_record(t_anthill *ant)
+void		null_track_record(t_anthill *ant)
 {
-	int     i;
+	int		i;
 
 	i = 0;
 	while (ant->ways[i] != NULL)
@@ -40,9 +40,9 @@ void        null_track_record(t_anthill *ant)
 	}
 }
 
-static int         len_int(int **way)
+static int	len_int(int **way)
 {
-	int     i;
+	int		i;
 
 	i = 0;
 	while (way[i] != NULL)
@@ -50,12 +50,11 @@ static int         len_int(int **way)
 	return (i + 1);
 }
 
-void        track_record(int *way, t_anthill *ant)
+void		track_record(int *way, t_anthill *ant)
 {
-	int     **ways;
-	int     i;
+	int		**ways;
+	int		i;
 
-	ways = NULL;
 	i = 0;
 	if (ant->ways == NULL || ant->ways[0] == NULL)
 	{

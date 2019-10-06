@@ -10,11 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lem-in.h"
+#include "lem_in.h"
 
 static t_anthill	*newanthill(void)
 {
-	t_anthill *ant;
+	t_anthill		*ant;
 
 	ant = (t_anthill*)malloc(sizeof(t_anthill));
 	ant->ways = (int**)malloc(sizeof(int*) * 2);
@@ -29,14 +29,13 @@ static t_anthill	*newanthill(void)
 
 int					main(void)
 {
-	t_anthill	*ant;
-	t_room		*rooms;
+	t_anthill		*ant;
+	t_room			*rooms;
 
 	rooms = new_room();
 	ant = newanthill();
 	validation(ant, rooms);
-	algorithm(ant, rooms);
-//	check_link_room_full(rooms);
+	algorithm(ant, rooms)
 	free_track_record(ant);
 	free_rooms(rooms);
 	return (0);

@@ -21,24 +21,23 @@ typedef	struct		s_room
 	int				id;
 	short			type; // 0 - обычная комната, 1 -  start, 2 - end
 							// 3 - room_in, 4 - room_out, 5 - комнаты без путей
-	int			    state; // 0 - нет муравья, 1 - есть муравей
+	int				state; // 0 - нет муравья, 1 - есть муравей
 	int				x;
 	int				y;
-	int             bf;
-	int             visit;
-	int 			*closed_links;
+	int				bf;
+	int				visit;
+	int				*closed_links;
 	struct s_room	**next_rooms;
 	struct s_room	*next;
 	struct s_room	*bfs_next;
 	struct s_room	*bfs_prev;
-
 }					t_room;
 
 typedef	struct		s_anthill
 {
 	int				ants;
 	int				rooms;
-	int 			**ways;
+	int				**ways;
 	int				max_x;
 	int				max_y;
 }					t_anthill;
@@ -48,19 +47,19 @@ typedef	struct		s_anthill
 **		type_past	-   прошлый тип линии
 **		type		- 	тип линии
 **		stage		-   этап
-**          0   -   Количество муравьев
-**          1   -   Создание комнат
-**          2   -   Линковка комнат
+**		  0   -   Количество муравьев
+**		  1   -   Создание комнат
+**		  2   -   Линковка комнат
 **		n_comm		-	количество комманд
 */
 
 typedef struct		s_var_valid
 {
-	int             start;
-	int             end;
+	int				start;
+	int				end;
 	int				type;
-	int             type_past;
-	int 			stage;
+	int				type_past;
+	int				stage;
 	int				n_comm;
 
 }					t_var_valid;
@@ -78,22 +77,22 @@ void				free_rooms(t_room *rooms);
 void				error(void);
 int					pars_line_link(t_room *room, char *line);
 void				algorithm(t_anthill *ant, t_room *rooms);
-t_room          	*search_room_type(t_room *rooms, short type);
-int 			    short_way(t_room *rooms, t_anthill *ant);
+t_room				*search_room_type(t_room *rooms, short type);
+int					short_way(t_room *rooms, t_anthill *ant);
 void				check_link_room_full(t_room *room);
 void				go_ants(t_room *rooms, t_anthill *ant);
 void				rooms_sharing(t_room *room_in, t_anthill *ant);
-void                track_record(int *way, t_anthill *ant);
-void                free_track_record(t_anthill *ant);
+void				track_record(int *way, t_anthill *ant);
+void				free_track_record(t_anthill *ant);
 void				print_ways(t_room *room, t_anthill *ant);
 void				print_way(t_room *room, int *way);
-t_room		        *end_room(t_room *rooms);
-int 		        size_link(t_room *room);
+t_room				*end_room(t_room *rooms);
+int					size_link(t_room *room);
 void				redirect_link(t_room *room, t_room *new_room, char *name);
 void				print_close_links(t_room *room);
 void				del_copies(t_room *rooms, t_anthill *ant);
-void                null_track_record(t_anthill *ant);
-int 		        *creat_closed_links(int size);
-int                 to_position(t_room *rooms);
+void				null_track_record(t_anthill *ant);
+int					*creat_closed_links(int size);
+int					to_position(t_room *rooms);
 
 #endif

@@ -10,13 +10,13 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lem-in.h"
+#include "lem_in.h"
 
-int         *my_intrevers(int *way)
+int			*my_intrevers(int *way)
 {
-	int     i;
-	int     tmp;
-	int     m_i;
+	int		i;
+	int		tmp;
+	int		m_i;
 
 	i = 1;
 	m_i = way[0];
@@ -42,7 +42,7 @@ t_room		*end_room(t_room *rooms)
 	return (NULL);
 }
 
-int 		size_link(t_room *room)
+int			size_link(t_room *room)
 {
 	int		size;
 
@@ -52,14 +52,14 @@ int 		size_link(t_room *room)
 	return (size);
 }
 
-int 		*creat_closed_links(int size)
+int			*creat_closed_links(int size)
 {
-	int 	*closed_links;
+	int		*closed_links;
 	int		i;
 
 	i = 0;
 	closed_links = (int*)malloc(sizeof(int) * size);
-	while(i < size)
+	while (i < size)
 	{
 		closed_links[i] = 0;
 		i++;
@@ -69,7 +69,7 @@ int 		*creat_closed_links(int size)
 
 void		close_link(t_room *end_room, t_room *room)
 {
-	int     i;
+	int		i;
 
 	i = 0;
 	while (end_room->next_rooms[i] != NULL)
@@ -82,9 +82,9 @@ void		close_link(t_room *end_room, t_room *room)
 	}
 }
 
-int         link_check(t_room *room, t_room *room_2)
+int			link_check(t_room *room, t_room *room_2)
 {
-	int     i;
+	int		i;
 
 	i = 0;
 	while (room_2->next_rooms[i] != NULL)
@@ -96,15 +96,16 @@ int         link_check(t_room *room, t_room *room_2)
 	return (1);
 }
 
-int         *df_check(t_room *end_room) {
-	t_room *room;
-	int i;
-	int j;
-	int *way;
+int			*df_check(t_room *end_room)
+{
+	t_room	*room;
+	int		i;
+	int		j;
+	int		*way;
 
 	room = end_room;
 	j = 1;
-	way = (int *) malloc(sizeof(int) * (end_room->bf + 1));
+	way = (int*)malloc(sizeof(int) * (end_room->bf + 1));
 	way[0] = end_room->bf;
 	room = room->bfs_prev;
 	while (room != NULL)
@@ -123,14 +124,15 @@ int         *df_check(t_room *end_room) {
 						room->visit++;
 					close_link(end_room, room);
 					end_room = room;
-					break;
+					break ;
 				}
 				i++;
 			}
 		}
 		room = room->bfs_prev;
 	}
-	if (j == 1) {
+	if (j == 1)
+	{
 		free(way);
 		return (NULL);
 	}
@@ -138,10 +140,10 @@ int         *df_check(t_room *end_room) {
 		return (way);
 }
 
-int         short_way(t_room *rooms, t_anthill *ant)
+int			short_way(t_room *rooms, t_anthill *ant)
 {
-	t_room  *room;
-	int     *way;
+	t_room	*room;
+	int		*way;
 
 	room = end_room(rooms);
 	if ((way = my_intrevers(df_check(room))) != NULL)
@@ -149,6 +151,5 @@ int         short_way(t_room *rooms, t_anthill *ant)
 		track_record(way, ant);
 		return (0);
 	}
-	//	check_link_room_full(rooms);
 	return (1);
 }

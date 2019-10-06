@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lem-in.h"
+#include "lem_in.h"
 
 /*
 **			check_line
@@ -26,7 +26,7 @@
 **				no valid   - 6
 */
 
-static int	the_room(char *str)
+static int		the_room(char *str)
 {
 	int		i;
 	char	**split;
@@ -40,7 +40,7 @@ static int	the_room(char *str)
 	}
 	while (split[0][i])
 	{
-		if (split[0][0] == 'L' ||  split[0][0] == '#' ||
+		if (split[0][0] == 'L' || split[0][0] == '#' ||
 			split[0][i] == ' ' || ft_isprint(split[0][i]) == 0)
 		{
 			free_char_double_array(split);
@@ -58,16 +58,16 @@ static int	the_room(char *str)
 	return (1);
 }
 
-static int	the_link(char *str)
+static int		the_link(char *str)
 {
-	int i;
-	int ch;
+	int			i;
+	int			ch;
 
 	i = 0;
 	ch = 0;
 	while (i < 2)
 	{
-		if (*str == 'L' || *str == '#' )
+		if (*str == 'L' || *str == '#')
 			return (0);
 		while (*str)
 		{
@@ -90,7 +90,7 @@ static int	the_link(char *str)
 	return (0);
 }
 
-static int 	the_comment(char *str)
+static int		the_comment(char *str)
 {
 	if (*str == '#')
 	{
@@ -101,7 +101,7 @@ static int 	the_comment(char *str)
 	return (0);
 }
 
-static int 	no_valid_command(char *str)
+static int		no_valid_command(char *str)
 {
 	if (*str == '#')
 	{
@@ -112,23 +112,23 @@ static int 	no_valid_command(char *str)
 	return (0);
 }
 
-int	check_number_positive(char *str)
+int				check_number_positive(char *str)
 {
-    int i;
+	int			i;
 
-    i = 0;
-    while (str[i])
-    {
-        if (str[i] < '0' || str[i] > '9')
-            return (0);
-        i++;
-    }
-    if (i > 0)
-        return (1);
-    return (0);
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] < '0' || str[i] > '9')
+			return (0);
+		i++;
+	}
+	if (i > 0)
+		return (1);
+	return (0);
 }
 
-int			check_line(char *line)
+int				check_line(char *line)
 {
 	if (check_number_positive(line))
 		return (0);

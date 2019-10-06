@@ -10,12 +10,12 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lem-in.h"
+#include "lem_in.h"
 
-static int size_links(t_room *room)
+static int		size_links(t_room *room)
 {
-	int i;
-	int size;
+	int			i;
+	int			size;
 
 	size = 1;
 	i = 0;
@@ -28,14 +28,14 @@ static int size_links(t_room *room)
 	return (size);
 }
 
-void	redirect_link(t_room *room, t_room *new_room, char *name)
+void			redirect_link(t_room *room, t_room *new_room, char *name)
 {
-	int i;
+	int			i;
 
 	i = 0;
-	while(room->next_rooms[i] != NULL)
+	while (room->next_rooms[i] != NULL)
 	{
-		if (ft_strcmp(room->next_rooms[i]->name,name) == 0)
+		if (ft_strcmp(room->next_rooms[i]->name, name) == 0)
 		{
 			room->next_rooms[i] = new_room;
 			break ;
@@ -44,12 +44,12 @@ void	redirect_link(t_room *room, t_room *new_room, char *name)
 	}
 }
 
-static void separation_links(t_room *room_in, t_room *room_out)
+static void		separation_links(t_room *room_in, t_room *room_out)
 {
 	t_room		**tmp_room;
-	int 		size;
-	int 		i;
-	int 		j;
+	int			size;
+	int			i;
+	int			j;
 
 	j = 0;
 	i = 1;
@@ -74,14 +74,14 @@ static void separation_links(t_room *room_in, t_room *room_out)
 	room_out->next_rooms = tmp_room;
 }
 
-static void add_to_end(t_room *room, t_room *room_end)
+static void		add_to_end(t_room *room, t_room *room_end)
 {
 	while (room->next != NULL)
 		room = room->next;
 	room->next = room_end;
 }
 
-void	rewriting_room(t_room *room_in, t_room *room_out, int count_room)
+void			rewriting_room(t_room *room_in, t_room *room_out, int count_room)
 {
 	room_out->name = ft_strdup(room_in->name);
 	room_out->next_rooms = room_in->next_rooms;
@@ -89,12 +89,11 @@ void	rewriting_room(t_room *room_in, t_room *room_out, int count_room)
 	room_out->type = 4;
 	room_in->type = 3;
 	room_out->id = count_room;
-
 }
 
-void	close_link_in(t_room *room_in)
+void			close_link_in(t_room *room_in)
 {
-	int i;
+	int			i;
 
 	i = 0;
 	while (room_in->next_rooms[i] != NULL)
@@ -102,13 +101,12 @@ void	close_link_in(t_room *room_in)
 		if (room_in->closed_links[i] == 0)
 			room_in->closed_links[i] = 1;
 		i++;
-
 	}
 }
 
-void	room_sharing(t_room *room_in, t_anthill *ant)
+void			room_sharing(t_room *room_in, t_anthill *ant)
 {
-	t_room	*room_out;
+	t_room		*room_out;
 
 	room_out = new_room();
 	free(room_out->next_rooms);
@@ -119,10 +117,10 @@ void	room_sharing(t_room *room_in, t_anthill *ant)
 	add_to_end(room_in, room_out);
 }
 
-void	rooms_sharing(t_room *room, t_anthill *ant)
+void			rooms_sharing(t_room *room, t_anthill *ant)
 {
-	int i;
-	t_room *st_room;
+	int			i;
+	t_room		*st_room;
 
 	i = 1;
 	st_room = search_room_type(room, 1);
