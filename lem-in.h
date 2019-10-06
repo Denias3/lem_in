@@ -21,7 +21,7 @@ typedef	struct		s_room
 	int				id;
 	short			type; // 0 - обычная комната, 1 -  start, 2 - end
 							// 3 - room_in, 4 - room_out, 5 - комнаты без путей
-	short			state; // 0 - нет муравья, 1 - есть муравей
+	int			    state; // 0 - нет муравья, 1 - есть муравей
 	int				x;
 	int				y;
 	int             bf;
@@ -85,7 +85,8 @@ void				go_ants(t_room *rooms, t_anthill *ant);
 void				rooms_sharing(t_room *room_in, t_anthill *ant);
 void                track_record(int *way, t_anthill *ant);
 void                free_track_record(t_anthill *ant);
-void				print_vay(t_room *room, t_anthill *ant);
+void				print_ways(t_room *room, t_anthill *ant);
+void				print_way(t_room *room, int *way);
 t_room		        *end_room(t_room *rooms);
 int 		        size_link(t_room *room);
 void				redirect_link(t_room *room, t_room *new_room, char *name);

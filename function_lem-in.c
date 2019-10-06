@@ -136,30 +136,38 @@ void		print_close_links(t_room *room)
 	}
 }
 
-void	print_vay(t_room *room, t_anthill *ant)
+void	print_way(t_room *room, int *way)
 {
 	int i;
-	int j;
 	t_room *st_room;
+
+	i = 1;
+	st_room = search_room_type(room, 1);
+	while (i - 1 <= way[0])
+	{
+
+		if (st_room->type == 2)
+		{
+			ft_printf("%s(%d)", st_room->name, st_room->state);
+			break ;
+		}
+		ft_printf("%s(%d)-", st_room->name, st_room->state);
+		st_room = st_room->next_rooms[way[i]];
+		i++;
+	}
+}
+
+void	print_ways(t_room *rooms, t_anthill *ant)
+{
+
+	int j;
+
 
 	j = 0;
 
 	while (ant->ways[j] != NULL)
     {
-        i = 1;
-        st_room = search_room_type(room, 1);
-        while (i - 1 <= ant->ways[j][0])
-        {
-
-            if (st_room->type == 2)
-            {
-                ft_printf("%s", st_room->name);
-                break ;
-            }
-            ft_printf("%s-", st_room->name);
-            st_room = st_room->next_rooms[ant->ways[j][i]];
-            i++;
-        }
+        print_way(rooms, ant->ways[j]);
         ft_printf("\n");
         j++;
     }
