@@ -37,7 +37,7 @@ t_room		*end_room(t_room *rooms)
 	{
 		if (rooms->type == 2)
 			return (rooms);
-		rooms = rooms->bfs_next;
+		rooms = rooms->next;
 	}
 	return (NULL);
 }

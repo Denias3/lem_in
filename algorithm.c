@@ -225,7 +225,7 @@ void			algorithm(t_anthill *ant, t_room *rooms)
 	all_creat_closed_links(rooms);
 	while (to_position(rooms) == 0 && (p_ways = possible_ways(rooms)) > 0)
 	{
-//		print_rooms(rooms, 1);
+		print_rooms(rooms, 0);
 		del_copies(rooms, ant);
 		if (short_way(rooms, ant) == 0)
 		{
