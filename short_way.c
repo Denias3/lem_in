@@ -116,7 +116,6 @@ int         *df_check(t_room *end_room) {
 			{
 				if (room->next_rooms[i] == end_room)
 				{
-					room->closed_links = creat_closed_links(size_link(room));
 					room->closed_links[i] = 3;
 					way[j] = i;
 					j++;
@@ -145,7 +144,6 @@ int         short_way(t_room *rooms, t_anthill *ant)
 	int     *way;
 
 	room = end_room(rooms);
-	room->closed_links = creat_closed_links(size_link(room));
 	if ((way = my_intrevers(df_check(room))) != NULL)
 	{
 		track_record(way, ant);

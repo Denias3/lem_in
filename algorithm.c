@@ -309,6 +309,14 @@ void            free_visit_close(t_room *rooms)
 	}
 }
 
+void            all_creat_closed_links(t_room *rooms)
+{
+	while (rooms != NULL)
+	{
+		rooms->closed_links = creat_closed_links(size_link(rooms));
+		rooms = rooms->next;
+	}
+}
 
 //void			algorithm(t_anthill *ant, t_room *rooms)
 //{
@@ -331,9 +339,10 @@ void			algorithm(t_anthill *ant, t_room *rooms)
 {
 	int         p_ways;
 
+	all_creat_closed_links(rooms);
 	while (to_position(rooms) == 0 && (p_ways = possible_ways(rooms)) > 0)
 	{
-		print_rooms(rooms, 0);
+		print_rooms(rooms, 1);
 		del_copies(rooms, ant);
 		if (short_way(rooms, ant) == 0)
 		{
