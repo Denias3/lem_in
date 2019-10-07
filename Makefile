@@ -1,11 +1,18 @@
 NAME = lem-in
 
-SRC = lem-in.c\
+SRC = lem_in.c\
 check_line.c\
-function_lem-in.c\
+function_lem_in.c\
 validation.c\
 pars_line.c\
-algorithm.c
+algorithm.c\
+short_way.c\
+go_ants.c\
+track_record.c\
+room_sharing.c\
+join_room.c\
+to_position.c
+
 
 INCLUDES = ft_printf/libftprintf.a
 
