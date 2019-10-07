@@ -12,39 +12,59 @@
 
 #include "lem_in.h"
 
+int 		check_ant_flow(t_room *st_rooms, int *way)
+{
+	int		i;
+	int 	j;
+
+	i = 1;
+	j = 0;
+	while (st_rooms->type != 2)
+	{
+		if (st_rooms->state == 0)
+			j++;
+		else
+		{
+			st_rooms = st_rooms->next_rooms[way[i]];
+			break ;
+		}
+		st_rooms = st_rooms->next_rooms[way[i]];
+		i++;
+	}
+	while (st_rooms->type != 2)
+	{
+		i++;
+		if (st_rooms->state > 0)
+			j++;
+		st_rooms = st_rooms->next_rooms[way[i]];
+	}
+	return (j + 1);
+}
+
 void        go_way(t_room *st_rooms, int *way)
 {
-    int i;
+    int		i;
+	int 	j;
 
     i = 1;
-    while (i - 1 < way[0] && st_rooms->state == 0)
-	{
-		st_rooms = st_rooms->next_rooms[way[i]];
-		i++;
-	}
-    if (i - 1 < way[0] && st_rooms->state == 1)
-	{
-		if (st_rooms->type != 2)
-		{
-			st_rooms->next_rooms[way[i]]->state++;
-			st_rooms->state--;
-			st_rooms->next_rooms[way[i]]->visit = st_rooms->visit;
-		}
-		ft_printf("L%d-%s", st_rooms->next_rooms[way[i]]->visit, st_rooms->next_rooms[way[i]]->name);
-		st_rooms = st_rooms->next_rooms[way[i]];
-		i++;
-	}
-    while (i - 1 < way[0] && st_rooms->state > 1)
+    j = check_ant_flow(st_rooms, way);
+//	while (st_rooms->state == 0)
+//	{
+//		st_rooms = st_rooms->next_rooms[way[i]];
+//		i++;
+//	}
+    while (j > 0)
     {
-    	if (st_rooms->type != 2)
-		{
+    	if (st_rooms->state > 0)
+    	{
 			st_rooms->next_rooms[way[i]]->visit = st_rooms->visit;
 			st_rooms->next_rooms[way[i]]->state++;
 			st_rooms->state--;
+			ft_printf("L%d-%s ", st_rooms->next_rooms[way[i]]->visit, st_rooms->next_rooms[way[i]]->name);
 		}
-		ft_printf("L%d-%s", st_rooms->next_rooms[way[i]]->visit, st_rooms->next_rooms[way[i]]->name);
 		st_rooms = st_rooms->next_rooms[way[i]];
         i++;
+        j--;
     }
 }
 
@@ -66,11 +86,12 @@ void    go_ants(t_room *rooms, t_anthill *ant)
 		{
 
 			go_way(st_room, ant->ways[j]);
-			ft_printf(" ");
+//			ft_printf(" ");
 
 			j++;
 		}
 //		print_ways(rooms, ant, 0);
 		ft_printf("\n");
 	}
+
 }
