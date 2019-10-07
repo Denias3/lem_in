@@ -20,11 +20,15 @@ void		free_track_record(t_anthill *ant)
 	while (ant->ways[i] != NULL)
 	{
 		free(ant->ways[i]);
+		free(ant->r_ways[i]);
 		ant->ways[i] = NULL;
+		ant->r_ways[i] = NULL;
 		i++;
 	}
 	free(ant->ways);
+	free(ant->r_ways);
 	ant->ways = NULL;
+	ant->r_ways = NULL;
 	free(ant);
 }
 
