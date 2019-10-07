@@ -94,7 +94,7 @@ void				validation(t_anthill *ant, t_room *rooms)
 	t_var_valid		*var_valid;
 
 	var_valid = new_var_valid();
-	fd = open("/Users/emeha/CLionProjects/lem_in/m4", O_RDONLY);
+	fd = open("/Users/emeha/CLionProjects/lem_in/m1", O_RDONLY);
 //	fd = 0;
 	while (get_next_line(fd, &line) > 0)
 	{
@@ -112,7 +112,7 @@ void				validation(t_anthill *ant, t_room *rooms)
 			stage_rooms(var_valid, ant, rooms, line);
 		else if ((var_valid->stage == 2 || var_valid->stage == 1))
 			stage_link(var_valid, rooms, line);
-//		ft_printf("%s\n", line);
+		ft_printf("%s\n", line);
 		free(line);
 	}
 	ft_printf("\n");
