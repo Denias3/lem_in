@@ -20,6 +20,7 @@ static t_anthill	*newanthill(void)
 	ant->ways = (int**)malloc(sizeof(int*) * 2);
 	ant->ways[0] = NULL;
 	ant->ways[1] = NULL;
+	ant->r_ways = NULL;
 	ant->ants = 0;
 	ant->max_x = 0;
 	ant->max_y = 0;

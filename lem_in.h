@@ -38,6 +38,7 @@ typedef	struct		s_anthill
 	int				ants;
 	int				rooms;
 	int				**ways;
+	int				**r_ways;
 	int				max_x;
 	int				max_y;
 }					t_anthill;
@@ -94,5 +95,7 @@ void				del_copies(t_room *rooms, t_anthill *ant);
 void				null_track_record(t_anthill *ant);
 int					*creat_closed_links(int size);
 int					to_position(t_room *rooms);
+int					len_int(int **way);
+int					*my_intrevers(int *way);
 
 #endif

@@ -40,7 +40,7 @@ void		null_track_record(t_anthill *ant)
 	}
 }
 
-static int	len_int(int **way)
+int			len_int(int **way)
 {
 	int		i;
 
