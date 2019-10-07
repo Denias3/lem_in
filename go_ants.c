@@ -12,33 +12,38 @@
 
 #include "lem_in.h"
 
-int         check_go_room(t_room *rooms, int *way)
-{
-    int     i;
-
-    i = 1;
-    while (i - 1 <= way[0])
-    {
-        if (rooms->next_rooms[way[i]]->state > 0 && (rooms->type == 0 || rooms->type == 1))
-            return (0);
-        rooms = rooms->next_rooms[way[i]];
-        i++;
-    }
-    return (1);
-}
-
 void        go_way(t_room *st_rooms, int *way)
 {
-    t_room  *room;
     int i;
 
     i = 1;
-    room = st_rooms;
-    while (i - 1 <= way[0])
+    while (i - 1 < way[0] && st_rooms->state == 0)
+	{
+		st_rooms = st_rooms->next_rooms[way[i]];
+		i++;
+	}
+    if (i - 1 < way[0] && st_rooms->state == 1)
+	{
+		if (st_rooms->type != 2)
+		{
+			st_rooms->next_rooms[way[i]]->state++;
+			st_rooms->state--;
+			st_rooms->next_rooms[way[i]]->visit = st_rooms->visit;
+		}
+		ft_printf("L%d-%s", st_rooms->next_rooms[way[i]]->visit, st_rooms->next_rooms[way[i]]->name);
+		st_rooms = st_rooms->next_rooms[way[i]];
+		i++;
+	}
+    while (i - 1 < way[0] && st_rooms->state > 1)
     {
-        room->next_rooms[way[i]]->state++;
-        room->state--;
-        room = room->next_rooms[way[i]];
+    	if (st_rooms->type != 2)
+		{
+			st_rooms->next_rooms[way[i]]->visit = st_rooms->visit;
+			st_rooms->next_rooms[way[i]]->state++;
+			st_rooms->state--;
+		}
+		ft_printf("L%d-%s", st_rooms->next_rooms[way[i]]->visit, st_rooms->next_rooms[way[i]]->name);
+		st_rooms = st_rooms->next_rooms[way[i]];
         i++;
     }
 }
@@ -46,11 +51,26 @@ void        go_way(t_room *st_rooms, int *way)
 void    go_ants(t_room *rooms, t_anthill *ant)
 {
     t_room *st_room;
+    t_room *stop_room;
+	int j;
 
 	st_room = search_room_type(rooms, 1);
-	st_room->state = ant->rooms;
-    while (st_room->state > 0)
+	stop_room = search_room_type(rooms, 2);
+	st_room->state = ant->ants;
+	print_ways(rooms, ant, 0);
+    while (stop_room->state != ant->ants)
     {
+		j = 0;
+		(st_room->visit)++;
+		while (ant->ways[j] != NULL)
+		{
 
-    }
+			go_way(st_room, ant->ways[j]);
+			ft_printf(" ");
+
+			j++;
+		}
+//		print_ways(rooms, ant, 0);
+		ft_printf("\n");
+	}
 }

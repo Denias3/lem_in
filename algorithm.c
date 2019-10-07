@@ -216,5 +216,6 @@ void			algorithm(t_anthill *ant, t_room *rooms)
 		}
 	}
 	del_copies(rooms, ant);
-	print_vay(rooms, ant);
+	free_visit_close(rooms);
+	go_ants(rooms, ant);
 }
