@@ -24,7 +24,7 @@ void        go_way(t_room *end_rooms, int *way)
 			end_rooms->visit = end_rooms->next_rooms[way[i]]->visit;
 			end_rooms->next_rooms[way[i]]->state--;
 			end_rooms->state++;
-			ft_printf("L%d-%s ", end_rooms->visit, end_rooms->name);
+//			ft_printf("L%d-%s ", end_rooms->visit, end_rooms->name);
 //			if (way[0] >= i + 1)
 //				ft_printf(" ");
 		}
@@ -34,14 +34,15 @@ void        go_way(t_room *end_rooms, int *way)
 	}
 }
 
+
+
 void    go_ants(t_room *rooms, t_anthill *ant)
 {
-    t_room *st_room;
-    t_room *stop_room;
-	int j;
-	int count;
+    t_room	*st_room;
+    t_room	*stop_room;
 
-	count = 0;
+	int		j;
+	ways_allow(rooms, ant);
 	st_room = search_room_type(rooms, 1);
 	stop_room = search_room_type(rooms, 2);
 	st_room->state = ant->ants;
@@ -55,9 +56,7 @@ void    go_ants(t_room *rooms, t_anthill *ant)
 //			ft_printf(" ");
 			j++;
 		}
-		count++;
 		if (stop_room->state != ant->ants)
 			ft_printf("\n");
 	}
-//	ft_printf("%d", count);
 }
