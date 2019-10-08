@@ -49,9 +49,9 @@ void    go_ants(t_room *rooms, t_anthill *ant)
 	while (stop_room->state != ant->ants)
     {
 		j = 0;
-		(st_room->visit)++;
 		if (ways_acc == NULL)
 		{
+			(st_room->visit)++;
 			go_way(stop_room, ant->r_shortest_way, 1);
 		}
 		else
@@ -59,7 +59,10 @@ void    go_ants(t_room *rooms, t_anthill *ant)
 			while (ant->r_ways[j] != NULL)
 			{
 				if (ways_acc[j] == 1)
+				{
+					(st_room->visit)++;
 					go_way(stop_room, ant->r_ways[j], 1);
+				}
 				j++;
 			}
 		}
@@ -67,4 +70,5 @@ void    go_ants(t_room *rooms, t_anthill *ant)
 		if (stop_room->state != ant->ants)
 			ft_printf("\n");
 	}
+	free(ways_acc);
 }

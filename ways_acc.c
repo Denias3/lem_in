@@ -27,11 +27,8 @@ void	print_ways_acc(int *ways_acc, int size)
 
 void	init_ways_acc(int *ways_acc, int size)
 {
-	while (size > 0)
-	{
+	while (--size >= 0)
 		ways_acc[size] = 0;
-		size--;
-	}
 }
 
 void	cop_ways_acc(int *ways_acc, int *ways_acc_tmp,  int size)
@@ -131,6 +128,7 @@ int		*ways_allow(t_room *rooms, t_anthill *ant)
 			cop_ways_acc(ways_acc, ways_acc_tmp, (len_int(ant->ways) - 1));
 		}
 	}
+	free(ways_acc_tmp);
 	null_state_rooms(rooms);
 	if (shortest_way_allow(rooms, ant, count) == 1)
 		return (NULL);
