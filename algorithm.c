@@ -305,7 +305,7 @@ void			algorithm(t_anthill *ant, t_room *rooms)
 			if (check_xlink(rooms, ant) == 1)
 			{
 				search_xlink(rooms, ant);
-				null_track_record(ant);
+				free_ways(ant);
 				null_visit_close(rooms);
 			}
 			else

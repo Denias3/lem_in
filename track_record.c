@@ -27,18 +27,21 @@ void		free_track_record(t_anthill *ant)
 	}
 	free(ant->ways);
 	free(ant->r_ways);
+	free(ant->shortest_way);
+	free(ant->r_shortest_way);
 	ant->ways = NULL;
 	ant->r_ways = NULL;
 	free(ant);
 }
 
-void		null_track_record(t_anthill *ant)
+void		free_ways(t_anthill *ant)
 {
 	int		i;
 
 	i = 0;
 	while (ant->ways[i] != NULL)
 	{
+		free(ant->ways[i]);
 		ant->ways[i] = NULL;
 		i++;
 	}

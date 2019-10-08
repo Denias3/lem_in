@@ -146,7 +146,7 @@ int			short_way(t_room *rooms, t_anthill *ant, int i)
 	int		*way;
 
 	room = end_room(rooms);
-	if ((way = my_intrevers(df_check(room))) != NULL && i == 0)
+	if (i == 0 && (way = my_intrevers(df_check(room))) != NULL)
 	{
 		track_record(way, ant);
 		return (0);
