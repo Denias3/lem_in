@@ -12,7 +12,7 @@
 
 #include "lem_in.h"
 
-void        go_way(t_room *end_rooms, int *way)
+void        go_way(t_room *end_rooms, int *way, int v)
 {
 	int		i;
 
@@ -24,9 +24,8 @@ void        go_way(t_room *end_rooms, int *way)
 			end_rooms->visit = end_rooms->next_rooms[way[i]]->visit;
 			end_rooms->next_rooms[way[i]]->state--;
 			end_rooms->state++;
-//			ft_printf("L%d-%s ", end_rooms->visit, end_rooms->name);
-//			if (way[0] >= i + 1)
-//				ft_printf(" ");
+			if (v)
+				ft_printf("L%d-%s ", end_rooms->visit, end_rooms->name);
 		}
 
 		end_rooms = end_rooms->next_rooms[way[i]];
@@ -40,9 +39,10 @@ void    go_ants(t_room *rooms, t_anthill *ant)
 {
     t_room	*st_room;
     t_room	*stop_room;
+	int		*ways_acc;
 
 	int		j;
-	ways_allow(rooms, ant);
+	ways_acc = ways_allow(rooms, ant);
 	st_room = search_room_type(rooms, 1);
 	stop_room = search_room_type(rooms, 2);
 	st_room->state = ant->ants;
@@ -50,12 +50,20 @@ void    go_ants(t_room *rooms, t_anthill *ant)
     {
 		j = 0;
 		(st_room->visit)++;
-		while (ant->r_ways[j] != NULL)
+		if (ways_acc == NULL)
 		{
-			go_way(stop_room, ant->r_ways[j]);
-//			ft_printf(" ");
-			j++;
+			go_way(stop_room, ant->r_shortest_way, 1);
 		}
+		else
+		{
+			while (ant->r_ways[j] != NULL)
+			{
+				if (ways_acc[j] == 1)
+					go_way(stop_room, ant->r_ways[j], 1);
+				j++;
+			}
+		}
+
 		if (stop_room->state != ant->ants)
 			ft_printf("\n");
 	}
