@@ -299,6 +299,7 @@ void			algorithm(t_anthill *ant, t_room *rooms)
 	shortest_way(rooms, ant);
 	while (to_position(rooms) == 0 && (possible_ways(rooms)) > 0)
 	{
+//		print_rooms(rooms, 0);
 		del_copies(rooms, ant);
 		if (short_way(rooms, ant, 0) == 0)
 		{
@@ -317,6 +318,7 @@ void			algorithm(t_anthill *ant, t_room *rooms)
 	null_visit_close(rooms);
 
 	revers_ways(search_start_room(rooms), ant);
+	print_ways(rooms, ant, 1);
 	go_ants(rooms, ant);
 //	ft_printf("\n\n");
 //	print_way(rooms, ant->r_ways[0], 0);
