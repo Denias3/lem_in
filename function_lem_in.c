@@ -142,11 +142,11 @@ void	print_way(t_room *room, int *way, int t)
 	t_room		*st_room;
 
 	i = 1;
-	st_room = search_room_type(room, 1);
+	st_room = search_room_type(room, 2);
 	while (i - 1 <= way[0])
 	{
 
-		if (st_room->type == 2)
+		if (st_room->type == 1)
 		{
 			if (t == 0)
 				ft_printf("%s(%d)", st_room->name, st_room->state);

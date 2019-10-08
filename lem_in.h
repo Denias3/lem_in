@@ -99,5 +99,8 @@ int					*creat_closed_links(int size);
 int					to_position(t_room *rooms);
 int					len_int(int **way);
 int					*my_intrevers(int *way);
+int					iteration_ways_acc(int *ways_acc, int size);
+void        		go_way(t_room *end_rooms, int *way, int v);
+int					*ways_allow(t_room *rooms, t_anthill *ant);
 
 #endif
