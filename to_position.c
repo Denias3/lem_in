@@ -52,7 +52,7 @@ t_room			*search_room_bf(t_room *rooms, int bf, int *baf)
 				(*baf) = 0;
 				if (rooms->next_rooms[i]->bf == -1)
 				{
-					if (rooms->type == 4 && rooms->visit == 1)
+					if (rooms->type == 4 && rooms->posit == 1)
 						break ;
 					else if (rooms->type == 4 && rooms->closed_links != 0 && rooms->closed_links[i] == 2)
 					{
@@ -117,7 +117,7 @@ int				go_bf(t_room *rooms)
 			if (tmp->type == 4)
 			{
 				if (tmp->next_rooms[0]->bf != -1)
-					tmp->visit = 1;
+					tmp->posit = 1;
 				tmp->bf = bf;
 			}
 			else

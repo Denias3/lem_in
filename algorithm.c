@@ -299,15 +299,18 @@ void			algorithm(t_anthill *ant, t_room *rooms)
 	shortest_way(rooms, ant);
 	while (to_position(rooms) == 0 && (possible_ways(rooms)) > 0)
 	{
-		del_copies(rooms, ant);
+
 		print_rooms(rooms, 2);
 		if (short_way(rooms, ant, 0) == 0)
 		{
+
 			if (check_xlink(rooms, ant) == 1)
 			{
+				del_copies(rooms, ant);
 				search_xlink(rooms, ant);
 				free_ways(ant);
 				null_visit_close(rooms);
+
 			}
 			else
 				rooms_sharing(rooms, ant);

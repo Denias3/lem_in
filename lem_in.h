@@ -26,6 +26,7 @@ typedef	struct		s_room
 	int				y;
 	int				bf;
 	int				visit;
+	int 			posit;
 	int				*closed_links;
 	struct s_room	**next_rooms;
 	struct s_room	*next;
