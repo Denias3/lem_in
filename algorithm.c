@@ -144,7 +144,7 @@ void			search_xlink(t_room *room, t_anthill *ant)
 	while (size >= j)
 	{
 		room = room->next_rooms[ant->ways[i][j]];
-		if (room->type == 0 && room->visit > 1)
+		if ((room->type == 0 || room->type == 3 || room->type == 4) && room->visit > 1)
 		{
 			if (delet_xlink(room->next_rooms[ant->ways[i][j + 1]], room->id) == 0)
 			{
@@ -173,7 +173,7 @@ int				check_xlink(t_room *room, t_anthill *ant)
 	while (size >= j)
 	{
 		room = room->next_rooms[ant->ways[i][j]];
-		if (room->type == 0 && room->visit > 1)
+		if ((room->type == 0 || room->type == 3 || room->type == 4) && room->visit > 1)
 		{
 			return (1);
 		}

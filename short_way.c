@@ -120,7 +120,7 @@ int			*df_check(t_room *end_room)
 					room->closed_links[i] = 3;
 					way[j] = i;
 					j++;
-					if (room->type == 0 && room->type == 3 && room->type == 4)
+					if (room->type == 0 || room->type == 3 || room->type == 4)
 						room->visit++;
 					close_link(end_room, room);
 					end_room = room;
