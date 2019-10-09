@@ -52,15 +52,18 @@ t_room			*search_room_bf(t_room *rooms, int bf, int *baf)
 				(*baf) = 0;
 				if (rooms->next_rooms[i]->bf == -1)
 				{
-					if (rooms->type == 4 && rooms->closed_links != 0 && rooms->closed_links[i] == 2)
+					if (rooms->type == 4 && rooms->visit == 1)
+						break ;
+					else if (rooms->type == 4 && rooms->closed_links != 0 && rooms->closed_links[i] == 2)
 					{
 						(*baf) = 1;
 						return (rooms->next_rooms[i]);
 					}
-					else if (rooms->closed_links != 0 && rooms->closed_links[i] != 1 && rooms->closed_links[i] != 3 && rooms->closed_links[i] != 4)
+					else if (rooms->closed_links != 0 && (rooms->closed_links[i] == 0 || rooms->closed_links[i] == 2))
 						return (rooms->next_rooms[i]);
 					else if (rooms->closed_links == 0)
 						return (rooms->next_rooms[i]);
+
 				}
 				i++;
 			}
@@ -112,7 +115,11 @@ int				go_bf(t_room *rooms)
 		{
 			ch = 0;
 			if (tmp->type == 4)
+			{
+				if (tmp->next_rooms[0]->bf != -1)
+					tmp->visit = 1;
 				tmp->bf = bf;
+			}
 			else
 			{
 				tmp->bf = bf - baf;

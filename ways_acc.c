@@ -127,6 +127,9 @@ int		*ways_allow(t_room *rooms, t_anthill *ant)
 			count = count_tmp;
 			cop_ways_acc(ways_acc, ways_acc_tmp, (len_int(ant->ways) - 1));
 		}
+//		ft_printf("%d cou\n", count_tmp);
+//		ft_printf("%d cou2\n", count_tmp);
+
 	}
 	free(ways_acc_tmp);
 	null_state_rooms(rooms);
