@@ -121,13 +121,18 @@ void			room_sharing(t_room *room_in, t_anthill *ant)
 void			rooms_sharing(t_room *room, t_anthill *ant)
 {
 	int			i;
+	int 		j;
 	t_room		*st_room;
 
+	j = 0;
 	i = 1;
 	st_room = search_room_type(room, 1);
-	while (i < ant->ways[0][0])
+	while (ant->ways[j] != NULL)
+		j++;
+	j--;
+	while (i < ant->ways[j][0])
 	{
-		st_room = st_room->next_rooms[ant->ways[0][i]];
+		st_room = st_room->next_rooms[ant->ways[j][i]];
 		room_sharing(st_room, ant);
 		i++;
 	}
