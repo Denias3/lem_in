@@ -43,8 +43,8 @@ void    go_ants(t_room *rooms, t_anthill *ant)
 //	int 	*my_ways;
 
 	int		j;
-	ways_acc = ways_allow(rooms, ant);
-//	ways_acc = right_ways(ant);
+//	ways_acc = ways_allow(rooms, ant);
+	ways_acc = right_ways(ant);
 	st_room = search_room_type(rooms, 1);
 	stop_room = search_room_type(rooms, 2);
 	st_room->state = ant->ants;

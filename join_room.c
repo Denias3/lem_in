@@ -43,6 +43,8 @@ void		del_copies(t_room *rooms, t_anthill *ant)
 			{
 				if (rooms->closed_links[i] == 3)
 					redirect_link(rooms->next_rooms[i], rooms, rooms->name);
+				else if (rooms->closed_links[i] == 1)
+					rooms->closed_links[i] = 0;
 				i++;
 			}
 			rooms->type = 0;

@@ -12,7 +12,8 @@ track_record.c\
 room_sharing.c\
 join_room.c\
 to_position.c\
-ways_acc.c
+ways_acc.c\
+right_ways.c
 
 
 INCLUDES = ft_printf/libftprintf.a

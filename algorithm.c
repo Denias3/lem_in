@@ -300,7 +300,7 @@ void			algorithm(t_anthill *ant, t_room *rooms)
 	while (to_position(rooms) == 0 && (possible_ways(rooms)) > 0)
 	{
 		del_copies(rooms, ant);
-		print_rooms(rooms, 2);
+//		print_rooms(rooms, 2);
 		if (short_way(rooms, ant, 0) == 0)
 		{
 			if (check_xlink(rooms, ant) == 1)
@@ -312,14 +312,14 @@ void			algorithm(t_anthill *ant, t_room *rooms)
 			else
 				rooms_sharing(rooms, ant);
 		}
-		print_ways(rooms, ant, 0);
+//		print_ways(rooms, ant, 0);
 	}
 //	print_ways(rooms, ant, 0);
 	del_copies(rooms, ant);
 	null_visit_close(rooms);
 
 	revers_ways(search_start_room(rooms), ant);
-	print_ways(rooms, ant, 1);
+//	print_ways(rooms, ant, 1);
 	go_ants(rooms, ant);
 //	ft_printf("\n\n");
 //	print_way(rooms, ant->r_ways[0], 0);
