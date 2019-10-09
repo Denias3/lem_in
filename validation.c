@@ -94,7 +94,7 @@ void				validation(t_anthill *ant, t_room *rooms)
 	t_var_valid		*var_valid;
 
 	var_valid = new_var_valid();
-	fd = open("/Users/emeha/CLionProjects/lem_in/m7", O_RDONLY);
+	fd = open("/Users/emeha/CLionProjects/lem_in/m10", O_RDONLY);
 //	fd = 0;
 	while (get_next_line(fd, &line) > 0)
 	{
