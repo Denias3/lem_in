@@ -89,7 +89,7 @@ int			link_check(t_room *room, t_room *room_2)
 	i = 0;
 	while (room_2->next_rooms[i] != NULL)
 	{
-		if (room_2->next_rooms[i] == room && (room_2->closed_links[i] == 2 || room_2->closed_links[i] == 0))
+		if (ft_strcmp(room_2->next_rooms[i]->name, room->name) == 0 && room_2->closed_links[i] != 4)
 			return (0);
 		i++;
 	}
@@ -115,12 +115,12 @@ int			*df_check(t_room *end_room)
 			i = 0;
 			while (room->next_rooms[i] != NULL)
 			{
-				if (room->next_rooms[i] == end_room)
+				if (ft_strcmp(room->next_rooms[i]->name, end_room->name) == 0)
 				{
 					room->closed_links[i] = 3;
 					way[j] = i;
 					j++;
-					if (room->type == 0)
+					if (room->type == 0 && room->type == 3 && room->type == 4)
 						room->visit++;
 					close_link(end_room, room);
 					end_room = room;
