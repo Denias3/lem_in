@@ -89,7 +89,7 @@ int			link_check(t_room *room, t_room *room_2)
 	i = 0;
 	while (room_2->next_rooms[i] != NULL)
 	{
-		if (room_2->next_rooms[i] == room)
+		if (room_2->next_rooms[i] == room && (room_2->closed_links[i] == 2 || room_2->closed_links[i] == 0))
 			return (0);
 		i++;
 	}
