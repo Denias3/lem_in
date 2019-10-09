@@ -102,5 +102,6 @@ int					*my_intrevers(int *way);
 int					iteration_ways_acc(int *ways_acc, int size);
 void        		go_way(t_room *end_rooms, int *way, int v);
 int					*ways_allow(t_room *rooms, t_anthill *ant);
-
+int 				*right_ways(t_anthill *ant);
+void				cop_ways_acc(int *ways_acc, int *ways_acc_tmp,  int size);
 #endif
