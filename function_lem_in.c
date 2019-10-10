@@ -12,6 +12,39 @@
 
 #include "lem_in.h"
 
+void			check_link_room(t_room *room)
+{
+	int			i;
+
+	i = 0;
+	ft_printf("%s(%d) - room\n", room->name, room->id);
+	ft_printf("%d - bf\n", room->bf);
+	ft_printf("%d - type\n", room->type);
+	ft_printf("%d - visit\n", room->visit);
+	ft_printf("links:\n");
+	while (room->next_rooms[i] != NULL)
+	{
+		if (room->closed_links && room->closed_links[i])
+			ft_printf("%4s(%d); close - %d\n", room->next_rooms[i]->name,
+					i, room->closed_links[i]);
+		else
+			ft_printf("%4s(%d); close - 0\n", room->next_rooms[i]->name, i);
+		i++;
+	}
+	ft_printf("\n");
+}
+
+void			check_link_room_full(t_room *room)
+{
+	ft_printf("------------------------\n");
+	while (room != NULL)
+	{
+		check_link_room(room);
+		room = room->next;
+	}
+	ft_printf("------------------------\n");
+}
+
 int				count_char_double_array(char **str)
 {
 	int			i;
@@ -166,7 +199,6 @@ void	print_way(t_room *room, int *way, int t)
 	st_room = search_room_type(room, 1);
 	while (i - 1 <= way[0])
 	{
-
 		if (st_room->type == 2)
 		{
 			if (t == 0)
@@ -193,7 +225,6 @@ void	print_way_r(t_room *room, int *way, int t)
 	st_room = search_room_type(room, 2);
 	while (i - 1 <= way[0])
 	{
-
 		if (st_room->type == 1)
 		{
 			if (t == 0)

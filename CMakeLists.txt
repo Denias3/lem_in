@@ -10,7 +10,7 @@ set(SOURCES lem_in.c
         function_lem_in.c
         validation.c
         pars_line.c
-        algorithm.c short_way.c go_ants.c track_record.c room_sharing.c join_room.c to_position.c ways_acc.c right_ways.c)
+        algorithm.c short_way.c go_ants.c track_record.c room_sharing.c join_room.c to_position.c ways_acc.c right_ways.c pars_line_2.c function_lem_in_2.c check_line_2.c)
 
 
 add_executable(lem_in ${SOURCES} ${LIBFT})

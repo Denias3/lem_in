@@ -68,6 +68,7 @@ typedef struct		s_var_valid
 
 }					t_var_valid;
 
+t_anthill			*newanthill(void);
 int					check_line(char *line);
 int					count_char_double_array(char **str);
 void				free_char_double_array(char **str);
@@ -105,4 +106,7 @@ void        		go_way(t_room *end_rooms, int *way, int v);
 int					*ways_allow(t_room *rooms, t_anthill *ant);
 int 				*right_ways(t_anthill *ant);
 void				cop_ways_acc(int *ways_acc, int *ways_acc_tmp,  int size);
+void				memolloc_room(t_room *room1, t_room *room2, int i);
+int					the_room(char *str);
+int					the_link(char *str);
 #endif

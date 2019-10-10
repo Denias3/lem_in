@@ -92,9 +92,12 @@ void				validation(t_anthill *ant, t_room *rooms)
 	char			*line;
 	int				fd;
 	t_var_valid		*var_valid;
+	char 			*map;
+	char			*tmp;
 
+	map = ft_strnew(0);
 	var_valid = new_var_valid();
-	fd = open("/Users/fschille/Desktop/lem_in/m10", O_RDONLY);
+	fd = open("/Users/emeha/CLionProjects/lem_in/maps/m1", O_RDONLY);
 //	fd = 0;
 	while (get_next_line(fd, &line) > 0)
 	{
@@ -112,11 +115,16 @@ void				validation(t_anthill *ant, t_room *rooms)
 			stage_rooms(var_valid, ant, rooms, line);
 		else if ((var_valid->stage == 2 || var_valid->stage == 1))
 			stage_link(var_valid, rooms, line);
-		ft_printf("%s\n", line);
-		free(line);
+		tmp = map;
+		map = ft_strjoin_free(map, line, 0, 1);
+		free(tmp);
+		tmp = map;
+		map = ft_strjoin_free(map, ft_strdup("\n"), 0, 1);
+		free(tmp);
 	}
-	ft_printf("\n");
 	if (var_valid->stage != 2 || var_valid->n_comm != 2)
 		error();
+	ft_printf("%s\n", map);
+	free(map);
 	free(var_valid);
 }
