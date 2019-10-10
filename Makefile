@@ -2,9 +2,12 @@ NAME = lem-in
 
 SRC = lem_in.c\
 check_line.c\
+check_line_2.c\
 function_lem_in.c\
+function_lem_in_2.c\
 validation.c\
 pars_line.c\
+pars_line_2.c\
 algorithm.c\
 short_way.c\
 go_ants.c\

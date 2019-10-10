@@ -225,6 +225,7 @@ void	print_way_r(t_room *room, int *way, int t)
 	st_room = search_room_type(room, 2);
 	while (i - 1 <= way[0])
 	{
+
 		if (st_room->type == 1)
 		{
 			if (t == 0)

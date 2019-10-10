@@ -110,4 +110,5 @@ void				memolloc_room(t_room *room1, t_room *room2, int i);
 int					the_room(char *str);
 int					the_link(char *str);
 t_room				*search_start_room(t_room *rooms);
+void				print_way_r(t_room *room, int *way, int t);
 #endif
