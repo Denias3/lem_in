@@ -297,7 +297,7 @@ void			algorithm(t_anthill *ant, t_room *rooms)
 {
 	all_creat_closed_links(rooms);
 	shortest_way(rooms, ant);
-	while (to_position(rooms) == 0 && (possible_ways(rooms)) > 0)
+ 	while (to_position(rooms) == 0 && (possible_ways(rooms)) > 0)
 	{
 
 		print_rooms(rooms, 2);

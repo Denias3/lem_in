@@ -90,7 +90,7 @@ void                track_record(int *way, t_anthill *ant);
 void                free_track_record(t_anthill *ant);
 void				print_ways(t_room *rooms, t_anthill *ant, int t);
 void				print_way(t_room *room, int *way, int t);
-t_room		        *end_room(t_room *rooms);
+t_room		        *end_rooms(t_room *rooms);
 int 		        size_link(t_room *room);
 void				redirect_link(t_room *room, t_room *new_room, char *name);
 void				print_close_links(t_room *room);
@@ -105,4 +105,5 @@ void        		go_way(t_room *end_rooms, int *way, int v);
 int					*ways_allow(t_room *rooms, t_anthill *ant);
 int 				*right_ways(t_anthill *ant);
 void				cop_ways_acc(int *ways_acc, int *ways_acc_tmp,  int size);
+t_room				*search_start_room(t_room *rooms);
 #endif
