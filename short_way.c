@@ -90,9 +90,9 @@ int			link_check(t_room *room, t_room *room_2)
 	i = 0;
 	while (room_2->next_rooms[i] != NULL)
 	{
-		if (ft_strcmp(room_2->next_rooms[i]->name, room->name) == 0 && room_2->closed_links[i] != 1 && room_2->closed_links[i] != 4)
+		if (ft_strcmp(room_2->next_rooms[i]->name, room->name) == 0 && room_2->closed_links[i] != 1 && room_2->closed_links[i] != 4 && room_2->closed_links[i] != 3)
 			return (1);
-		else if (ft_strcmp(room_2->next_rooms[i]->name, room->name) == 0 && room_2->closed_links[i] != 4)
+		else if (ft_strcmp(room_2->next_rooms[i]->name, room->name) == 0 && room_2->closed_links[i] != 4 && room_2->closed_links[i] != 3)
 			return (2);
 		i++;
 	}
