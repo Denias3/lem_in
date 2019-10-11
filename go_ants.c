@@ -64,7 +64,7 @@ void    go_ants(t_room *rooms, t_anthill *ant)
 	st_room = search_room_type(rooms, 1);
 	stop_room = search_room_type(rooms, 2);
 	st_room->state = ant->ants;
-	print_ways_r_acc(rooms, ant, 0, ways_acc);
+//	print_ways_r_acc(rooms, ant, 0, ways_acc);
 	while (stop_room->state != ant->ants)
     {
 		j = 0;

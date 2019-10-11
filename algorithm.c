@@ -287,22 +287,24 @@ void			shortest_way(t_room *rooms, t_anthill *ant)
 	{
 		if (short_way(rooms, ant, 1) == 0)
 		{
+			revers_shortest_ways(search_start_room(rooms), ant);
 			null_visit_close(rooms);
 		}
 	}
-	revers_shortest_ways(search_start_room(rooms), ant);
+//	print_rooms(rooms, 2);
+
 }
 
 void			algorithm(t_anthill *ant, t_room *rooms)
 {
 	all_creat_closed_links(rooms);
 	shortest_way(rooms, ant);
- 	while (to_position_2(rooms) == 0 && (possible_ways(rooms)) > 0)
+ 	while ((possible_ways(rooms)) > 0 && to_position_2(rooms) == 0)
 	{
-		print_rooms(rooms, 2);
+//		print_rooms(rooms, 2);
 		if (short_way(rooms, ant, 0) == 0)
 		{
-			print_ways(rooms, ant, 0);
+//			print_ways(rooms, ant, 0);
 			if (check_xlink(rooms, ant) == 1)
 			{
 				del_copies(rooms, ant);

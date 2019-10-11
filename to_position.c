@@ -146,16 +146,14 @@ int				to_position(t_room *rooms)
 
 int 			compare_room(t_room *room, t_room *compare)
 {
-	if ((ft_strcmp(compare->name, room->name) != 0 ||
-	((room->type == 3 || room->type == 4) &&
-	(compare->type == 3 || compare->type == 4))) &&
-		room->posit == 0)
+	if (room->posit == 0)
 	{
+		if (ft_strcmp(compare->name, room->name) != 0)
+			return (1);
 		if ((room->type == 3 || room->type == 4) &&
 			(compare->type == 3 || compare->type == 4))
 			if (compare->type == room->type)
 				return (0);
-		return (1);
 	}
 	return (0);
 }
@@ -167,6 +165,22 @@ void 			null_posit(t_room *rooms)
 		rooms->posit = 0;
 		rooms = rooms->next;
 	}
+}
+
+int 			break_bf(t_room *rooms, int bf)
+{
+	int tmp_bf;
+
+	tmp_bf = 0;
+	while (rooms != NULL)
+	{
+		if (rooms->bf > tmp_bf)
+			tmp_bf = rooms->bf;
+		rooms = rooms->next;
+	}
+	if (tmp_bf >= bf)
+		return (0);
+	return (1);
 }
 
 void			rec_bf(t_room *rooms, int bf, int iter, t_room *compare)
@@ -209,7 +223,6 @@ void			rec_bf(t_room *rooms, int bf, int iter, t_room *compare)
 				if (rooms->next_rooms[i]->bf == -1)
 				{
 					rooms->next_rooms[i]->bf = bf;
-
 					if (rooms->type == 4)
 					{
 						while (rooms->next_rooms[i]->next_rooms[j] != NULL)
@@ -253,6 +266,8 @@ int				go_bf_2(t_room *rooms)
 		null_posit(rooms);
 		rec_bf(st_rooms, bf, iter, st_rooms);
 //		print_rooms(rooms, 2);
+		if (break_bf(rooms, bf))
+			return (1);
 		iter++;
 		bf++;
 	}
