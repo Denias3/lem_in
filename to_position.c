@@ -30,6 +30,8 @@ void			free_bf(t_room *rooms)
 {
 	while (rooms != NULL)
 	{
+		rooms->bfs_prev = NULL;
+		rooms->bfs_next = NULL;
 		if (rooms->type == 1)
 			rooms->bf = 0;
 		else
@@ -137,6 +139,130 @@ int				to_position(t_room *rooms)
 {
 	free_bf(rooms);
 	if (go_bf(rooms) == 0)
+		return (0);
+	else
+		return (1);
+}
+
+int 			compare_room(t_room *room, t_room *compare)
+{
+	if ((ft_strcmp(compare->name, room->name) != 0 ||
+	((room->type == 3 || room->type == 4) &&
+	(compare->type == 3 || compare->type == 4))) &&
+		room->posit == 0)
+	{
+		if ((room->type == 3 || room->type == 4) &&
+			(compare->type == 3 || compare->type == 4))
+			if (compare->type == room->type)
+				return (0);
+		return (1);
+	}
+	return (0);
+}
+
+void 			null_posit(t_room *rooms)
+{
+	while (rooms != NULL)
+	{
+		rooms->posit = 0;
+		rooms = rooms->next;
+	}
+}
+
+void			rec_bf(t_room *rooms, int bf, int iter, t_room *compare)
+{
+	int i;
+	int j;
+	t_room *room_bfs;
+
+	i = 0;
+	j = 0;
+	if (iter <= 0)
+		return ;
+	iter--;
+	rooms->posit = 1;
+	room_bfs = rooms;
+	while (rooms->next_rooms[i] != NULL)
+	{
+		if (compare_room(rooms->next_rooms[i], compare) &&
+				rooms->closed_links != NULL &&
+				rooms->closed_links[i] != 4 &&
+				rooms->closed_links[i] != 3)
+		{
+			if (rooms->type == 3 && rooms->closed_links[i] == 2)
+			{
+				if (rooms->next_rooms[i]->next_rooms[0]->bf == -1)
+				{
+					rooms->next_rooms[i]->next_rooms[0]->bf = bf;
+					while (room_bfs->bfs_next != NULL)
+						room_bfs = room_bfs->bfs_next;
+					room_bfs->bfs_next = rooms->next_rooms[i]->next_rooms[0];
+					rooms->next_rooms[i]->next_rooms[0]->bfs_prev = room_bfs;
+				}
+				if (rooms->next_rooms[i]->bf == -1)
+					rooms->next_rooms[i]->bf = bf;
+				else
+					rec_bf(rooms->next_rooms[i], bf, iter, rooms);
+			}
+			else if (rooms->type != 3)
+			{
+				if (rooms->next_rooms[i]->bf == -1)
+				{
+					rooms->next_rooms[i]->bf = bf;
+
+					if (rooms->type == 4)
+					{
+						while (rooms->next_rooms[i]->next_rooms[j] != NULL)
+						{
+							if (ft_strcmp(rooms->next_rooms[i]->next_rooms[j]->name, rooms->name) == 0)
+							{
+								rooms->next_rooms[i]->bfs_prev = rooms->next_rooms[i]->next_rooms[j];
+								rooms->next_rooms[i]->next_rooms[j]->bfs_next = rooms->next_rooms[i];
+								break ;
+							}
+							j++;
+						}
+					}
+					else
+					{
+						while (room_bfs->bfs_next != NULL)
+							room_bfs = room_bfs->bfs_next;
+						room_bfs->bfs_next = rooms->next_rooms[i];
+						rooms->next_rooms[i]->bfs_prev = room_bfs;
+					}
+				}
+				else
+					rec_bf(rooms->next_rooms[i], bf, iter, rooms);
+			}
+		}
+		i++;
+	}
+}
+
+int				go_bf_2(t_room *rooms)
+{
+	int bf;
+	int iter;
+	t_room *st_rooms;
+
+	iter = 1;
+	bf = 1;
+	st_rooms = search_room_type(rooms, 1);
+	while (end_bf(rooms) == 0)
+	{
+		null_posit(rooms);
+		rec_bf(st_rooms, bf, iter, st_rooms);
+//		print_rooms(rooms, 2);
+		iter++;
+		bf++;
+	}
+	return (0);
+}
+
+int				to_position_2(t_room *rooms)
+{
+	free_bf(rooms);
+	if (go_bf_2(rooms) == 0)
 		return (0);
 	else
 		return (1);
