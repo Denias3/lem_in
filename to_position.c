@@ -310,7 +310,7 @@ int 			check_add_type3(t_room *room)
 	return (1);
 }
 
-void			add_bfs(t_room *rooms, t_room *room, int bf)
+void			add_bfs(t_room *rooms, t_room *room, int bf, t_room *st_rooms)
 {
 	t_room *tmp;
 //	if (ft_strcmp(rooms->name, "Vqz2") == 0)
@@ -320,18 +320,27 @@ void			add_bfs(t_room *rooms, t_room *room, int bf)
 //	}
 	if (rooms->type == 4 && rooms->bf != -1)
 	{
+		print_bfs(st_rooms);
 		tmp = rooms->bfs_prev;
 		tmp->bfs_next = rooms->next_rooms[0];
+		print_bfs(st_rooms);
 		rooms->next_rooms[0]->bfs_prev = tmp;
+		print_bfs(st_rooms);
 		rooms->next_rooms[0]->bf = rooms->bf;
+		print_bfs(st_rooms);
 		rooms->next_rooms[0]->link_in = rooms;
+		print_bfs(st_rooms);
 		if (rooms->bfs_next != NULL)
 		{
 			rooms->bfs_next->bfs_prev = rooms->next_rooms[0];
+			print_bfs(st_rooms);
 			rooms->next_rooms[0]->bfs_next = rooms->bfs_next;
+			print_bfs(st_rooms);
 		}
 		next_bfs_type4(rooms->next_rooms[0], rooms, bf);
+		print_bfs(st_rooms);
 		rooms->bfs_next = rooms->next_rooms[0]->bfs_next;
+		print_bfs(st_rooms);
 	}
 	else
 	{
@@ -345,7 +354,7 @@ void			add_bfs(t_room *rooms, t_room *room, int bf)
 	}
 }
 
-void			next_bfs(t_room *rooms, int bf)
+void			next_bfs(t_room *rooms, int bf, t_room *st_rooms)
 {
 	int 		i;
 
@@ -356,19 +365,19 @@ void			next_bfs(t_room *rooms, int bf)
 		rooms->next_rooms[i]->bf == -1)
 		{
 //			&& !(rooms->type == 3 && rooms->next_rooms[0]->bf == -1)
-			add_bfs(rooms, rooms->next_rooms[i], bf);
+			add_bfs(rooms, rooms->next_rooms[i], bf, st_rooms);
 		}
 		i++;
 	}
 }
 
-int 			go_bfs(t_room *rooms)
+int 			go_bfs(t_room *rooms, t_room *st_rooms)
 {
 	rooms = search_room_type(rooms, 1);
+
 	while (rooms != NULL && rooms->type != 2)
 	{
-		next_bfs(rooms, rooms->bf + 1);
-//		print_bfs(rooms);
+		next_bfs(rooms, rooms->bf + 1, st_rooms);
 		rooms = rooms->bfs_next;
 	}
 	if (rooms == NULL)
@@ -380,7 +389,7 @@ int 			go_bfs(t_room *rooms)
 int				to_position_2(t_room *rooms)
 {
 	free_bf(rooms);
-	if (go_bfs(rooms) == 0)
+	if (go_bfs(rooms, rooms) == 0)
 		return (0);
 	else
 		return (1);

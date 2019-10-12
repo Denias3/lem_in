@@ -114,5 +114,4 @@ t_room				*search_start_room(t_room *rooms);
 void				print_way_r(t_room *room, int *way, int t);
 int					to_position_2(t_room *rooms);
 void				print_bfs(t_room *rooms);
-void				pri(t_room *rooms);
 #endif
