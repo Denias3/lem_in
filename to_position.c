@@ -292,21 +292,45 @@ void			next_bfs_type4(t_room *room, int bf)
 	}
 }
 
+int 			check_add_type3(t_room *room)
+{
+	int 		i;
+
+	i = 0;
+	while (room->next_rooms[i] != NULL)
+	{
+		if (room->closed_links[i] == 2 && room->next_rooms[i]->bf == -1)
+		{
+			return (0);
+		}
+		i++;
+	}
+	return (1);
+}
+
 void			add_bfs(t_room *rooms, t_room *room, int bf)
 {
+	if (ft_strcmp(rooms->name, "Vqz2") == 0)
+	{
+		bf++;
+		bf--;
+	}
 	if (rooms->type == 3)
 	{
-		if (room->next_rooms[0]->type == 1 || room->next_rooms[0]->bf != -1)
-			return ;
-		while (rooms->bfs_next != NULL)
-			rooms = rooms->bfs_next;
-		rooms->bfs_next = room->next_rooms[0];
-		room->next_rooms[0]->bfs_prev = rooms;
-		room->next_rooms[0]->bf = bf;
-		next_bfs_type4(room, bf + 1);
+		if (room->next_rooms[0]->type == 3 && room->next_rooms[0]->bf == -1)
+		{
+			while (rooms->bfs_next != NULL)
+				rooms = rooms->bfs_next;
+			rooms->bfs_next = room->next_rooms[0];
+			room->next_rooms[0]->bfs_prev = rooms;
+			room->next_rooms[0]->bf = bf;
+			next_bfs_type4(room, bf + 1);
+		}
 	}
 	else
 	{
+		if (room->type == 3 && check_add_type3(room) != 0)
+			return;
 		while (rooms->bfs_next != NULL)
 			rooms = rooms->bfs_next;
 		rooms->bfs_next = room;
@@ -325,6 +349,7 @@ void			next_bfs(t_room *rooms, int bf)
 		if (rooms->closed_links[i] != 1 && rooms->closed_links[i] != 3 && rooms->closed_links[i] != 4 &&
 		rooms->next_rooms[i]->bf == -1)
 		{
+//			&& !(rooms->type == 3 && rooms->next_rooms[0]->bf == -1)
 			add_bfs(rooms, rooms->next_rooms[i], bf);
 		}
 		i++;

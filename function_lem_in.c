@@ -205,12 +205,16 @@ void	print_way(t_room *room, int *way, int t)
 				ft_printf("%s(%d)", st_room->name, st_room->state);
 			else if (t == 1)
 				ft_printf("%s(%d)", st_room->name, st_room->visit);
+			else if (t == 2)
+				ft_printf("%s(%d)", st_room->name, st_room->bf);
 			break ;
 		}
 		if (t == 0)
 			ft_printf("%s(%d)-", st_room->name, st_room->state);
 		else if (t == 1)
 			ft_printf("%s(%d)-", st_room->name, st_room->visit);
+		else if (t == 2)
+			ft_printf("%s(%d)-", st_room->name, st_room->bf);
 		st_room = st_room->next_rooms[way[i]];
 		i++;
 	}
