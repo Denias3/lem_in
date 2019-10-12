@@ -97,7 +97,7 @@ void				validation(t_anthill *ant, t_room *rooms)
 
 	map = ft_strnew(0);
 	var_valid = new_var_valid();
-	fd = open("/Users/fschille/Desktop/lem_in/maps/bigm", O_RDONLY);
+	fd = open("/Users/emeha/Desktop/test/oromis-corrector/lemin/maps/bigsup02", O_RDONLY);
 //	fd = 0;
 	while (get_next_line(fd, &line) > 0)
 	{
