@@ -294,8 +294,12 @@ void			next_bfs_type4(t_room *room, int bf)
 
 void			add_bfs(t_room *rooms, t_room *room, int bf)
 {
-	if (rooms->type == 3 && room->next_rooms[0]->type != 1)
+	if (rooms->type == 3)
 	{
+		if (room->next_rooms[0]->type == 1 || room->next_rooms[0]->bf != -1)
+			return ;
+		while (rooms->bfs_next != NULL)
+			rooms = rooms->bfs_next;
 		rooms->bfs_next = room->next_rooms[0];
 		room->next_rooms[0]->bfs_prev = rooms;
 		room->next_rooms[0]->bf = bf;
