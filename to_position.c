@@ -337,6 +337,7 @@ int 			go_bfs(t_room *rooms)
 	while (rooms != NULL && rooms->type != 2)
 	{
 		next_bfs(rooms, rooms->bf + 1);
+//		print_bfs(rooms);
 		rooms = rooms->bfs_next;
 	}
 	if (rooms == NULL)

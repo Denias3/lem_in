@@ -87,6 +87,7 @@ void			rewriting_room(t_room *room_in, t_room *room_out, int count_room)
 	room_out->next_rooms = room_in->next_rooms;
 	room_out->closed_links = room_in->closed_links;
 	room_out->visit = room_in->visit;
+	room_out->link_in = room_in;
 	room_out->type = 4;
 	room_in->type = 3;
 	room_out->id = count_room;
