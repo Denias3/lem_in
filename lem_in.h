@@ -27,6 +27,7 @@ typedef	struct		s_room
 	int				bf;
 	int				visit;
 	int 			posit;
+	struct s_room	*link_in;
 	int				*closed_links;
 	struct s_room	**next_rooms;
 	struct s_room	*next;
@@ -112,4 +113,6 @@ int					the_link(char *str);
 t_room				*search_start_room(t_room *rooms);
 void				print_way_r(t_room *room, int *way, int t);
 int					to_position_2(t_room *rooms);
+void				print_bfs(t_room *rooms);
+void				pri(t_room *rooms);
 #endif

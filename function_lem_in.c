@@ -125,6 +125,7 @@ void			print_room(t_room *room)
 			ft_printf("\n");
 		ft_printf("bf:    %d\n", room->bf);
 		ft_printf("type:  %d\n", room->type);
+		ft_printf("visit:  %d\n", room->visit);
 		ft_printf("state: %d\n", room->state);
 		ft_printf("x:     %d\n", room->x);
 		ft_printf("y:     %d\n\n", room->y);
@@ -273,6 +274,16 @@ void	print_ways_r(t_room *rooms, t_anthill *ant, int t)
 		j++;
 	}
 	ft_printf("**-------**\n");
+}
+
+void			print_bfs(t_room *rooms)
+{
+	while (rooms != NULL)
+	{
+		ft_printf("%s-", rooms->name);
+		rooms = rooms->bfs_next;
+	}
+	ft_printf("\n");
 }
 
 void			print_rooms(t_room *rooms, int t)
