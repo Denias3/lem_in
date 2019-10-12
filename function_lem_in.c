@@ -81,6 +81,7 @@ t_room			*new_room(void)
 	room->y = -1;
 	room->bf = -1;
 	room->closed_links = NULL;
+	room->link_in = NULL;
 	room->visit = 0;
 	room->posit = 0;
 	room->next = NULL;
