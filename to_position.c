@@ -274,10 +274,77 @@ int				go_bf_2(t_room *rooms)
 	return (0);
 }
 
+void			next_bfs_type4(t_room *room, int bf)
+{
+	int 		i;
+
+	i = 1;
+	while (room->next_rooms[i] != NULL)
+	{
+		if (room->closed_links[i] != 1 && room->closed_links[i] != 3 && room->closed_links[i] != 4 &&
+			room->next_rooms[i]->bf == -1)
+		{
+			room->next_rooms[0]->bfs_next = room->next_rooms[i];
+			room->next_rooms[i]->bfs_prev = room->next_rooms[0];
+			room->next_rooms[i]->bf = bf;
+		}
+		i++;
+	}
+}
+
+void			add_bfs(t_room *rooms, t_room *room, int bf)
+{
+	while (rooms->bfs_next != NULL)
+		rooms = rooms->bfs_next;
+	if (rooms->type == 3)
+	{
+		rooms->bfs_next = room->next_rooms[0];
+		room->next_rooms[0]->bfs_prev = rooms;
+		room->next_rooms[0]->bf = bf;
+		next_bfs_type4(room, bf + 1);
+	}
+	else
+	{
+		rooms->bfs_next = room;
+		room->bfs_prev = rooms;
+		room->bf = bf;
+	}
+}
+
+void			next_bfs(t_room *rooms, int bf)
+{
+	int 		i;
+
+	i = 0;
+	while (rooms->next_rooms[i] != NULL)
+	{
+		if (rooms->closed_links[i] != 1 && rooms->closed_links[i] != 3 && rooms->closed_links[i] != 4 &&
+		rooms->next_rooms[i]->bf == -1)
+		{
+			add_bfs(rooms, rooms->next_rooms[i], bf);
+		}
+		i++;
+	}
+}
+
+int 			go_bfs(t_room *rooms)
+{
+	rooms = search_room_type(rooms, 1);
+	while (rooms != NULL && rooms->type != 2)
+	{
+		next_bfs(rooms, rooms->bf + 1);
+		rooms = rooms->bfs_next;
+	}
+	if (rooms == NULL)
+		return (1);
+	rooms->bfs_next = NULL;
+	return (0);
+}
+
 int				to_position_2(t_room *rooms)
 {
 	free_bf(rooms);
-	if (go_bf_2(rooms) == 0)
+	if (go_bfs(rooms) == 0)
 		return (0);
 	else
 		return (1);
