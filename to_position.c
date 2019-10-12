@@ -287,7 +287,7 @@ void			next_bfs_type4(t_room *rooms, t_room *room, int bf)
 			while (rooms->bfs_next != NULL)
 			{
 				rooms = rooms->bfs_next;
-				ft_printf("%s\n", rooms->name);
+//				ft_printf("%s\n", rooms->name);
 			}
 			rooms->bfs_next = room->next_rooms[i];
 			room->next_rooms[i]->bfs_prev = rooms;
@@ -321,10 +321,10 @@ void			add_bfs(t_room *rooms, t_room *room, int bf)
 //		bf++;
 //		bf--;
 //	}
-	if (rooms->type == 4 && rooms->bf != -1)
+	if (rooms->type == 4 && rooms->bf != -1 && check_add_type3(rooms) == 0)
 	{
-		if (rooms->type == 4 && check_add_type3(rooms) != 0)
-			return;
+//		if (rooms->type == 4 && check_add_type3(rooms) != 0)
+//			return;
 		tmp = rooms->bfs_prev;
 		tmp->bfs_next = rooms->next_rooms[0];
 		rooms->next_rooms[0]->bfs_prev = tmp;
