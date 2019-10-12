@@ -274,19 +274,21 @@ int				go_bf_2(t_room *rooms)
 	return (0);
 }
 
-void			next_bfs_type4(t_room *room, int bf)
+void			next_bfs_type4(t_room *rooms, t_room *room, int bf)
 {
 	int 		i;
 
 	i = 1;
 	while (room->next_rooms[i] != NULL)
 	{
-		if (room->closed_links[i] != 1 && room->closed_links[i] != 3 && room->closed_links[i] != 4 &&
+		if (room->closed_links[i] == 0 &&
 			room->next_rooms[i]->bf == -1)
 		{
-			room->next_rooms[0]->bfs_next = room->next_rooms[i];
-			room->next_rooms[i]->bfs_prev = room->next_rooms[0];
-			room->next_rooms[i]->bf = bf;
+			while (rooms->bfs_next != NULL)
+				rooms = rooms->bfs_next;
+			rooms->bfs_next = room->next_rooms[i];
+			room->next_rooms[i]->bfs_prev = rooms;
+			rooms->bfs_next->bf = bf;
 		}
 		i++;
 	}
@@ -310,26 +312,30 @@ int 			check_add_type3(t_room *room)
 
 void			add_bfs(t_room *rooms, t_room *room, int bf)
 {
-	if (ft_strcmp(rooms->name, "Vqz2") == 0)
+	t_room *tmp;
+//	if (ft_strcmp(rooms->name, "Vqz2") == 0)
+//	{
+//		bf++;
+//		bf--;
+//	}
+	if (rooms->type == 4 && rooms->bf != -1)
 	{
-		bf++;
-		bf--;
-	}
-	if (rooms->type == 3)
-	{
-		if (room->next_rooms[0]->type == 3 && room->next_rooms[0]->bf == -1)
+		tmp = rooms->bfs_prev;
+		tmp->bfs_next = rooms->next_rooms[0];
+		rooms->next_rooms[0]->bfs_prev = tmp;
+		rooms->next_rooms[0]->bf = rooms->bf;
+		rooms->next_rooms[0]->link_in = rooms;
+		if (rooms->bfs_next != NULL)
 		{
-			while (rooms->bfs_next != NULL)
-				rooms = rooms->bfs_next;
-			rooms->bfs_next = room->next_rooms[0];
-			room->next_rooms[0]->bfs_prev = rooms;
-			room->next_rooms[0]->bf = bf;
-			next_bfs_type4(room, bf + 1);
+			rooms->bfs_next->bfs_prev = rooms->next_rooms[0];
+			rooms->next_rooms[0]->bfs_next = rooms->bfs_next;
 		}
+		next_bfs_type4(rooms->next_rooms[0], rooms, bf);
+		rooms->bfs_next = rooms->next_rooms[0]->bfs_next;
 	}
 	else
 	{
-		if (room->type == 3 && check_add_type3(room) != 0)
+		if (room->type == 4 && check_add_type3(room) != 0)
 			return;
 		while (rooms->bfs_next != NULL)
 			rooms = rooms->bfs_next;

@@ -307,7 +307,7 @@ void			algorithm(t_anthill *ant, t_room *rooms)
 
 			if (check_xlink(rooms, ant) == 1)
 			{
-//				print_rooms(rooms, 2);
+				print_rooms(rooms, 2);
 
 				del_copies(rooms, ant);
 				search_xlink(rooms, ant);
@@ -317,10 +317,10 @@ void			algorithm(t_anthill *ant, t_room *rooms)
 			else
 				rooms_sharing(rooms, ant);
 		}
-//		print_ways(rooms, ant, 0);
+		print_ways(rooms, ant, 0);
 	}
 //	print_rooms(rooms, 2);
-//	print_ways(rooms, ant, 0);
+	print_ways(rooms, ant, 0);
 	del_copies(rooms, ant);
 
 	null_visit_close(rooms);

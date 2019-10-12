@@ -276,15 +276,15 @@ void	print_ways_r(t_room *rooms, t_anthill *ant, int t)
 	ft_printf("**-------**\n");
 }
 
-void			print_bfs(t_room *rooms)
-{
-	while (rooms != NULL)
-	{
-		ft_printf("%s-", rooms->name);
-		rooms = rooms->bfs_next;
-	}
-	ft_printf("\n");
-}
+//void			print_bfs(t_room *rooms)
+//{
+//	while (rooms != NULL)
+//	{
+//		ft_printf("%s-", rooms->name);
+//		rooms = rooms->bfs_next;
+//	}
+//	ft_printf("\n");
+//}
 
 void			print_rooms(t_room *rooms, int t)
 {
