@@ -285,7 +285,10 @@ void			next_bfs_type4(t_room *rooms, t_room *room, int bf)
 			room->next_rooms[i]->bf == -1)
 		{
 			while (rooms->bfs_next != NULL)
+			{
 				rooms = rooms->bfs_next;
+				ft_printf("%s\n", rooms->name);
+			}
 			rooms->bfs_next = room->next_rooms[i];
 			room->next_rooms[i]->bfs_prev = rooms;
 			rooms->bfs_next->bf = bf;
@@ -320,15 +323,18 @@ void			add_bfs(t_room *rooms, t_room *room, int bf)
 //	}
 	if (rooms->type == 4 && rooms->bf != -1)
 	{
+		if (rooms->type == 4 && check_add_type3(rooms) != 0)
+			return;
 		tmp = rooms->bfs_prev;
 		tmp->bfs_next = rooms->next_rooms[0];
 		rooms->next_rooms[0]->bfs_prev = tmp;
 		rooms->next_rooms[0]->bf = rooms->bf;
 		rooms->next_rooms[0]->link_in = rooms;
-		if (rooms->bfs_next != NULL)
+		tmp = rooms;
+		if (tmp->bfs_next != NULL)
 		{
-			rooms->bfs_next->bfs_prev = rooms->next_rooms[0];
-			rooms->next_rooms[0]->bfs_next = rooms->bfs_next;
+			tmp->bfs_next->bfs_prev = tmp->next_rooms[0];
+			tmp->next_rooms[0]->bfs_next = tmp->bfs_next;
 		}
 		next_bfs_type4(rooms->next_rooms[0], rooms, bf);
 		rooms->bfs_next = rooms->next_rooms[0]->bfs_next;
@@ -367,6 +373,11 @@ int 			go_bfs(t_room *rooms)
 	rooms = search_room_type(rooms, 1);
 	while (rooms != NULL && rooms->type != 2)
 	{
+//		if (rooms->id == 1820)
+//		{
+//			rooms->bf++;
+//			rooms->bf--;
+//		}
 		next_bfs(rooms, rooms->bf + 1);
 //		print_bfs(rooms);
 		rooms = rooms->bfs_next;
