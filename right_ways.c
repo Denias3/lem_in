@@ -111,5 +111,5 @@ int 		*right_ways(t_anthill *ant)
 		}
 	}
 	free(ways_acc);
-	return (res_ways_acc);
+	return (search_count(ant->ants, ant->shortest_way[0]) == count ? NULL : res_ways_acc);
 }
