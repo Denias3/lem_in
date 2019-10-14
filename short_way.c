@@ -199,7 +199,7 @@ int			short_way(t_room *rooms, t_anthill *ant, int i)
 		track_record(way, ant);
 		return (0);
 	}
-	if (i == 1)
+	else if (i == 1)
 	{
 		ant->shortest_way = my_intrevers(df_check(room));
 		return (0);

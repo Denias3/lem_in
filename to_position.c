@@ -316,15 +316,13 @@ int 			check_add_type3(t_room *room)
 void			add_bfs(t_room *rooms, t_room *room, int bf)
 {
 	t_room *tmp;
-//	if (ft_strcmp(rooms->name, "Vqz2") == 0)
-//	{
-//		bf++;
-//		bf--;
-//	}
+	if (ft_strcmp(room->name, "Ejp6") == 0 && room->visit == 4)
+	{
+		rooms->id++;
+		rooms->id--;
+	}
 	if (rooms->type == 4 && rooms->bf != -1 && check_add_type3(rooms) == 0)
 	{
-//		if (rooms->type == 4 && check_add_type3(rooms) != 0)
-//			return;
 		tmp = rooms->bfs_prev;
 		tmp->bfs_next = rooms->next_rooms[0];
 		rooms->next_rooms[0]->bfs_prev = tmp;

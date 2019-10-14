@@ -297,10 +297,9 @@ void			algorithm(t_anthill *ant, t_room *rooms, char *map)
 //		print_rooms(rooms, 2);
 		if (short_way(rooms, ant, 0) == 0)
 		{
-
+//			print_ways(rooms, ant, 3);
 			if (check_xlink(rooms, ant) == 1)
 			{
-
 				del_copies(rooms, ant);
 				search_xlink(rooms, ant);
 				print_ways(rooms, ant, 3);
@@ -310,7 +309,7 @@ void			algorithm(t_anthill *ant, t_room *rooms, char *map)
 			else
 				rooms_sharing(rooms, ant);
 		}
-//		print_ways(rooms, ant, 0);
+		print_ways(rooms, ant, 0);
 	}
  	ft_printf("%s\n", map);
  	free(map);
