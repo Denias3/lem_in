@@ -44,11 +44,7 @@ int		iteration_ways_acc(int *ways_acc, int size)
 	i = 0;
 	while (i < size)
 	{
-		if (ways_acc[i] == 1)
-		{
-			ways_acc[i] = 0;
-		}
-		else if (ways_acc[i] == 0)
+		if (ways_acc[i] == 0)
 		{
 			ways_acc[i] = 1;
 			return (1);

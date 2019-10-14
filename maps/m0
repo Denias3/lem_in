@@ -1,21 +1,15 @@
-6
-B 1 0
-C 1 1
-D 1 2
-E 2 0
-##end
-H 2 3
-F 2 1
-G 2 2
+3
 ##start
-A 0 2
-A-E
-B-C
-C-D
-D-H
-D-F
-E-D
-E-F
-A-B
-F-G
-G-H
+rs 1 0
+##end
+re 5 0
+s1 9 0
+s2 13 0
+s3 15 5
+s4 14 5
+rs-s1
+rs-s3
+s1-s2
+s3-s4
+s4-re
+s2-re
