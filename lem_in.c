@@ -18,11 +18,12 @@ int					main(void)
 {
 	t_anthill		*ant;
 	t_room			*rooms;
+	char			*map;
 
 	rooms = new_room();
 	ant = newanthill();
-	validation(ant, rooms);
-	algorithm(ant, rooms);
+	map = validation(ant, rooms);
+	algorithm(ant, rooms, map);
 	free_track_record(ant);
 	free_rooms(rooms);
 	return (0);

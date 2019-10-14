@@ -36,12 +36,24 @@ void			memolloc_room(t_room *room1, t_room *room2, int i)
 	free(tmp);
 }
 
-t_room			*check_name(t_room *rooms, char *name)
+t_room			*check_name(t_room *rooms, char *name, char *name_link)
 {
+	int i;
+
 	while (rooms != NULL)
 	{
 		if (ft_strcmp(rooms->name, name) == 0)
+		{
+			i = 0;
+			while (rooms->next_rooms[i] != NULL)
+			{
+				if (ft_strcmp(rooms->next_rooms[i]->name, name_link) == 0)
+					error("several identical ribs");
+				i++;
+			}
 			return (rooms);
+		}
+
 		rooms = rooms->next;
 	}
 	return (NULL);
