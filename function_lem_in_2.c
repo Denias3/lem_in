@@ -27,3 +27,21 @@ t_anthill	*newanthill(void)
 	ant->rooms = 0;
 	return (ant);
 }
+
+int 		check_num(char *num)
+{
+	int i;
+
+	i = 0;
+	if (num[i] == '-' || num[i] == '+')
+		i++;
+	while (num[i] != '\0')
+	{
+		if (!ft_isdigit((int)num[i]))
+			return (1);
+		i++;
+	}
+	if (i == 1 && (num[0] == '-' || num[0] == '+'))
+		return (1);
+	return (0);
+}

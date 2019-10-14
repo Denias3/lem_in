@@ -30,14 +30,14 @@ t_var_valid			*new_var_valid(void)
 void				stage_num_ant(t_var_valid *var_valid, t_anthill *ant, char *line)
 {
 	if (var_valid->type == 4 || var_valid->type == 5)
-		error();
+		error("##start and ##end should be in front of the room");
 	else if (var_valid->type == 0)
 	{
 		ant->ants = ft_atoi(line);
 		var_valid->stage = 1;
 	}
 	else
-		error();
+		error("at the very beginning should be the number of ants");
 }
 
 void				stage_rooms(t_var_valid *var_valid, t_anthill *ant, t_room *rooms, char *line)
@@ -49,7 +49,7 @@ void				stage_rooms(t_var_valid *var_valid, t_anthill *ant, t_room *rooms, char 
 			if (var_valid->type == 4)
 			{
 				if (var_valid->start == 1 || var_valid->type_past == 5)
-					error();
+					error("after ##end there cannot be ##start");
 				var_valid->type_past = var_valid->type;
 				var_valid->start = 1;
 				var_valid->n_comm++;
@@ -57,7 +57,7 @@ void				stage_rooms(t_var_valid *var_valid, t_anthill *ant, t_room *rooms, char 
 			else if (var_valid->type == 5)
 			{
 				if (var_valid->end == 1 || var_valid->type_past == 4)
-					error();
+					error("after ##start there cannot be ##end");
 				var_valid->type_past = var_valid->type;
 				var_valid->end = 1;
 				var_valid->n_comm++;
@@ -72,7 +72,7 @@ void				stage_rooms(t_var_valid *var_valid, t_anthill *ant, t_room *rooms, char 
 			var_valid->stage = 2;
 	}
 	else
-		error();
+		error("not valid map");
 }
 
 void				stage_link(t_var_valid *var_valid, t_room *rooms, char *line)
@@ -81,13 +81,13 @@ void				stage_link(t_var_valid *var_valid, t_room *rooms, char *line)
 	{
 		var_valid->stage = 2;
 		if (pars_line_link(rooms, line) == 1)
-			error();
+			error("not valid link");
 	}
 	else
-		error();
+		error("not valid map");
 }
 
-void				validation(t_anthill *ant, t_room *rooms)
+char				*validation(t_anthill *ant, t_room *rooms)
 {
 	char			*line;
 	int				fd;
@@ -97,16 +97,21 @@ void				validation(t_anthill *ant, t_room *rooms)
 
 	map = ft_strnew(0);
 	var_valid = new_var_valid();
-	fd = open("/Users/emeha/Desktop/test/oromis-corrector/lemin/maps/bigsup02", O_RDONLY);
+	fd = open("/Users/emeha/Desktop/ch_lemin/lem-in_maps/multiple_ways/two_ways", O_RDONLY);
 //	fd = 0;
 	while (get_next_line(fd, &line) > 0)
 	{
 		var_valid->type = check_line(line);
 		if (var_valid->type == -1)
-			error();
+			error("not valid line in the map");
 		if (var_valid->type == 6 || var_valid->type == 3)
 		{
-			free(line);
+			tmp = map;
+			map = ft_strjoin_free(map, line, 0, 1);
+			free(tmp);
+			tmp = map;
+			map = ft_strjoin_free(map, ft_strdup("\n"), 0, 1);
+			free(tmp);
 			continue ;
 		}
 		if (var_valid->stage == 0)
@@ -123,8 +128,7 @@ void				validation(t_anthill *ant, t_room *rooms)
 		free(tmp);
 	}
 	if (var_valid->stage != 2 || var_valid->n_comm != 2)
-		error();
-	ft_printf("%s\n", map);
-	free(map);
+		error("all conditions of the card are not met");
 	free(var_valid);
+	return (map);
 }

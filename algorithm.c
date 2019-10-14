@@ -282,11 +282,13 @@ void			shortest_way(t_room *rooms, t_anthill *ant)
 			null_visit_close(rooms);
 		}
 	}
+	else
+		error("!");
 //	print_rooms(rooms, 2);
 
 }
 
-void			algorithm(t_anthill *ant, t_room *rooms)
+void			algorithm(t_anthill *ant, t_room *rooms, char *map)
 {
 	all_creat_closed_links(rooms);
 	shortest_way(rooms, ant);
@@ -308,8 +310,10 @@ void			algorithm(t_anthill *ant, t_room *rooms)
 			else
 				rooms_sharing(rooms, ant);
 		}
-		print_ways(rooms, ant, 0);
+//		print_ways(rooms, ant, 0);
 	}
+ 	ft_printf("%s\n", map);
+ 	free(map);
 //	print_rooms(rooms, 2);
 //	print_ways(rooms, ant, 0);
 	del_copies(rooms, ant);

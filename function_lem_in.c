@@ -310,8 +310,8 @@ void			print_rooms(t_room *rooms, int t)
 	ft_printf("\n\n*************\n*************\n\n");
 }
 
-void			error(void)
+void			error(char *text)
 {
-	ft_printf("error\n");
+	ft_printf("error (%s)\n", text);
 	exit(0);
 }
