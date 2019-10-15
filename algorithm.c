@@ -288,18 +288,32 @@ void			shortest_way(t_room *rooms, t_anthill *ant)
 
 }
 
+void			ch_t_4(t_room *rooms)
+{
+	while (rooms != NULL)
+	{
+		if (rooms->type == 4)
+		{
+			ft_printf("%s\n", rooms->name);
+//			error("ko");
+		}
+		rooms = rooms->bfs_next;
+	}
+	ft_printf("ok\n");
+}
+
 void			algorithm(t_anthill *ant, t_room *rooms, char *map)
 {
 	all_creat_closed_links(rooms);
 	shortest_way(rooms, ant);
-	int i;
+	int i = 0;
 
-	i = 0;
  	while ((possible_ways(rooms)) > 0 && to_position_2(rooms) == 0)
 	{
+//		ch_t_4(rooms);
 //		print_rooms(rooms, 2);
 //		print_bfs(rooms);
-		if (i == 369)
+		if (i == 7)
 		{
 			i++;
 			i--;
@@ -312,13 +326,14 @@ void			algorithm(t_anthill *ant, t_room *rooms, char *map)
 				del_copies(rooms, ant);
 //				print_ways(rooms, ant, 0);
 				search_xlink(rooms, ant);
-//				print_ways(rooms, ant, 3);
+				print_ways(rooms, ant, 3);
 				free_ways(ant);
 				null_visit_close(rooms);
 			}
 			else
 				rooms_sharing(rooms, ant);
 		}
+//		print_ways(rooms, ant, 0);
 		i++;
 	}
  	ft_printf("%s\n", map);
