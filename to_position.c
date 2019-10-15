@@ -316,12 +316,14 @@ int 			check_add_type3(t_room *room)
 void			add_bfs(t_room *rooms, t_room *room, int bf)
 {
 	t_room *tmp;
+	int i;
+	i = 0;
 //	if (ft_strcmp(rooms->name, "Vqz2") == 0)
 //	{
 //		bf++;
 //		bf--;
 //	}
-	if (ft_strcmp(rooms->name, "Moj0") == 0 && rooms->type == 3)
+	if (ft_strcmp(room->name, "Tl_8") == 0 && room->type == 4)
 	{
 		rooms->id++;
 		rooms->id--;
@@ -373,14 +375,20 @@ void			next_bfs(t_room *rooms, int bf)
 	int 		i;
 
 	i = 0;
+	if (ft_strcmp(rooms->name, "Tl_8") == 0)
+	{
+		i++;
+		i--;
+	}
 	while (rooms->next_rooms[i] != NULL)
 	{
 		if (rooms->closed_links[i] != 1 && rooms->closed_links[i] != 3 && rooms->closed_links[i] != 4 &&
-		rooms->next_rooms[i]->bf == -1)
+				(rooms->next_rooms[i]->bf == -1 || (rooms->type == 4 && rooms->next_rooms[i]->type == 3)))
 		{
 //			&& !(rooms->type == 3 && rooms->next_rooms[0]->bf == -1)
 			add_bfs(rooms, rooms->next_rooms[i], bf);
 		}
+
 		i++;
 	}
 }
