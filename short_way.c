@@ -90,10 +90,30 @@ int			link_check(t_room *room, t_room *room_2)
 	i = 0;
 	while (room_2->next_rooms[i] != NULL)
 	{
-		if (ft_strcmp(room_2->next_rooms[i]->name, room->name) == 0 && room_2->closed_links[i] != 1 && room_2->closed_links[i] != 4 && room_2->closed_links[i] != 3)
+		if (ft_strcmp(room_2->next_rooms[i]->name, room->name) == 0 &&
+		room_2->closed_links[i] != 1 && room_2->closed_links[i] != 4 &&
+		room_2->closed_links[i] != 3)
 			return (1);
-		else if (ft_strcmp(room_2->next_rooms[i]->name, room->name) == 0 && room_2->closed_links[i] != 4 && room_2->closed_links[i] != 3)
+		else if (ft_strcmp(room_2->next_rooms[i]->name, room->name) == 0 &&
+		room_2->closed_links[i] != 4 && room_2->closed_links[i] != 3)
 			return (2);
+		i++;
+	}
+	return (0);
+}
+
+int 		check_room_visit(t_room *room, int type)
+{
+	int 	i;
+
+	i = 0;
+	while (room->next_rooms[i] != NULL)
+	{
+		if (room->closed_links[i] == type)
+		{
+			if (room->next_rooms[i]->visit == 2)
+				return (1);
+		}
 		i++;
 	}
 	return (0);
@@ -134,11 +154,19 @@ void		df_check2(t_room **end_room, t_room *room, int *way, int *j)
 	{
 		if (ft_strcmp(room->next_rooms[i]->name, (*end_room)->name) == 0)
 		{
+			if ((*end_room)->type == 3 && check_room_visit((*end_room), 2) == 0 &&
+			room->closed_links[i] != 2)
+				return;
 			room->closed_links[i] = 3;
 			way[(*j)] = i;
 			(*j)++;
 			if (room->type == 0 || room->type == 3 || room->type == 4)
 				room->visit++;
+			if (room->visit == 2)
+			{
+				i++;
+				i--;
+			}
 			close_link(*end_room, room);
 			*end_room = room;
 			return ;
@@ -163,6 +191,11 @@ int			*df_check(t_room *end_room)
 	j = 1;
 	while (room != NULL)
 	{
+		if (ft_strcmp(room->name, "Ep_2") == 0)
+		{
+			j++;
+			j--;
+		}
 		tmp = room;
 		while (check == 0 && end_room->bf == tmp->bf + 1)
 		{

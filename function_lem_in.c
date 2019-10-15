@@ -283,9 +283,15 @@ void	print_ways_r(t_room *rooms, t_anthill *ant, int t)
 
 void			print_bfs(t_room *rooms)
 {
+	int i = 500;
+	while (i != 0 && rooms->bfs_prev != NULL)
+	{
+		rooms = rooms->bfs_prev;
+		i--;
+	}
 	while (rooms != NULL)
 	{
-			ft_printf("%s-", rooms->name, rooms->bf, rooms->type);
+			ft_printf("%s(%d)-", rooms->name, rooms->bf);
 //			if (rooms->bfs_next != NULL)
 //				ft_printf(" next ==> %s bfs(%d) type(%d)\n", rooms->bfs_next->name, rooms->bfs_next->bf, rooms->bfs_next->type);
 //			else

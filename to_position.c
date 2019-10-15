@@ -375,7 +375,7 @@ void			next_bfs(t_room *rooms, int bf)
 	int 		i;
 
 	i = 0;
-	if (ft_strcmp(rooms->name, "Tl_8") == 0)
+	if (ft_strcmp(rooms->name, "Idn3") == 0)
 	{
 		i++;
 		i--;
@@ -404,7 +404,9 @@ int 			go_bfs(t_room *rooms)
 //			rooms->bf--;
 //		}
 		next_bfs(rooms, rooms->bf + 1);
-//		print_bfs(rooms);
+//		if (rooms->bf > 22)
+//			print_bfs(rooms);
+
 		rooms = rooms->bfs_next;
 	}
 	if (rooms == NULL)
