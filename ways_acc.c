@@ -77,7 +77,7 @@ int 	shortest_way_allow(t_room *rooms, t_anthill *ant, int count)
 	st_room->state = ant->ants;
 	while (stop_room->state != ant->ants)
 	{
-		go_way(stop_room, ant->r_shortest_way, 0);
+		go_way(stop_room, ant->r_shortest_way);
 		count_tmp++;
 	}
 	null_state_rooms(rooms);
@@ -113,7 +113,7 @@ int		*ways_allow(t_room *rooms, t_anthill *ant)
 			while (ant->r_ways[j] != NULL)
 			{
 				if (ways_acc_tmp[j] == 1)
-					go_way(stop_room, ant->r_ways[j], 0);
+					go_way(stop_room, ant->r_ways[j]);
 				j++;
 			}
 			count_tmp++;

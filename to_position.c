@@ -321,8 +321,23 @@ void			add_bfs(t_room *rooms, t_room *room, int bf)
 //		bf++;
 //		bf--;
 //	}
-	if (rooms->type == 4 && rooms->bf != -1 && check_add_type3(rooms) == 0)
+	if (ft_strcmp(rooms->name, "Moj0") == 0 && rooms->type == 3)
 	{
+		rooms->id++;
+		rooms->id--;
+//		while (rooms->link_in->next_rooms[i] != NULL)
+//		{
+//			if (rooms->link_in->closed_links[i] == 3)
+//			{
+//				ft_printf("%s", rooms->link_in->next_rooms[i]->name);
+//			}
+//			i++;
+//		}
+	}
+	if (rooms->type == 4 && rooms->bf != -1)
+	{
+		if (rooms->bf != rooms->next_rooms[0]->bf)
+			ft_printf("kakay to xyina\n");
 //		if (rooms->type == 4 && check_add_type3(rooms) != 0)
 //			return;
 		tmp = rooms->bfs_prev;
@@ -348,6 +363,8 @@ void			add_bfs(t_room *rooms, t_room *room, int bf)
 		rooms->bfs_next = room;
 		room->bfs_prev = rooms;
 		room->bf = bf;
+		if (room->type == 4 && room->next_rooms[0]->bf == -1)
+			room->next_rooms[0]->bf = bf;
 	}
 }
 

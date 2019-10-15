@@ -292,25 +292,34 @@ void			algorithm(t_anthill *ant, t_room *rooms, char *map)
 {
 	all_creat_closed_links(rooms);
 	shortest_way(rooms, ant);
+	int i;
+
+	i = 0;
  	while ((possible_ways(rooms)) > 0 && to_position_2(rooms) == 0)
 	{
 //		print_rooms(rooms, 2);
+//		print_bfs(rooms);
+		if (i == 369)
+		{
+			i++;
+			i--;
+		}
 		if (short_way(rooms, ant, 0) == 0)
 		{
 
 			if (check_xlink(rooms, ant) == 1)
 			{
-
 				del_copies(rooms, ant);
+//				print_ways(rooms, ant, 0);
 				search_xlink(rooms, ant);
-				print_ways(rooms, ant, 3);
+//				print_ways(rooms, ant, 3);
 				free_ways(ant);
 				null_visit_close(rooms);
 			}
 			else
 				rooms_sharing(rooms, ant);
 		}
-//		print_ways(rooms, ant, 0);
+		i++;
 	}
  	ft_printf("%s\n", map);
  	free(map);
