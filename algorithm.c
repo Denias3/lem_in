@@ -283,9 +283,25 @@ void			shortest_way(t_room *rooms, t_anthill *ant)
 		}
 	}
 	else
-		error("!");
+		error("did not find a way");
 //	print_rooms(rooms, 2);
 
+}
+
+void			ch_bfs_bf(t_room *rooms)
+{
+	int cou;
+
+	cou = 0;
+	while (rooms != NULL)
+	{
+		if (cou > rooms->bf)
+			error("bf error");
+		if (cou < rooms->bf)
+			cou = rooms->bf;
+		rooms = rooms->bfs_next;
+	}
+	ft_printf("ok\n");
 }
 
 void			ch_t_4(t_room *rooms)
@@ -310,10 +326,11 @@ void			algorithm(t_anthill *ant, t_room *rooms, char *map)
 
  	while ((possible_ways(rooms)) > 0 && to_position_2(rooms) == 0)
 	{
+//		ch_bfs_bf(rooms);
 //		ch_t_4(rooms);
 //		print_rooms(rooms, 2);
 //		print_bfs(rooms);
-		if (i == 7)
+		if (i == 8)
 		{
 			i++;
 			i--;
@@ -326,14 +343,14 @@ void			algorithm(t_anthill *ant, t_room *rooms, char *map)
 				del_copies(rooms, ant);
 //				print_ways(rooms, ant, 0);
 				search_xlink(rooms, ant);
-				print_ways(rooms, ant, 3);
+//				print_ways(rooms, ant, 3);
 				free_ways(ant);
 				null_visit_close(rooms);
 			}
 			else
 				rooms_sharing(rooms, ant);
 		}
-//		print_ways(rooms, ant, 0);
+		print_ways(rooms, ant, 0);
 		i++;
 	}
  	ft_printf("%s\n", map);
