@@ -12,7 +12,7 @@
 
 #include "lem_in.h"
 
-void        go_way(t_room *end_rooms, int *way, int v)
+void        go_way(t_room *end_rooms, int *way)
 {
 	int		i;
 
@@ -24,10 +24,8 @@ void        go_way(t_room *end_rooms, int *way, int v)
 			end_rooms->visit = end_rooms->next_rooms[way[i]]->visit;
 			end_rooms->next_rooms[way[i]]->state--;
 			end_rooms->state++;
-			if (v)
-				ft_printf("L%d-%s ", end_rooms->visit, end_rooms->name);
+			ft_printf("L%d-%s ", end_rooms->visit, end_rooms->name);
 		}
-
 		end_rooms = end_rooms->next_rooms[way[i]];
 		i++;
 	}
@@ -71,7 +69,7 @@ void    go_ants(t_room *rooms, t_anthill *ant)
 		if (ways_acc == NULL)
 		{
 			(st_room->visit)++;
-			go_way(stop_room, ant->r_shortest_way, 1);
+			go_way(stop_room, ant->r_shortest_way);
 		}
 		else
 		{
@@ -80,12 +78,11 @@ void    go_ants(t_room *rooms, t_anthill *ant)
 				if (ways_acc[j] == 1)
 				{
 					(st_room->visit)++;
-					go_way(stop_room, ant->r_ways[j], 1);
+					go_way(stop_room, ant->r_ways[j]);
 				}
 				j++;
 			}
 		}
-
 		if (stop_room->state != ant->ants)
 			ft_printf("\n");
 	}

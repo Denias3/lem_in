@@ -236,7 +236,6 @@ void	print_way_r(t_room *room, int *way, int t)
 	st_room = search_room_type(room, 2);
 	while (i - 1 <= way[0])
 	{
-
 		if (st_room->type == 1)
 		{
 			if (t == 0)
@@ -286,15 +285,16 @@ void			print_bfs(t_room *rooms)
 {
 	while (rooms != NULL)
 	{
-		ft_printf("%s bfs(%d) type(%d)\n", rooms->name, rooms->bf, rooms->type);
-		if (rooms->bfs_next != NULL)
-			ft_printf(" next ==> %s bfs(%d) type(%d)\n", rooms->bfs_next->name, rooms->bfs_next->bf, rooms->bfs_next->type);
-		else
-			ft_printf(" next ==> NULL \n");
-		if (rooms->bfs_prev != NULL)
-			ft_printf(" prev ==> %s bfs(%d) type(%d)\n", rooms->bfs_prev->name, rooms->bfs_prev->bf, rooms->bfs_prev->type);
-		else
-			ft_printf(" prev ==> NULL \n");
+			ft_printf("%s bfs(%d) type(%d)\n", rooms->name, rooms->bf, rooms->type);
+			if (rooms->bfs_next != NULL)
+				ft_printf(" next ==> %s bfs(%d) type(%d)\n", rooms->bfs_next->name, rooms->bfs_next->bf, rooms->bfs_next->type);
+			else
+				ft_printf(" next ==> NULL \n");
+			if (rooms->bfs_prev != NULL)
+				ft_printf(" prev ==> %s bfs(%d) type(%d)\n", rooms->bfs_prev->name, rooms->bfs_prev->bf, rooms->bfs_prev->type);
+			else
+				ft_printf(" prev ==> NULL \n");
+
 		rooms = rooms->bfs_next;
 	}
 	ft_printf("\n******************\n");
