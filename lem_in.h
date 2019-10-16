@@ -81,7 +81,8 @@ int					pars_line_link(t_room *room, char *line);
 void				algorithm(t_anthill *ant, t_room *rooms);
 t_room				*search_room_type(t_room *rooms, short type);
 int					short_way(t_room *rooms, t_anthill *ant, int i);
-void				go_ants(t_room *rooms, t_anthill *ant, int *ways_acc, int j);
+void				go_ants(t_room *rooms, t_anthill *ant,
+					int *ways_acc, int j);
 void				rooms_sharing(t_room *room_in, t_anthill *ant);
 void				track_record(int *way, t_anthill *ant);
 void				free_track_record(t_anthill *ant);
@@ -111,18 +112,18 @@ void				search_xlink(t_room *room, t_anthill *ant);
 int					check_xlink(t_room *room, t_anthill *ant);
 void				null_visit_close(t_room *rooms);
 void				all_creat_closed_links(t_room *rooms);
-int 				check_num(char *num);
+int					check_num(char *num);
 void				free_map(t_anthill *ant, char *line);
 void				stage_link(t_var_valid *var_valid,
-							   char *line, t_room *rooms);
+					char *line, t_room *rooms);
 void				stage_rooms(t_var_valid *var_valid,
-								t_anthill *ant, t_room *rooms, char *line);
+					t_anthill *ant, t_room *rooms, char *line);
 void				stage_num_ant(t_var_valid *var_valid,
-								  t_anthill *ant, char *line);
+					t_anthill *ant, char *line);
 void				validation_2(t_anthill *ant, t_room *rooms,
-						t_var_valid *var_valid, char *line);
+					t_var_valid *var_valid, char *line);
 void				stage_rooms_2(t_var_valid *var_valid,
-								  t_anthill *ant, t_room *rooms, char *line);
+					t_anthill *ant, t_room *rooms, char *line);
 void				free_bf(t_room *rooms);
 void				next_bfs_type4(t_room *rooms, t_room *room, int bf);
 int					check_add_type3(t_room *room);
@@ -130,7 +131,7 @@ void				add_bfs_2(t_room *rooms, int bf);
 void				close_link(t_room *end_room, t_room *room);
 int					check_room_visit(t_room *room, int size);
 void				rewriting_room(t_room *room_in,
-							   t_room *room_out, int count_room);
+					t_room *room_out, int count_room);
 void				close_link_in(t_room *room_in);
 int					*new_ways_acc(int size);
 
