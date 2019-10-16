@@ -82,6 +82,9 @@ int			*right_ways(t_anthill *ant, int count, int tmp_count)
 		}
 	}
 	free(ways_acc);
-	return (search_count(ant->ants, ant->shortest_way[0])
-	== count ? NULL : res_ways_acc);
+	if (search_count(ant->ants, ant->shortest_way[0]) == count)
+		free(res_ways_acc);
+	else
+		return (res_ways_acc);
+	return (NULL);
 }
