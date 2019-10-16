@@ -36,6 +36,30 @@ int 		search_char(char *str, char elem)
 	return (-1);
 }
 
+void		memolloc_next_rooms(t_room *room, t_room *new_next_room, int size)
+{
+	t_room	**tmp;
+	t_room	**room_tmp;
+	int 	i;
+
+	room_tmp = (t_room**)malloc(sizeof(t_room*) * size);
+	i = 0;
+	while (room->next_rooms[i] != NULL)
+	{
+		room_tmp[i] = room->next_rooms[i];
+		i++;
+	}
+	if (new_next_room != NULL)
+	{
+		room_tmp[i] = new_next_room;
+		i++;
+	}
+	room_tmp[i] = NULL;
+	tmp = room->next_rooms;
+	free(tmp);
+	room->next_rooms = room_tmp;
+}
+
 char 		**links_for_room(char *name_room, char **links)
 {
 	int 	i;
@@ -70,6 +94,16 @@ char 		**links_for_room(char *name_room, char **links)
 	return (links_room);
 }
 
+void		back_write_next_rooms(t_room *rooms, t_room *room)
+{
+	int 	size;
+
+	size = 0;
+	while (room->next_rooms[size] != NULL)
+		size++;
+	memolloc_next_rooms(room, rooms, size + 2);
+}
+
 void		write_next_rooms(t_room *rooms, t_room *room, char **links_room)
 {
 	int 	i;
@@ -87,6 +121,7 @@ void		write_next_rooms(t_room *rooms, t_room *room, char **links_room)
 		{
 			rooms->next_rooms[i] = room;
 			rooms->next_rooms[i + 1] = NULL;
+			back_write_next_rooms(rooms, room);
 			return ;
 		}
 		j++;
@@ -96,20 +131,20 @@ void		write_next_rooms(t_room *rooms, t_room *room, char **links_room)
 int 		linking(t_room *rooms, t_anthill *ant)
 {
 	t_room	*room;
-	t_room	*st_rooom;
+//	t_room	*st_rooom;
 	char 	**links_room;
 
-	st_rooom = rooms;
+//	st_rooom = rooms;
 	while (rooms != NULL)
 	{
 		links_room = links_for_room(rooms->name, ant->map_links);
-		rooms->next_rooms = (t_room**)malloc(sizeof(t_room*) * (size_arr(links_room) + 1));
-		rooms->next_rooms[0] = NULL;
-		room = st_rooom;
+		memolloc_next_rooms(rooms, NULL, (size_arr(links_room) + 1));
+//		rooms->next_rooms[0] = NULL;
+		room = rooms->next;
 		while (room != NULL)
 		{
-			if (ft_strcmp(rooms->name, room->name) != 0)
-				write_next_rooms(rooms, room, links_room);
+//			if (ft_strcmp(rooms->name, room->name) != 0)
+			write_next_rooms(rooms, room, links_room);
 			room = room->next;
 		}
 		rooms = rooms->next;
