@@ -46,7 +46,7 @@ static void		pars_line_room_2(t_anthill *ant, t_room *room,
 
 	split = ft_strsplit(line, ' ');
 	room->name = split[0];
-	if (check_num(split[1]) == 1|| check_num(split[2]) == 1)
+	if (check_num(split[1]) == 1 || check_num(split[2]) == 1)
 		error("no valid room");
 	room->x = ft_atoi(split[1]);
 	room->y = ft_atoi(split[2]);

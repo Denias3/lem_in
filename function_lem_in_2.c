@@ -12,9 +12,9 @@
 
 #include "lem_in.h"
 
-t_anthill	*newanthill(void)
+t_anthill		*newanthill(void)
 {
-	t_anthill		*ant;
+	t_anthill	*ant;
 
 	ant = (t_anthill*)malloc(sizeof(t_anthill));
 	ant->ways = (int**)malloc(sizeof(int*) * 2);
@@ -28,9 +28,9 @@ t_anthill	*newanthill(void)
 	return (ant);
 }
 
-int 		check_num(char *num)
+int				check_num(char *num)
 {
-	int i;
+	int			i;
 
 	i = 0;
 	if (num[i] == '-' || num[i] == '+')

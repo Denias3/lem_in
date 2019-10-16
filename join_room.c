@@ -19,49 +19,53 @@ int			search_redirect_link(t_room *room, char *name)
 	i = 0;
 	while (room->next_rooms[i] != NULL)
 	{
-		if (ft_strcmp(room->next_rooms[i]->name, name) == 0 && room->next_rooms[i]->type == 4)
+		if (ft_strcmp(room->next_rooms[i]->name, name) == 0 &&
+		room->next_rooms[i]->type == 4)
 			return (i);
 		i++;
 	}
 	return (-1);
 }
 
-void		del_copies(t_room *rooms, t_anthill *ant)
+void		del_copies_2(t_room **rooms, t_anthill *ant, t_room **tmp2)
 {
 	t_room	*tmp;
-	t_room	*tmp2;
-	int		i;
-	int		red;
 
-	red = -1;
+	if ((*rooms)->closed_links != NULL)
+	{
+		free((*rooms)->closed_links);
+		(*rooms)->closed_links = NULL;
+	}
+	(*tmp2)->next = NULL;
+	free((*rooms)->next_rooms);
+	free((*rooms)->name);
+	ant->rooms--;
+	tmp = (*rooms);
+	(*rooms) = (*rooms)->next;
+	free(tmp);
+}
+
+void		del_copies(t_room *rooms, t_anthill *ant, int i, int red)
+{
+	t_room	*tmp2;
+
 	while (rooms != NULL)
 	{
 		if (rooms->type == 4)
 		{
-			if (rooms->closed_links != NULL)
-			{
-				free(rooms->closed_links);
-				rooms->closed_links = NULL;
-			}
-			tmp2->next = NULL;
-			free(rooms->next_rooms);
-			free(rooms->name);
-			ant->rooms--;
-			tmp = rooms;
-			rooms = rooms->next;
-			free(tmp);
+			del_copies_2(&rooms, ant, &tmp2);
 			continue ;
 		}
 		else if (rooms->type == 3)
 		{
-			i = 0;
-			while (rooms->next_rooms[i] != NULL)
+			i = -1;
+			while (rooms->next_rooms[++i] != NULL)
 			{
-				if ((red = search_redirect_link(rooms->next_rooms[i], rooms->name)) != -1)
+				if ((red = search_redirect_link(rooms->next_rooms[i],
+						rooms->name)) != -1)
 					rooms->next_rooms[i]->next_rooms[red] = rooms;
 				else if (rooms->closed_links[i] == 1)
 					rooms->closed_links[i] = 0;
-				i++;
 			}
 			rooms->type = 0;
 		}

@@ -12,13 +12,11 @@
 
 #include "lem_in.h"
 
-int		the_room(char *str)
+int			the_room(char *str, int i)
 {
-	int		i;
 	char	**split;
 
 	split = ft_strsplit(str, ' ');
-	i = 0;
 	if (count_char_double_array(split) != 3)
 	{
 		free_char_double_array(split);
@@ -43,13 +41,8 @@ int		the_room(char *str)
 	return (1);
 }
 
-int		the_link(char *str)
+int			the_link(char *str, int i, int ch)
 {
-	int			i;
-	int			ch;
-
-	i = 0;
-	ch = 0;
 	while (i < 2)
 	{
 		if (*str == 'L' || *str == '#')

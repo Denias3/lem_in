@@ -15,7 +15,7 @@
 int			*new_ways_acc(int size)
 {
 	int		*ways_acc;
-	int 	i;
+	int		i;
 
 	ways_acc = (int*)malloc(sizeof(int) * size);
 	i = 0;
@@ -27,10 +27,10 @@ int			*new_ways_acc(int size)
 	return (ways_acc);
 }
 
-int 		long_path_size(t_anthill *ant, int *ways_acc)
+int			long_path_size(t_anthill *ant, int *ways_acc)
 {
-	int 	i;
-	int 	size;
+	int		i;
+	int		size;
 
 	i = 0;
 	size = -1;
@@ -43,9 +43,9 @@ int 		long_path_size(t_anthill *ant, int *ways_acc)
 	return (size);
 }
 
-int 		my_ceil(int num1, int num2)
+int			my_ceil(int num1, int num2)
 {
-	int 	res;
+	int		res;
 
 	if (num1 % num2 == 0)
 		res = num1 / num2;
@@ -54,15 +54,15 @@ int 		my_ceil(int num1, int num2)
 	return (res);
 }
 
-int 		search_count(int ants, int size_big_way)
+int			search_count(int ants, int size_big_way)
 {
 	return ((ants - 1) + size_big_way);
 }
 
-int 		open_ways(int *ways_acc, int size)
+int			open_ways(int *ways_acc, int size)
 {
-	int 	i;
-	int 	res;
+	int		i;
+	int		res;
 
 	i = 0;
 	res = 0;
@@ -75,14 +75,12 @@ int 		open_ways(int *ways_acc, int size)
 	return (res);
 }
 
-int 		*right_ways(t_anthill *ant)
+int			*right_ways(t_anthill *ant, int count, int tmp_count)
 {
 	int		size_ways;
 	int		*ways_acc;
-	int 	*res_ways_acc;
-	int 	ants;
-	int 	count;
-	int 	tmp_count;
+	int		*res_ways_acc;
+	int		ants;
 
 	size_ways = len_int(ant->ways) - 1;
 	ways_acc = new_ways_acc(size_ways);
@@ -99,5 +97,6 @@ int 		*right_ways(t_anthill *ant)
 		}
 	}
 	free(ways_acc);
-	return (search_count(ant->ants, ant->shortest_way[0]) == count ? NULL : res_ways_acc);
+	return (search_count(ant->ants, ant->shortest_way[0])
+	== count ? NULL : res_ways_acc);
 }

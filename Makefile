@@ -9,6 +9,8 @@ validation.c\
 pars_line.c\
 pars_line_2.c\
 algorithm.c\
+algorithm_2.c\
+algorithm_3.c\
 short_way.c\
 go_ants.c\
 track_record.c\

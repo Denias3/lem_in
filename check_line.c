@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_line.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emeha <emeha@student.42.fr>                +#+  +:+       +#+        */
+/*   By: fschille <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/04/10 04:39:50 by emeha             #+#    #+#             */
-/*   Updated: 2019/04!/10 05:32:02 by emeha            ###   ########.fr       */
+/*   Created: 2019/10/16 11:53:21 by fschille          #+#    #+#             */
+/*   Updated: 2019/10/16 11:53:28 by fschille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,9 +68,9 @@ int				check_line(char *line)
 {
 	if (check_number_positive(line))
 		return (0);
-	else if (the_room(line))
+	else if (the_room(line, 0))
 		return (1);
-	else if (the_link(line))
+	else if (the_link(line, 0, 0))
 		return (2);
 	else if (the_comment(line))
 		return (3);

@@ -12,9 +12,9 @@
 
 #include "lem_in.h"
 
-void        go_way(t_room *end_rooms, int *way)
+void			go_way(t_room *end_rooms, int *way)
 {
-	int		i;
+	int			i;
 
 	i = 1;
 	while (way[0] >= i)
@@ -31,38 +31,29 @@ void        go_way(t_room *end_rooms, int *way)
 	}
 }
 
-void    go_ants(t_room *rooms, t_anthill *ant)
+void			go_ants(t_room *rooms, t_anthill *ant, int *ways_acc, int j)
 {
-    t_room	*st_room;
-    t_room	*stop_room;
-	int		*ways_acc;
-
-	int		j;
-	ways_acc = right_ways(ant);
+	t_room		*st_room;
+	t_room		*stop_room;
 
 	st_room = search_room_type(rooms, 1);
 	stop_room = search_room_type(rooms, 2);
 	st_room->state = ant->ants;
 	while (stop_room->state != ant->ants)
-    {
-		j = 0;
+	{
+		j = -1;
 		if (ways_acc == NULL)
 		{
 			(st_room->visit)++;
 			go_way(stop_room, ant->r_shortest_way);
 		}
 		else
-		{
-			while (ant->r_ways[j] != NULL)
-			{
+			while (ant->r_ways[++j] != NULL)
 				if (ways_acc[j] == 1)
 				{
 					(st_room->visit)++;
 					go_way(stop_room, ant->r_ways[j]);
 				}
-				j++;
-			}
-		}
 		if (stop_room->state != ant->ants)
 			ft_printf("\n");
 	}
