@@ -102,18 +102,17 @@ int			link_check(t_room *room, t_room *room_2)
 	return (0);
 }
 
-int 		check_room_visit(t_room *room, int type)
+int 		check_room_visit(t_room *room, int size)
 {
 	int 	i;
 
 	i = 0;
 	while (room->next_rooms[i] != NULL)
 	{
-		if (room->closed_links[i] == type)
-		{
-			if (room->next_rooms[i]->visit == 2)
-				return (1);
-		}
+		if (room->next_rooms[i]->type == 4 && room->next_rooms[i]->next_rooms[0]->visit == size)
+			return (1);
+		else if (room->next_rooms[i]->visit == size)
+			return (1);
 		i++;
 	}
 	return (0);
@@ -191,11 +190,6 @@ int			*df_check(t_room *end_room)
 	j = 1;
 	while (room != NULL)
 	{
-		if (ft_strcmp(room->name, "Ep_2") == 0)
-		{
-			j++;
-			j--;
-		}
 		tmp = room;
 		while (check == 0 && end_room->bf == tmp->bf + 1)
 		{
@@ -204,9 +198,13 @@ int			*df_check(t_room *end_room)
 			tmp = tmp->bfs_prev;
 		}
 		if (check == 1 && end_room->bf == room->bf + 1 && (link_check(end_room, room) == 1))
+		{
 			df_check2(&end_room, room, way, &j);
+		}
 		if (check == 0 && end_room->bf == room->bf + 1 && (link_check(end_room, room) == 2))
+		{
 			df_check2(&end_room, room, way, &j);
+		}
 		check = 0;
 		room = room->bfs_prev;
 	}

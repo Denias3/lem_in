@@ -326,15 +326,6 @@ void			algorithm(t_anthill *ant, t_room *rooms, char *map)
 
  	while ((possible_ways(rooms)) > 0 && to_position_2(rooms) == 0)
 	{
-//		ch_bfs_bf(rooms);
-//		ch_t_4(rooms);
-//		print_rooms(rooms, 2);
-//		print_bfs(rooms);
-		if (i == 8)
-		{
-			i++;
-			i--;
-		}
 		if (short_way(rooms, ant, 0) == 0)
 		{
 
@@ -350,6 +341,8 @@ void			algorithm(t_anthill *ant, t_room *rooms, char *map)
 			else
 				rooms_sharing(rooms, ant);
 		}
+		else
+			break ;
 		print_ways(rooms, ant, 0);
 		i++;
 	}
