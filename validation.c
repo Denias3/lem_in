@@ -75,29 +75,28 @@ void				stage_rooms(t_var_valid *var_valid, t_anthill *ant, t_room *rooms, char 
 		error("not valid map");
 }
 
-void				stage_link(t_var_valid *var_valid, t_room *rooms, char *line)
+void				stage_link(t_var_valid *var_valid, char *line, t_anthill *ant)
 {
 	if (var_valid->type == 2)
 	{
 		var_valid->stage = 2;
-		if (pars_line_link(rooms, line) == 1)
+		if (pars_line_link_new(line, ant) == 1)
 			error("not valid link");
 	}
 	else
 		error("not valid map");
 }
 
-char				*validation(t_anthill *ant, t_room *rooms)
+void				validation(t_anthill *ant, t_room *rooms)
 {
 	char			*line;
 	int				fd;
 	t_var_valid		*var_valid;
-	char 			*map;
 	char			*tmp;
 
-	map = ft_strnew(0);
+
 	var_valid = new_var_valid();
-	fd = open("/Users/fschille/Desktop/lem_in/maps/bigsup04", O_RDONLY);
+	fd = open("/Users/emeha/CLionProjects/lem_in/maps/m1", O_RDONLY);
 //	fd = 0;
 	while (get_next_line(fd, &line) > 0)
 	{
@@ -106,11 +105,11 @@ char				*validation(t_anthill *ant, t_room *rooms)
 			error("not valid line in the map");
 		if (var_valid->type == 6 || var_valid->type == 3)
 		{
-			tmp = map;
-			map = ft_strjoin_free(map, line, 0, 1);
+			tmp = ant->map;
+			ant->map = ft_strjoin_free(ant->map, line, 0, 1);
 			free(tmp);
-			tmp = map;
-			map = ft_strjoin_free(map, ft_strdup("\n"), 0, 1);
+			tmp = ant->map;
+			ant->map = ft_strjoin_free(ant->map, ft_strdup("\n"), 0, 1);
 			free(tmp);
 			continue ;
 		}
@@ -119,18 +118,15 @@ char				*validation(t_anthill *ant, t_room *rooms)
 		else if (var_valid->stage == 1 && var_valid->type != 2)
 			stage_rooms(var_valid, ant, rooms, line);
 		else if ((var_valid->stage == 2 || var_valid->stage == 1))
-			stage_link(var_valid, rooms, line);
-		tmp = map;
-		map = ft_strjoin_free(map, line, 0, 1);
+			stage_link(var_valid, line, ant);
+		tmp = ant->map;
+		ant->map = ft_strjoin_free(ant->map, line, 0, 1);
 		free(tmp);
-		tmp = map;
-		map = ft_strjoin_free(map, ft_strdup("\n"), 0, 1);
+		tmp = ant->map;
+		ant->map = ft_strjoin_free(ant->map, ft_strdup("\n"), 0, 1);
 		free(tmp);
 	}
 	if (var_valid->stage != 2 || var_valid->n_comm != 2)
 		error("all conditions of the card are not met");
 	free(var_valid);
-	if (linking(rooms, ant) != 0)
-		error("Kakayto oshibka!!!!!!!!!!!!!!!!!!!!!!!!!!");
-	return (map);
 }

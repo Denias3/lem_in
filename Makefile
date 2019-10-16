@@ -26,6 +26,7 @@ all: $(NAME)
 $(NAME): $(SRC)
 		@make -C ft_printf
 		@gcc -Wall -Werror -Wextra -g $(SRC) $(INCLUDES) -o $(NAME)
+		gcc -pg -Wall $(SRC) $(INCLUDES) -o htable_test
 		@echo "-> compil lem-in"
 
 comp:

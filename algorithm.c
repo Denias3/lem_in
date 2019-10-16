@@ -318,7 +318,7 @@ void			ch_t_4(t_room *rooms)
 	ft_printf("ok\n");
 }
 
-void			algorithm(t_anthill *ant, t_room *rooms, char *map)
+void			algorithm(t_anthill *ant, t_room *rooms)
 {
 	all_creat_closed_links(rooms);
 	shortest_way(rooms, ant);
@@ -342,19 +342,14 @@ void			algorithm(t_anthill *ant, t_room *rooms, char *map)
 				rooms_sharing(rooms, ant);
 		}
 		else
-		{
-
 			break ;
-		}
 //		print_ways(rooms, ant, 0);
 		i++;
 	}
-//	ft_printf("/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\\n>>%d - Possible Ways\n/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\\n", possible_ways(rooms));
-//	print_ways(rooms, ant, 3);
- 	ft_printf("%s\n", map);
- 	free(map);
+ 	ft_printf("%s\n", ant->map);
+ 	free(ant->map);
 //	print_rooms(rooms, 2);
-
+//	print_ways(rooms, ant, 0);
 	del_copies(rooms, ant);
 
 	null_visit_close(rooms);
@@ -362,7 +357,7 @@ void			algorithm(t_anthill *ant, t_room *rooms, char *map)
 	revers_ways(search_start_room(rooms), ant);
 //	print_ways(rooms, ant, 1);
 	go_ants(rooms, ant);
-//	ft_printf("\n\n");
+	ft_printf("\n\n");
 //	print_way(rooms, ant->r_ways[0], 0);
 //	print_way(rooms, ant->r_ways[1], 1);
 }

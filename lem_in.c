@@ -11,20 +11,44 @@
 /* ************************************************************************** */
 
 #include "lem_in.h"
-
-
+#include <sys/time.h>
+#include <stdio.h>
 
 int					main(void)
 {
 	t_anthill		*ant;
 	t_room			*rooms;
-	char			*map;
+
+	struct timeval  tv;
+	gettimeofday(&tv, NULL);
+
+	double time_begin = ((double)tv.tv_sec) * 1000 +
+						((double)tv.tv_usec) / 1000;
 
 	rooms = new_room();
 	ant = newanthill();
-	map = validation(ant, rooms);
-	algorithm(ant, rooms, map);
+	validation(ant, rooms);
+
+	gettimeofday(&tv, NULL);
+	double time_end = ((double)tv.tv_sec) * 1000 +
+					  ((double)tv.tv_usec) / 1000 ;
+
+	double total_time_ms = time_end - time_begin;
+
+	printf("TOTAL TIME val (ms) = %f\n", total_time_ms);
+
+	gettimeofday(&tv, NULL);
+
+	time_begin = ((double)tv.tv_sec) * 1000 +
+						((double)tv.tv_usec) / 1000;
+	algorithm(ant, rooms);
 	free_track_record(ant);
 	free_rooms(rooms);
+	gettimeofday(&tv, NULL);
+	time_end = ((double)tv.tv_sec) * 1000 +
+					  ((double)tv.tv_usec) / 1000 ;
+
+	total_time_ms = time_end - time_begin;
+	printf("TOTAL TIME alg (ms) = %f\n", total_time_ms);
 	return (0);
 }
