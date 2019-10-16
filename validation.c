@@ -96,7 +96,7 @@ void				validation(t_anthill *ant, t_room *rooms)
 
 
 	var_valid = new_var_valid();
-	fd = open("/Users/fschille/Desktop/lem_in/maps/m1", O_RDONLY);
+	fd = open("/Users/fschille/Desktop/lem_in/maps/m6", O_RDONLY);
 //	fd = 0;
 	while (get_next_line(fd, &line) > 0)
 	{

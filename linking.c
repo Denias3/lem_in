@@ -50,13 +50,13 @@ char 		**links_for_room(char *name_room, char **links)
 	{
 		if ((ent = ft_strstr(links[i], name_room)) != NULL)
 		{
-			if (ent[ft_strlen(name_room)] == '-')
+			if (ent[ft_strlen(name_room)] == '-' && ft_strncmp(links[i], ent, search_char(links[i], '-')) == 0)
 			{
 				links_room[j] = (char*)malloc(sizeof(char) * ft_strlen(links[i]));
 				ft_strcpy(links_room[j], (ent + ft_strlen(name_room) + 1));
 				j++;
 			}
-			else if (ent[ft_strlen(name_room)] == '\0')
+			else if (ent[ft_strlen(name_room)] == '\0' && ft_strcmp(links[i] + search_char(links[i], '-') + 1, name_room) == 0)
 			{
 				links_room[j] = (char*)malloc(sizeof(char) * ft_strlen(links[i]));
 				ft_strncpy(links_room[j], links[i], search_char(links[i], '-'));
