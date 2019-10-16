@@ -75,12 +75,12 @@ void				stage_rooms(t_var_valid *var_valid, t_anthill *ant, t_room *rooms, char 
 		error("not valid map");
 }
 
-void				stage_link(t_var_valid *var_valid, char *line, t_anthill *ant)
+void				stage_link(t_var_valid *var_valid, char *line, t_room *rooms)
 {
 	if (var_valid->type == 2)
 	{
 		var_valid->stage = 2;
-		if (pars_line_link_new(line, ant) == 1)
+		if (pars_line_link(rooms, line) == 1)
 			error("not valid link");
 	}
 	else
@@ -96,7 +96,7 @@ void				validation(t_anthill *ant, t_room *rooms)
 
 
 	var_valid = new_var_valid();
-	fd = open("/Users/fschille/Desktop/lem_in/maps/m1", O_RDONLY);
+	fd = open("/Users/emeha/CLionProjects/lem_in/maps/bigm", O_RDONLY);
 //	fd = 0;
 	while (get_next_line(fd, &line) > 0)
 	{
@@ -118,7 +118,7 @@ void				validation(t_anthill *ant, t_room *rooms)
 		else if (var_valid->stage == 1 && var_valid->type != 2)
 			stage_rooms(var_valid, ant, rooms, line);
 		else if ((var_valid->stage == 2 || var_valid->stage == 1))
-			stage_link(var_valid, line, ant);
+			stage_link(var_valid, line, rooms);
 		tmp = ant->map;
 		ant->map = ft_strjoin_free(ant->map, line, 0, 1);
 		free(tmp);
@@ -128,6 +128,6 @@ void				validation(t_anthill *ant, t_room *rooms)
 	}
 	if (var_valid->stage != 2 || var_valid->n_comm != 2)
 		error("all conditions of the card are not met");
-	linking(rooms, ant);
+//	linking(rooms, ant);
 	free(var_valid);
 }

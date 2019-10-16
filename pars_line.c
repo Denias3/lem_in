@@ -46,7 +46,7 @@ static void		pars_line_room_2(t_anthill *ant, t_room *room,
 
 	split = ft_strsplit(line, ' ');
 	room->name = split[0];
-	memaloc_map_rooms(ant, split[0]);
+//	memaloc_map_rooms(ant, split[0]);
 	if (check_num(split[1]) == 1|| check_num(split[2]) == 1)
 		error("no valid room");
 	room->x = ft_atoi(split[1]);
@@ -66,24 +66,31 @@ static void		pars_line_room_2(t_anthill *ant, t_room *room,
 int				pars_line_room(t_anthill *ant, t_room *room,
 				char *line, t_var_valid *v_val)
 {
-	t_room		*rooms;
+//	t_room		*rooms;
 
 	if (v_val->type == 1 || v_val->type == 4 || v_val->type == 5)
 	{
-		rooms = room;
+//		rooms = room;
 		ant->rooms++;
-		while (room != NULL && room->name != NULL)
-		{
-			if (room->next == NULL)
-			{
-				room->next = new_room();
-				room = room->next;
-				break ;
-			}
-			room = room->next;
-		}
-		pars_line_room_2(ant, room, line, v_val);
-		if (check_name_coord(rooms, room) == 0)
+//		while (room != NULL && room->name != NULL)
+//		{
+//			if (room->next == NULL)
+//			{
+				if (ant->end_room == NULL)
+				{
+					ant->end_room = room;
+				}
+				else
+				{
+					ant->end_room->next = new_room();
+					ant->end_room = ant->end_room->next;
+				}
+//				break ;
+//			}
+//			room = room->next;
+//		}
+		pars_line_room_2(ant, ant->end_room, line, v_val);
+		if (check_name_coord(room, ant->end_room) == 0)
 			error("two rooms with the same coordinates");
 		return (1);
 	}
@@ -138,25 +145,25 @@ int				pars_line_link(t_room *room, char *line)
 	}
 }
 
-int				pars_line_link_new(char *line, t_anthill *ant)
-{
-	char		**split;
-
-	split = ft_strsplit(line, '-');
-	if (check_name_2(split[0], split[1], ant) &&
-		ft_strcmp(split[0], split[1]) != 0)
-	{
-		memaloc_map_links(ant, line);
-		free(split[0]);
-		free(split[1]);
-		free(split);
-		return (0);
-	}
-	else
-	{
-		free(split[0]);
-		free(split[1]);
-		free(split);
-		return (1);
-	}
-}
+//int				pars_line_link_new(char *line, t_anthill *ant)
+//{
+//	char		**split;
+//
+//	split = ft_strsplit(line, '-');
+//	if (check_name_2(split[0], split[1], ant) &&
+//		ft_strcmp(split[0], split[1]) != 0)
+//	{
+//		memaloc_map_links(ant, line);
+//		free(split[0]);
+//		free(split[1]);
+//		free(split);
+//		return (0);
+//	}
+//	else
+//	{
+//		free(split[0]);
+//		free(split[1]);
+//		free(split);
+//		return (1);
+//	}
+//}

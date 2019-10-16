@@ -39,8 +39,7 @@ typedef	struct		s_anthill
 {
 	int				ants;
 	char 			*map;
-	char 			**map_links;
-	char 			**map_rooms;
+	t_room			*end_room;
 	int				rooms;
 	int 			*shortest_way;
 	int 			*r_shortest_way;
@@ -118,10 +117,5 @@ void				print_way_r(t_room *room, int *way, int t);
 int					to_position_2(t_room *rooms);
 void				print_bfs(t_room *rooms);
 int 				check_num(char *num);
-int					check_name_2(char *name, char *name2, t_anthill *ant);
-int					pars_line_link_new(char *line, t_anthill *ant);
-void				memaloc_map_rooms(t_anthill *ant, char *name);
-void				memaloc_map_links(t_anthill *ant, char *name);
-int 				linking(t_room *rooms, t_anthill *ant);
 
 #endif

@@ -349,7 +349,7 @@ void			algorithm(t_anthill *ant, t_room *rooms)
  	ft_printf("%s\n", ant->map);
  	free(ant->map);
 //	print_rooms(rooms, 2);
-	print_ways(rooms, ant, 0);
+//	print_ways(rooms, ant, 0);
 	del_copies(rooms, ant);
 
 	null_visit_close(rooms);

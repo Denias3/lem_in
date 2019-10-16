@@ -128,26 +128,26 @@ void		write_next_rooms(t_room *rooms, t_room *room, char **links_room)
 	}
 }
 
-int 		linking(t_room *rooms, t_anthill *ant)
-{
-	t_room	*room;
-//	t_room	*st_rooom;
-	char 	**links_room;
-
-//	st_rooom = rooms;
-	while (rooms != NULL)
-	{
-		links_room = links_for_room(rooms->name, ant->map_links);
-		memolloc_next_rooms(rooms, NULL, (size_arr(links_room) + 1));
-//		rooms->next_rooms[0] = NULL;
-		room = rooms->next;
-		while (room != NULL)
-		{
-//			if (ft_strcmp(rooms->name, room->name) != 0)
-			write_next_rooms(rooms, room, links_room);
-			room = room->next;
-		}
-		rooms = rooms->next;
-	}
-	return (1);
-}
+//int 		linking(t_room *rooms, t_anthill *ant)
+//{
+//	t_room	*room;
+////	t_room	*st_rooom;
+//	char 	**links_room;
+//
+////	st_rooom = rooms;
+//	while (rooms != NULL)
+//	{
+//		links_room = links_for_room(rooms->name, ant->map_links);
+//		memolloc_next_rooms(rooms, NULL, (size_arr(links_room) + 1));
+////		rooms->next_rooms[0] = NULL;
+//		room = rooms->next;
+//		while (room != NULL)
+//		{
+////			if (ft_strcmp(rooms->name, room->name) != 0)
+//			write_next_rooms(rooms, room, links_room);
+//			room = room->next;
+//		}
+//		rooms = rooms->next;
+//	}
+//	return (1);
+//}

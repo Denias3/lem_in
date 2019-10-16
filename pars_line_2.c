@@ -59,23 +59,23 @@ t_room			*check_name(t_room *rooms, char *name, char *name_link)
 }
 
 
-int				check_name_2(char *name, char *name2, t_anthill *ant)
-{
-	int i;
-	int ch[2];
-
-	ch[0] = 0;
-	ch[1] = 0;
-	i = 0;
-	while (ant->map_rooms[i] != NULL)
-	{
-		if (ft_strcmp(name, ant->map_rooms[i]) == 0)
-			ch[0] = 1;
-		if (ft_strcmp(name2, ant->map_rooms[i]) == 0)
-			ch[1] = 1;
-		if (ch[0] && ch[1])
-			return (1);
-		i++;
-	}
-	return (0);
-}
+//int				check_name_2(char *name, char *name2, t_anthill *ant)
+//{
+//	int i;
+//	int ch[2];
+//
+//	ch[0] = 0;
+//	ch[1] = 0;
+//	i = 0;
+//	while (ant->map_rooms[i] != NULL)
+//	{
+//		if (ft_strcmp(name, ant->map_rooms[i]) == 0)
+//			ch[0] = 1;
+//		if (ft_strcmp(name2, ant->map_rooms[i]) == 0)
+//			ch[1] = 1;
+//		if (ch[0] && ch[1])
+//			return (1);
+//		i++;
+//	}
+//	return (0);
+//}
