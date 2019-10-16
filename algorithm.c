@@ -104,24 +104,25 @@ void			search_xlink(t_room *room, t_anthill *ant)
 	int			size;
 
 	i = 0;
-	j = 1;
+	j = 0;
 	while (ant->ways[i] != NULL)
 		i++;
 	i--;
 	size = ant->ways[i][0];
-	while (size >= j)
+	while (size >= ++j)
 	{
 		room = room->next_rooms[ant->ways[i][j]];
-		if ((room->type == 0 || room->type == 3 || room->type == 4) && room->visit > 1)
+		if ((room->type == 0 || room->type == 3 || room->type == 4) &&
+		room->visit > 1)
 		{
-			if (delet_xlink(room->next_rooms[ant->ways[i][j + 1]], room->id) == 0)
+			if (delet_xlink(room->next_rooms[ant->ways[i][j + 1]],
+					room->id) == 0)
 			{
 				room->closed_links[ant->ways[i][j + 1]] = 4;
 				room->visit = 0;
 				break ;
 			}
 		}
-		j++;
 	}
 }
 
@@ -141,7 +142,8 @@ int				check_xlink(t_room *room, t_anthill *ant)
 	while (size >= j)
 	{
 		room = room->next_rooms[ant->ways[i][j]];
-		if ((room->type == 0 || room->type == 3 || room->type == 4) && room->visit > 1)
+		if ((room->type == 0 || room->type == 3 || room->type == 4)
+		&& room->visit > 1)
 		{
 			return (1);
 		}
@@ -179,9 +181,9 @@ void			all_creat_closed_links(t_room *rooms)
 	}
 }
 
-int 			link_search(t_room *rooms, int id_room)
+int				link_search(t_room *rooms, int id_room)
 {
-	int 		i;
+	int			i;
 
 	i = 0;
 	while (rooms->next_rooms[i] != NULL)
@@ -193,42 +195,39 @@ int 			link_search(t_room *rooms, int id_room)
 	return (-1);
 }
 
-void			revers_ways(t_room *rooms, t_anthill *ant)
+void			revers_ways(t_room *rooms, t_anthill *ant, int i, int j)
 {
 	t_room		*room;
-	int 		i;
-	int 		j;
 
-	i = 0;
 	ant->r_ways = (int**)malloc(sizeof(int*) * len_int(ant->ways));
 	ant->r_ways[len_int(ant->ways) - 1] = NULL;
-	while (ant->ways[i] != NULL)
+	while (ant->ways[++i] != NULL)
 	{
-		j = 0;
+		j = -1;
 		room = rooms;
-		while (j <= ant->ways[i][0])
+		while (++j <= ant->ways[i][0])
 		{
 			if (j == 0)
 			{
-				ant->r_ways[i] = (int *) malloc(sizeof(int) * (ant->ways[i][j] + 1));
+				ant->r_ways[i] = (int*)malloc(sizeof(int) *
+						(ant->ways[i][j] + 1));
 				ant->r_ways[i][j] = ant->ways[i][j];
 			}
 			else
 			{
-				ant->r_ways[i][j] = link_search(room->next_rooms[ant->ways[i][j]], room->id);
+				ant->r_ways[i][j] = link_search(room->next_rooms
+						[ant->ways[i][j]], room->id);
 				room = room->next_rooms[ant->ways[i][j]];
 			}
-			j++;
 		}
 		ant->r_ways[i] = my_intrevers(ant->r_ways[i]);
-		i++;
 	}
 }
 
 void			revers_shortest_ways(t_room *rooms, t_anthill *ant)
 {
 	t_room		*room;
-	int 		i;
+	int			i;
 
 	i = 0;
 	room = rooms;
@@ -236,12 +235,14 @@ void			revers_shortest_ways(t_room *rooms, t_anthill *ant)
 	{
 		if (i == 0)
 		{
-			ant->r_shortest_way = (int*)malloc(sizeof(int) * (ant->shortest_way[i] + 1));
+			ant->r_shortest_way = (int*)malloc(sizeof(int) *
+					(ant->shortest_way[i] + 1));
 			ant->r_shortest_way[i] = ant->shortest_way[i];
 		}
 		else
 		{
-			ant->r_shortest_way[i] = link_search(room->next_rooms[ant->shortest_way[i]], room->id);
+			ant->r_shortest_way[i] = link_search(room->next_rooms
+					[ant->shortest_way[i]], room->id);
 			room = room->next_rooms[ant->shortest_way[i]];
 		}
 		i++;
@@ -261,16 +262,13 @@ void			shortest_way(t_room *rooms, t_anthill *ant)
 	}
 	else
 		error("did not find a way");
-
 }
 
 void			algorithm(t_anthill *ant, t_room *rooms)
 {
 	all_creat_closed_links(rooms);
 	shortest_way(rooms, ant);
-	int i = 0;
-
- 	while ((possible_ways(rooms)) > 0 && to_position_2(rooms) == 0)
+	while ((possible_ways(rooms)) > 0 && to_position_2(rooms) == 0)
 	{
 		if (short_way(rooms, ant, 0) == 0)
 		{
@@ -286,12 +284,11 @@ void			algorithm(t_anthill *ant, t_room *rooms)
 		}
 		else
 			break ;
-		i++;
 	}
- 	ft_printf("%s\n", ant->map);
- 	free(ant->map);
+	ft_printf("%s\n", ant->map);
+	free(ant->map);
 	del_copies(rooms, ant);
 	null_visit_close(rooms);
-	revers_ways(search_start_room(rooms), ant);
+	revers_ways(search_start_room(rooms), ant, -1, -1);
 	go_ants(rooms, ant);
 }

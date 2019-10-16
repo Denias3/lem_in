@@ -96,8 +96,8 @@ void				validation(t_anthill *ant, t_room *rooms)
 
 
 	var_valid = new_var_valid();
-//	fd = open("/Users/emeha/CLionProjects/lem_in/maps/m14", O_RDONLY);
-	fd = 0;
+	fd = open("/Users/fschille/Desktop/lem_in/maps/m1", O_RDONLY);
+//	fd = 0;
 	while (get_next_line(fd, &line) > 0)
 	{
 		var_valid->type = check_line(line);
