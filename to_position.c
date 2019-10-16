@@ -70,7 +70,6 @@ void			add_bfs(t_room *rooms, t_room *room, int bf)
 		tmp->bfs_next = rooms->next_rooms[0];
 		rooms->next_rooms[0]->bfs_prev = tmp;
 		rooms->next_rooms[0]->bf = rooms->bf;
-		rooms->next_rooms[0]->link_in = rooms;
 		tmp = rooms;
 		if (tmp->bfs_next != NULL)
 		{

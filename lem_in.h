@@ -26,8 +26,6 @@ typedef	struct		s_room
 	int				y;
 	int				bf;
 	int				visit;
-	int 			posit;
-	struct s_room	*link_in;
 	int				*closed_links;
 	struct s_room	**next_rooms;
 	struct s_room	*next;
@@ -45,8 +43,6 @@ typedef	struct		s_anthill
 	int 			*r_shortest_way;
 	int				**ways;
 	int				**r_ways;
-	int				max_x;
-	int				max_y;
 }					t_anthill;
 
 /*

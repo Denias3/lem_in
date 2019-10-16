@@ -23,8 +23,6 @@ t_anthill	*newanthill(void)
 	ant->r_ways = NULL;
 	ant->end_room = NULL;
 	ant->ants = 0;
-	ant->max_x = 0;
-	ant->max_y = 0;
 	ant->rooms = 0;
 	ant->map = ft_strnew(0);
 	return (ant);
