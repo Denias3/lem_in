@@ -56,10 +56,6 @@ int 		my_ceil(int num1, int num2)
 
 int 		search_count(int ants, int size_big_way)
 {
-//	if (ants - 1 == 0)
-//		ants -= 0;
-//	else
-//		ants -= 1;
 	return ((ants - 1) + size_big_way);
 }
 
@@ -87,7 +83,6 @@ int 		*right_ways(t_anthill *ant)
 	int 	ants;
 	int 	count;
 	int 	tmp_count;
-//	int 	i;
 
 	size_ways = len_int(ant->ways) - 1;
 	ways_acc = new_ways_acc(size_ways);
@@ -97,13 +92,6 @@ int 		*right_ways(t_anthill *ant)
 	{
 		ants = my_ceil(ant->ants, open_ways(ways_acc, size_ways));
 		tmp_count = search_count(ants, long_path_size(ant, ways_acc));
-//		i = 0;
-//		while (size_ways > i + 1)
-//		{
-//			ft_printf("%d(%d)-", ways_acc[i], i);
-//			i++;
-//		}
-//		ft_printf("%d(%d)\n", ways_acc[i], i);
 		if (tmp_count <= count)
 		{
 			cop_ways_acc(res_ways_acc, ways_acc, size_ways);

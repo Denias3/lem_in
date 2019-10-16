@@ -31,38 +31,18 @@ void        go_way(t_room *end_rooms, int *way)
 	}
 }
 
-void	print_ways_r_acc(t_room *rooms, t_anthill *ant, int t, int *ways_acc)
-{
-	int j;
-
-	j = 0;
-	while (ant->r_ways[j] != NULL)
-	{
-		if (ways_acc[j] == 1)
-		{
-			print_way_r(rooms, ant->r_ways[j], t);
-			ft_printf("\n");
-		}
-		j++;
-	}
-	ft_printf("**-------**\n");
-}
-
 void    go_ants(t_room *rooms, t_anthill *ant)
 {
     t_room	*st_room;
     t_room	*stop_room;
 	int		*ways_acc;
-//	int 	*my_ways;
 
 	int		j;
-//	ways_acc = ways_allow(rooms, ant);
 	ways_acc = right_ways(ant);
 
 	st_room = search_room_type(rooms, 1);
 	stop_room = search_room_type(rooms, 2);
 	st_room->state = ant->ants;
-//	print_ways_r_acc(rooms, ant, 0, ways_acc);
 	while (stop_room->state != ant->ants)
     {
 		j = 0;

@@ -76,29 +76,6 @@ t_room			*search_start_room(t_room *rooms)
 	return (NULL);
 }
 
-//void			realoc_xlink(t_room *room, int position)
-//{
-//	t_room		**tmp;
-//	int			i;
-//	int			j;
-//
-//	tmp = (t_room**)malloc(sizeof(t_room*) * (size_link(room)));
-//	i = 0;
-//	j = 0;
-//	while (room->next_rooms[i] != NULL)
-//	{
-//		if (i != position)
-//		{
-//			tmp[j] = room->next_rooms[i];
-//			j++;
-//		}
-//		i++;
-//	}
-//	tmp[j] = NULL;
-//	free(room->next_rooms);
-//	room->next_rooms = tmp;
-//}
-
 int				delet_xlink(t_room *room, int id)
 {
 	int			i;
@@ -284,38 +261,7 @@ void			shortest_way(t_room *rooms, t_anthill *ant)
 	}
 	else
 		error("did not find a way");
-//	print_rooms(rooms, 2);
 
-}
-
-void			ch_bfs_bf(t_room *rooms)
-{
-	int cou;
-
-	cou = 0;
-	while (rooms != NULL)
-	{
-		if (cou > rooms->bf)
-			error("bf error");
-		if (cou < rooms->bf)
-			cou = rooms->bf;
-		rooms = rooms->bfs_next;
-	}
-	ft_printf("ok\n");
-}
-
-void			ch_t_4(t_room *rooms)
-{
-	while (rooms != NULL)
-	{
-		if (rooms->type == 4)
-		{
-			ft_printf("%s\n", rooms->name);
-//			error("ko");
-		}
-		rooms = rooms->bfs_next;
-	}
-	ft_printf("ok\n");
 }
 
 void			algorithm(t_anthill *ant, t_room *rooms)
@@ -328,13 +274,10 @@ void			algorithm(t_anthill *ant, t_room *rooms)
 	{
 		if (short_way(rooms, ant, 0) == 0)
 		{
-
 			if (check_xlink(rooms, ant) == 1)
 			{
 				del_copies(rooms, ant);
-//				print_ways(rooms, ant, 0);
 				search_xlink(rooms, ant);
-//				print_ways(rooms, ant, 3);
 				free_ways(ant);
 				null_visit_close(rooms);
 			}
@@ -343,21 +286,12 @@ void			algorithm(t_anthill *ant, t_room *rooms)
 		}
 		else
 			break ;
-//		print_ways(rooms, ant, 0);
 		i++;
 	}
  	ft_printf("%s\n", ant->map);
  	free(ant->map);
-//	print_rooms(rooms, 2);
-//	print_ways(rooms, ant, 0);
 	del_copies(rooms, ant);
-
 	null_visit_close(rooms);
-
 	revers_ways(search_start_room(rooms), ant);
-//	print_ways(rooms, ant, 1);
 	go_ants(rooms, ant);
-	ft_printf("\n\n");
-//	print_way(rooms, ant->r_ways[0], 0);
-//	print_way(rooms, ant->r_ways[1], 1);
 }
