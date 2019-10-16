@@ -50,7 +50,7 @@ t_room			*new_room(void)
 	room->closed_links = NULL;
 	room->visit = 0;
 	room->next = NULL;
-	room->next_rooms = (t_room**)malloc(sizeof(t_room*) * 1);
+	room->next_rooms = (t_room**)malloc(sizeof(t_room*) * 2);
 	room->next_rooms[0] = NULL;
 	room->next_rooms[1] = NULL;
 	room->bfs_next = NULL;

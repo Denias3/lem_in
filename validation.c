@@ -30,14 +30,16 @@ t_var_valid			*new_var_valid(void)
 void				stage_num_ant(t_var_valid *var_valid, t_anthill *ant, char *line)
 {
 	if (var_valid->type == 4 || var_valid->type == 5)
-		error("##start and ##end should be in front of the room");
+		error("##start and ##end should be "
+		"in front of the room");
 	else if (var_valid->type == 0)
 	{
 		ant->ants = ft_atoi(line);
 		var_valid->stage = 1;
 	}
 	else
-		error("at the very beginning should be the number of ants");
+		error("at the very beginning should be "
+		"the number of ants");
 }
 
 void				stage_rooms(t_var_valid *var_valid, t_anthill *ant, t_room *rooms, char *line)
@@ -96,7 +98,7 @@ void				validation(t_anthill *ant, t_room *rooms)
 
 
 	var_valid = new_var_valid();
-	fd = open("/Users/fschille/Desktop/lem_in/maps/m1", O_RDONLY);
+	fd = open("/Users/emeha/CLionProjects/lem_in/maps/m1", O_RDONLY);
 //	fd = 0;
 	while (get_next_line(fd, &line) > 0)
 	{
