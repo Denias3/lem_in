@@ -19,7 +19,10 @@ join_room.c\
 to_position.c\
 ways_acc.c\
 right_ways.c\
-validation_2.c
+validation_2.c\
+to_position_2.c\
+short_way_2.c\
+room_sharing_2.c
 
 
 INCLUDES = ft_printf/libftprintf.a
