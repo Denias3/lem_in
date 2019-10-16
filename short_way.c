@@ -57,37 +57,43 @@ void		df_check2(t_room **end_room, t_room *room, int *way, int *j)
 	}
 }
 
+void		df_check_2(t_room **end_room, t_room **room, int *way, int *j)
+{
+	t_room	*tmp;
+	int		check;
+
+	tmp = (*room);
+	check = 0;
+	while (check == 0 && (*end_room)->bf == tmp->bf + 1)
+	{
+		if (link_check((*end_room), tmp) == 1)
+			check = 1;
+		tmp = tmp->bfs_prev;
+	}
+	if (check == 1 && (*end_room)->bf == (*room)->bf + 1 &&
+		(link_check((*end_room), (*room)) == 1))
+		df_check2(end_room, (*room), way, j);
+	if (check == 0 && (*end_room)->bf == (*room)->bf + 1 &&
+		(link_check((*end_room), (*room)) == 2))
+		df_check2(end_room, (*room), way, j);
+	check = 0;
+	(*room) = (*room)->bfs_prev;
+}
+
 int			*df_check(t_room *end_room)
 {
 	t_room	*room;
-	t_room	*tmp;
-	int		check;
 	int		j;
 	int		*way;
 
 	room = end_room;
-	check = 0;
 	way = (int*)malloc(sizeof(int) * (end_room->bf + 1));
 	way[0] = end_room->bf;
 	room = room->bfs_prev;
 	j = 1;
 	while (room != NULL)
 	{
-		tmp = room;
-		while (check == 0 && end_room->bf == tmp->bf + 1)
-		{
-			if (link_check(end_room, tmp) == 1)
-				check = 1;
-			tmp = tmp->bfs_prev;
-		}
-		if (check == 1 && end_room->bf == room->bf + 1 &&
-			(link_check(end_room, room) == 1))
-			df_check2(&end_room, room, way, &j);
-		if (check == 0 && end_room->bf == room->bf + 1 &&
-			(link_check(end_room, room) == 2))
-			df_check2(&end_room, room, way, &j);
-		check = 0;
-		room = room->bfs_prev;
+		df_check_2(&end_room, &room, way, &j);
 	}
 	if ((j - 1) == way[0])
 		return (way);
