@@ -54,8 +54,7 @@ void			go_ants(t_room *rooms, t_anthill *ant, int *ways_acc, int j)
 					(st_room->visit)++;
 					go_way(stop_room, ant->r_ways[j]);
 				}
-		if (stop_room->state != ant->ants)
-			ft_printf("\n");
+		ft_printf("\n");
 	}
 	free(ways_acc);
 }
