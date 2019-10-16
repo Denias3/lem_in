@@ -103,5 +103,5 @@ int					the_link(char *str);
 t_room				*search_start_room(t_room *rooms);
 int					to_position_2(t_room *rooms);
 int 				check_num(char *num);
-
+void				free_map(t_anthill *ant, char **line);
 #endif
