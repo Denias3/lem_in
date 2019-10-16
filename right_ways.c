@@ -12,21 +12,6 @@
 
 #include "lem_in.h"
 
-int			*new_ways_acc(int size)
-{
-	int		*ways_acc;
-	int		i;
-
-	ways_acc = (int*)malloc(sizeof(int) * size);
-	i = 0;
-	while (i < size)
-	{
-		ways_acc[i] = 0;
-		i++;
-	}
-	return (ways_acc);
-}
-
 int			long_path_size(t_anthill *ant, int *ways_acc)
 {
 	int		i;

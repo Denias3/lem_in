@@ -103,7 +103,6 @@ int					the_link(char *str, int i, int ch);
 t_room				*search_start_room(t_room *rooms);
 int					to_position_2(t_room *rooms);
 int					check_num(char *num);
-void				free_map(t_anthill *ant, char **line);
 t_room				*end_room_next(t_room *rooms);
 int					ended_way(t_room *room);
 int					possible_ways(t_room *room);
@@ -133,5 +132,6 @@ int					check_room_visit(t_room *room, int size);
 void				rewriting_room(t_room *room_in,
 							   t_room *room_out, int count_room);
 void				close_link_in(t_room *room_in);
+int					*new_ways_acc(int size);
 
 #endif

@@ -46,9 +46,9 @@ int				check_num(char *num)
 	return (0);
 }
 
-int			check_room_visit(t_room *room, int size)
+int				check_room_visit(t_room *room, int size)
 {
-	int	i;
+	int			i;
 
 	i = 0;
 	while (room->next_rooms[i] != NULL)

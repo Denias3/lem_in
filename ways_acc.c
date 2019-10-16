@@ -12,15 +12,30 @@
 
 #include "lem_in.h"
 
-void	cop_ways_acc(int *ways_acc, int *ways_acc_tmp, int size)
+int			*new_ways_acc(int size)
+{
+	int		*ways_acc;
+	int		i;
+
+	ways_acc = (int*)malloc(sizeof(int) * size);
+	i = 0;
+	while (i < size)
+	{
+		ways_acc[i] = 0;
+		i++;
+	}
+	return (ways_acc);
+}
+
+void		cop_ways_acc(int *ways_acc, int *ways_acc_tmp, int size)
 {
 	while (--size >= 0)
 		ways_acc[size] = ways_acc_tmp[size];
 }
 
-int		iteration_ways_acc(int *ways_acc, int size)
+int			iteration_ways_acc(int *ways_acc, int size)
 {
-	int i;
+	int		i;
 
 	i = 0;
 	while (i < size)

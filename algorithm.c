@@ -121,6 +121,5 @@ void			algorithm(t_anthill *ant, t_room *rooms)
 	del_copies(rooms, ant, 0, 0);
 	null_visit_close(rooms);
 	revers_ways(search_start_room(rooms), ant, -1, -1);
-	go_ants(rooms, ant, right_ways(ant, 0, 0),
-			-1);
+	go_ants(rooms, ant, right_ways(ant, 0, 0), -1);
 }
