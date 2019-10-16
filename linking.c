@@ -65,6 +65,8 @@ char 		**links_for_room(char *name_room, char **links)
 		}
 		i++;
 	}
+
+	links_room[j] = NULL;
 	return (links_room);
 }
 
@@ -81,9 +83,10 @@ void		write_next_rooms(t_room *rooms, t_room *room, char **links_room)
 	}
 	while (links_room[j] != NULL)
 	{
-		if (ft_strcmp(links_room[j], room->name) == 0)
+		if (links_room[j] != NULL && ft_strcmp(links_room[j], room->name) == 0)
 		{
 			rooms->next_rooms[i] = room;
+			rooms->next_rooms[i + 1] = NULL;
 			return ;
 		}
 		j++;
@@ -93,19 +96,23 @@ void		write_next_rooms(t_room *rooms, t_room *room, char **links_room)
 int 		linking(t_room *rooms, t_anthill *ant)
 {
 	t_room	*room;
+	t_room	*st_rooom;
 	char 	**links_room;
 
+	st_rooom = rooms;
 	while (rooms != NULL)
 	{
-		links_room = links_for_room(rooms->name, ant->links);
+		links_room = links_for_room(rooms->name, ant->map_links);
 		rooms->next_rooms = (t_room**)malloc(sizeof(t_room*) * (size_arr(links_room) + 1));
-		room->next_rooms[0] = NULL;
-		room = rooms->next;
+		rooms->next_rooms[0] = NULL;
+		room = st_rooom;
 		while (room != NULL)
 		{
-			write_next_rooms(rooms, room, links_room)
+			if (ft_strcmp(rooms->name, room->name) != 0)
+				write_next_rooms(rooms, room, links_room);
 			room = room->next;
 		}
 		rooms = rooms->next;
 	}
+	return (1);
 }
