@@ -342,14 +342,19 @@ void			algorithm(t_anthill *ant, t_room *rooms, char *map)
 				rooms_sharing(rooms, ant);
 		}
 		else
+		{
+
 			break ;
-		print_ways(rooms, ant, 0);
+		}
+//		print_ways(rooms, ant, 0);
 		i++;
 	}
+//	ft_printf("/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\\n>>%d - Possible Ways\n/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\\n", possible_ways(rooms));
+//	print_ways(rooms, ant, 3);
  	ft_printf("%s\n", map);
  	free(map);
 //	print_rooms(rooms, 2);
-//	print_ways(rooms, ant, 0);
+
 	del_copies(rooms, ant);
 
 	null_visit_close(rooms);

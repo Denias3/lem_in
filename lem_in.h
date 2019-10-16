@@ -39,6 +39,8 @@ typedef	struct		s_anthill
 {
 	int				ants;
 	int				rooms;
+	char            *map;
+	char            **links;
 	int 			*shortest_way;
 	int 			*r_shortest_way;
 	int				**ways;
@@ -115,4 +117,6 @@ void				print_way_r(t_room *room, int *way, int t);
 int					to_position_2(t_room *rooms);
 void				print_bfs(t_room *rooms);
 int 				check_num(char *num);
+int 				linking(t_room *rooms, t_anthill *ant);
+
 #endif

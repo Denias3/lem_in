@@ -97,7 +97,7 @@ char				*validation(t_anthill *ant, t_room *rooms)
 
 	map = ft_strnew(0);
 	var_valid = new_var_valid();
-	fd = open("/Users/fschille/Desktop/lem_in/maps/m1", O_RDONLY);
+	fd = open("/Users/fschille/Desktop/lem_in/maps/bigsup04", O_RDONLY);
 //	fd = 0;
 	while (get_next_line(fd, &line) > 0)
 	{
@@ -130,5 +130,7 @@ char				*validation(t_anthill *ant, t_room *rooms)
 	if (var_valid->stage != 2 || var_valid->n_comm != 2)
 		error("all conditions of the card are not met");
 	free(var_valid);
+	if (linking(rooms, ant) != 0)
+		error("Kakayto oshibka!!!!!!!!!!!!!!!!!!!!!!!!!!");
 	return (map);
 }
