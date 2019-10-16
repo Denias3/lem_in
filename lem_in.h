@@ -38,6 +38,9 @@ typedef	struct		s_room
 typedef	struct		s_anthill
 {
 	int				ants;
+	char 			*map;
+	char 			**map_links;
+	char 			**map_rooms;
 	int				rooms;
 	int 			*shortest_way;
 	int 			*r_shortest_way;
@@ -46,6 +49,8 @@ typedef	struct		s_anthill
 	int				max_x;
 	int				max_y;
 }					t_anthill;
+
+
 
 /*
 **			s_var_valid
@@ -73,7 +78,7 @@ t_anthill			*newanthill(void);
 int					check_line(char *line);
 int					count_char_double_array(char **str);
 void				free_char_double_array(char **str);
-char				*validation(t_anthill *ant, t_room *rooms);
+void				validation(t_anthill *ant, t_room *rooms);
 int					pars_line_room(t_anthill *ant, t_room *room, char *line, t_var_valid *v_val);
 void				print_room(t_room *room);
 void				print_rooms(t_room *rooms, int t);
@@ -82,7 +87,7 @@ t_room				*new_room(void);
 void				free_rooms(t_room *rooms);
 void				error(char *text);
 int					pars_line_link(t_room *room, char *line);
-void				algorithm(t_anthill *ant, t_room *rooms, char *map);
+void				algorithm(t_anthill *ant, t_room *rooms);
 t_room				*search_room_type(t_room *rooms, short type);
 int					short_way(t_room *rooms, t_anthill *ant, int i);
 void				check_link_room_full(t_room *room);
@@ -115,4 +120,8 @@ void				print_way_r(t_room *room, int *way, int t);
 int					to_position_2(t_room *rooms);
 void				print_bfs(t_room *rooms);
 int 				check_num(char *num);
+int					check_name_2(char *name, char *name2, t_anthill *ant);
+int					pars_line_link_new(char *line, t_anthill *ant);
+void				memaloc_map_rooms(t_anthill *ant, char *name);
+void				memaloc_map_links(t_anthill *ant, char *name);
 #endif
