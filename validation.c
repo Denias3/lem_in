@@ -27,7 +27,8 @@ t_var_valid			*new_var_valid(void)
 	return (var_valid);
 }
 
-void				stage_num_ant(t_var_valid *var_valid, t_anthill *ant, char *line)
+void				stage_num_ant(t_var_valid *var_valid,
+		t_anthill *ant, char *line)
 {
 	if (var_valid->type == 4 || var_valid->type == 5)
 		error("##start and ##end should be "
@@ -42,34 +43,13 @@ void				stage_num_ant(t_var_valid *var_valid, t_anthill *ant, char *line)
 		"the number of ants");
 }
 
-void				stage_rooms(t_var_valid *var_valid, t_anthill *ant, t_room *rooms, char *line)
+void				stage_rooms(t_var_valid *var_valid,
+		t_anthill *ant, t_room *rooms, char *line)
 {
 	if (var_valid->type == 1 || var_valid->type == 4 || var_valid->type == 5)
 	{
 		if (var_valid->n_comm <= 2)
-		{
-			if (var_valid->type == 4)
-			{
-				if (var_valid->start == 1 || var_valid->type_past == 5)
-					error("after ##end there cannot be ##start");
-				var_valid->type_past = var_valid->type;
-				var_valid->start = 1;
-				var_valid->n_comm++;
-			}
-			else if (var_valid->type == 5)
-			{
-				if (var_valid->end == 1 || var_valid->type_past == 4)
-					error("after ##start there cannot be ##end");
-				var_valid->type_past = var_valid->type;
-				var_valid->end = 1;
-				var_valid->n_comm++;
-			}
-			else if (var_valid->type == 1)
-			{
-				pars_line_room(ant, rooms, line, var_valid);
-				var_valid->type_past = var_valid->type;
-			}
-		}
+			stage_rooms_2(var_valid, ant, rooms, line);
 		else
 			var_valid->stage = 2;
 	}
@@ -77,7 +57,8 @@ void				stage_rooms(t_var_valid *var_valid, t_anthill *ant, t_room *rooms, char 
 		error("not valid map");
 }
 
-void				stage_link(t_var_valid *var_valid, char *line, t_room *rooms)
+void				stage_link(t_var_valid *var_valid,
+		char *line, t_room *rooms)
 {
 	if (var_valid->type == 2)
 	{
@@ -94,12 +75,9 @@ void				validation(t_anthill *ant, t_room *rooms)
 	char			*line;
 	int				fd;
 	t_var_valid		*var_valid;
-	char			*tmp;
-
 
 	var_valid = new_var_valid();
-	fd = open("/Users/fschille/Desktop/lem_in/maps/m1", O_RDONLY);
-//	fd = 0;
+	fd = 0;
 	while (get_next_line(fd, &line) > 0)
 	{
 		var_valid->type = check_line(line);
@@ -107,26 +85,11 @@ void				validation(t_anthill *ant, t_room *rooms)
 			error("not valid line in the map");
 		if (var_valid->type == 6 || var_valid->type == 3)
 		{
-			tmp = ant->map;
-			ant->map = ft_strjoin_free(ant->map, line, 0, 1);
-			free(tmp);
-			tmp = ant->map;
-			ant->map = ft_strjoin_free(ant->map, ft_strdup("\n"), 0, 1);
-			free(tmp);
+			free_map(ant, line);
 			continue ;
 		}
-		if (var_valid->stage == 0)
-			stage_num_ant(var_valid, ant, line);
-		else if (var_valid->stage == 1 && var_valid->type != 2)
-			stage_rooms(var_valid, ant, rooms, line);
-		else if ((var_valid->stage == 2 || var_valid->stage == 1))
-			stage_link(var_valid, line, rooms);
-		tmp = ant->map;
-		ant->map = ft_strjoin_free(ant->map, line, 0, 1);
-		free(tmp);
-		tmp = ant->map;
-		ant->map = ft_strjoin_free(ant->map, ft_strdup("\n"), 0, 1);
-		free(tmp);
+		validation_2(ant, rooms, var_valid, line);
+		free_map(ant, line);
 	}
 	if (var_valid->stage != 2 || var_valid->n_comm != 2)
 		error("all conditions of the card are not met");

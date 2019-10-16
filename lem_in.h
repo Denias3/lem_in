@@ -103,5 +103,24 @@ int					the_link(char *str);
 t_room				*search_start_room(t_room *rooms);
 int					to_position_2(t_room *rooms);
 int 				check_num(char *num);
-void				free_map(t_anthill *ant, char **line);
+void				free_map(t_anthill *ant, char *line);
+void				stage_link(t_var_valid *var_valid,
+							   char *line, t_room *rooms);
+void				stage_rooms(t_var_valid *var_valid,
+								t_anthill *ant, t_room *rooms, char *line);
+void				stage_num_ant(t_var_valid *var_valid,
+								  t_anthill *ant, char *line);
+void				validation_2(t_anthill *ant, t_room *rooms,
+						t_var_valid *var_valid, char *line);
+void				stage_rooms_2(t_var_valid *var_valid,
+								  t_anthill *ant, t_room *rooms, char *line);
+void				free_bf(t_room *rooms);
+void				next_bfs_type4(t_room *rooms, t_room *room, int bf);
+int					check_add_type3(t_room *room);
+void				add_bfs_2(t_room *rooms, int bf);
+void				close_link(t_room *end_room, t_room *room);
+int					check_room_visit(t_room *room, int size);
+void				rewriting_room(t_room *room_in,
+							   t_room *room_out, int count_room);
+void				close_link_in(t_room *room_in);
 #endif

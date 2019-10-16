@@ -45,3 +45,20 @@ int 		check_num(char *num)
 		return (1);
 	return (0);
 }
+
+int			check_room_visit(t_room *room, int size)
+{
+	int	i;
+
+	i = 0;
+	while (room->next_rooms[i] != NULL)
+	{
+		if (room->next_rooms[i]->type == 4 &&
+			room->next_rooms[i]->next_rooms[0]->visit == size)
+			return (1);
+		else if (room->next_rooms[i]->visit == size)
+			return (1);
+		i++;
+	}
+	return (0);
+}
